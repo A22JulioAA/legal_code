@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'legal_code.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "legal-roster",
+        "NAME": "legal-roster-db",
         "USER": "postgres",
         "PASSWORD": "abc123.",
         "HOST": "127.0.0.1",
