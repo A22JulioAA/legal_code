@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-  </head>
-  <body>
-    <h1>Inicia sesión aquí!</h1>
+{% extends "base.html" %}
 
-    <hr />
 
-    <form method="post">
+{% block title %}
+  Inicia Sesión
+{% endblock %}
+  
+
+{% block content %}
+  <form method="post">
       {% csrf_token %} {{formulario_login }}
 
       <input type="submit" value="Iniciar sesión" />
     </form>
-  </body>
-</html>
+{% endblock %}
+  
+    
+

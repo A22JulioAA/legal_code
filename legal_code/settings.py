@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'citas',
     'comentarios',
     'bootstrap5',
+    'fontawesome_5',
     
 ]
 
@@ -85,7 +86,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "abc123.",
         "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "PORT": "5433",
     }
 }
 
