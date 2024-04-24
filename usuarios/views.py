@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Cliente, Especialidad
 from django.http import HttpResponse
-from .forms import RegistroForm
+from .forms import RegistroClienteForm, RegistroProfesionalForm
 
 def crear_especialidad(request):
     # especialidad = Especialidad(nombre = 'Julio')
@@ -17,9 +17,11 @@ def crear_cliente(request):
                       fecha_nacimiento = '2002-04-19', telefono = '9987645342')
     cliente.save()
 
-def registro(request):
-    registro_form = RegistroForm()
-    return render(request, 'registro.html', {'registro_form': registro_form})
+def registro_cliente(request):
+    registro_cliente_form = RegistroClienteForm()
+    registro_profesional_form = RegistroProfesionalForm()
+
+    return render(request, 'registro.html', {'registro_cliente_form': registro_cliente_form, 'registro_profesional_form': registro_profesional_form})
 
 
     
