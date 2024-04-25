@@ -1,0 +1,5 @@
+Django
+Psycopg2
+Django-bootstrap-v5
+fontawesomefree
+crispyforms

@@ -4,65 +4,63 @@ registros, ver -------
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legal Roster | {% block title %}{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Roster | {% block title %}{% endblock %}</title>
 
-    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
-</head>
+  {% load static %}
+
+  {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
 <body>
-    <!-- Header de la página en donde se situará el título y el menú de navegación. 
+  <!-- Header de la página en donde se situará el título y el menú de navegación. 
          También la imagen de perfil y las opciones correspondientes. -->
-    <header class="container-fluid p-0">
-      <!-- TÍTULO PRINCIPAL -->
-      <h1 class="bg-dark p-3 m-0 text-center">
-        <a href="/" class="text-white">LEGAL ROSTER</a>
-      </h1>
-      <!-- FIN TÍTULO PRINCIPAL -->
+  <header class="container-fluid p-0">
+    <!-- TÍTULO PRINCIPAL -->
+    <h1 class="bg-dark p-3 m-0 text-center">
+      <a href="/" class="text-white">LEGAL ROSTER</a>
+    </h1>
+    <!-- FIN TÍTULO PRINCIPAL -->
 
-      <!-- MENÚ DE NAVEGACIÓN -->
-      <nav class="row navbar navbar-dark navbar-expand-lg bg-dark">
-        <div class="col-8 bg-dark text-center">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavAltMarkup"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link" href="/calendario"
-                >Calendario</a
-              >
-              <a class="nav-link" href="/mis-solicitudes">Solicitudes</a>
-              <a class="nav-link" href="/solicitar-cita">Solicitar Cita</a>
-              <a class="nav-link" href="/sobre-nosotros">Sobre nosotros</a>
-            </div>
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="row navbar navbar-dark navbar-expand-lg bg-dark">
+      <div class="col-8 bg-dark text-center">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="/calendario">Calendario</a>
+            <a class="nav-link" href="/mis-solicitudes">Solicitudes</a>
+            <a class="nav-link" href="/solicitar-cita">Solicitar Cita</a>
+            <a class="nav-link" href="/sobre-nosotros">Sobre nosotros</a>
           </div>
         </div>
-        <div class="col-4 bg-secondary text-white text-center">
-          <a class="text-white" href="/usuarios/registro">Registrate aquí</a>
-          <br />
-          <a class="text-white" href="/usuarios/login">Inicia sesión aquí</a>
-        </div>
-      </nav>
-      <!-- FIN MENÚ NAVEGACIÓN -->
-    </header>
-    <!-- FIN HEADER -->
+      </div>
+      <div class="col-4 bg-secondary text-white text-center">
+        <a class="text-white" href="/usuarios/registro">Registrate aquí</a>
+        <br />
+        <a class="text-white" href="/usuarios/login">Inicia sesión aquí</a>
+      </div>
+    </nav>
+    <!-- FIN MENÚ NAVEGACIÓN -->
+  </header>
+  <!-- FIN HEADER -->
 
-    <main>
-        {% block content %}
-          
-        {% endblock %}
-    </main>
+  <main>
+    {% block content %}
 
-    <!-- TODO:Habilitar footer, no está terminado -->
-    <!-- TODO:Insertar redes sociales -->
-    <!-- Footer de la página --> 
-    
+    {% endblock %}
+  </main>
+
+  <!-- TODO:Habilitar footer, no está terminado -->
+  <!-- TODO:Insertar redes sociales -->
+  <!-- Footer de la página -->
+
 
 </body>
+
 </html>
