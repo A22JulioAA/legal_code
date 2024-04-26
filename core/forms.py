@@ -11,11 +11,21 @@ from .models import Profesional
 class CustomUserCreationForm(forms.ModelForm):
     class Meta:
         model = Profesional
-        fields = ['nombre', 'email', 'password']
+        fields = ['nombre', 'apellidos','email', 'password', 'fecha_nacimiento', 'dni', 'telefono', 'precio_consulta', 'direccion']
         labels = {
             'nombre': 'Nombre ',
+            'apellidos': 'Apellidos',
             'email': 'Correo ',
-            'password': 'Contraseña '
+            'password': 'Contraseña ',
+            'fecha_nacimiento': 'Fecha de nacimiento ',
+            'dni': 'DNI ',
+            'telefono': 'Telefono ',
+            'precio_consulta': 'Precio Consulta ',
+            'direccion': 'Dirección '
+        }
+        widgets = {
+            'password': forms.PasswordInput(),
+            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'})
         }
     
     def __init__(self, *args, **kwargs):

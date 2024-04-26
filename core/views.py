@@ -8,6 +8,10 @@ from .forms import CustomUserCreationForm
 def homepage(request):
     return render(request, 'core/homepage.html')
 
+# TODO:A mejorar el registro e inicio de sesión. Implementar cambio de formulario según sea profesional o cliente.
+# TODO:Revisar permisos y crear permisos nuevos.
+
+
 @login_required
 def profesionales(request):
     return render(request, 'core/profesionales.html')
