@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
+    'core',
     'citas',
     'comentarios',
     'bootstrap5',
@@ -131,3 +132,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# VARIABLES DE REDIRECCIÓN DE LOGIN Y LOGOUT
+
+LOGIN_REDIRECT_URL = 'homepage'
+LOGIN_REDIRECT_LOGOUT = 'homepage'

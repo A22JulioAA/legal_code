@@ -1,0 +1,44 @@
+<!-- Plantilla base con la estructura principal de la web. No aplicará a logins ni registros. Para logins y 
+registros, ver ------- 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Roster | {% block title %}{% endblock %}</title>
+
+    {% load static %}
+
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<body>
+    <!-- Header de la página en donde se situará el título y el menú de navegación. 
+         También la imagen de perfil y las opciones correspondientes. -->
+    <header class="container-fluid p-0">
+        <!-- TÍTULO PRINCIPAL -->
+        <h1 class="bg-dark p-3 m-0 text-center">
+            <a href="/" class="text-white">LEGAL ROSTER</a>
+        </h1>
+        <h2>LOGIN PAGE</h2>
+        <!-- FIN TÍTULO PRINCIPAL -->
+    </header>
+    <!-- FIN HEADER -->
+
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    <!-- TODO:Habilitar footer, no está terminado -->
+    <!-- TODO:Insertar redes sociales -->
+    <!-- Footer de la página -->
+
+
+</body>
+
+</html>
