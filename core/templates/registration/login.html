@@ -2,14 +2,26 @@
 
 {% block content %}
 
-<h3>Login</h3>
+{% load crispy_forms_tags %}
 
 <form method="post">
     {% csrf_token %}
 
-    <input type="text" name="username" placeholder="Username"><br>
-    <input type="text" name="password" placeholder="Password"><br>
-    <input type="submit" value="Entrar">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Ingresa tus credenciales</h5>
+
+            {{ form | crispy }}
+
+            <div class="row">
+                <a href="{% url 'register' %}" class="card-link col-3">Registrarse</a>
+                <a href="#" class="card-link col-3">Olvidaste tu contraseña?</a>
+                <input class="btn btn-primary float-end col-5" type="submit" value="Entrar">
+            </div>
+        </div>
+    </div>
+
+
 </form>
 
 {% endblock %}

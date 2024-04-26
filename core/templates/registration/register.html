@@ -1,0 +1,27 @@
+{% extends "core/base-login.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Completa los campos</h5>
+
+            {{ form | crispy }}
+
+            <div class="row">
+                <a href="#" class="card-link col-3">Iniciar sesión</a>
+                <a href="#" class="card-link col-3">Necesitas ayuda?</a>
+                <input class="btn btn-primary float-end col-5" type="submit" value="Registrarse">
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+{% endblock %}
