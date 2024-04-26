@@ -10,6 +10,7 @@ def homepage(request):
 
 # TODO:A mejorar el registro e inicio de sesión. Implementar cambio de formulario según sea profesional o cliente.
 # TODO:Revisar permisos y crear permisos nuevos.
+# TODO: Hay movida porque por defecto Django pilla el username para autenticar y los usuarios no tienen username aquí. Estaría de locos no meterlo en el formulario pero que se les creara automáticamente.
 
 
 @login_required
