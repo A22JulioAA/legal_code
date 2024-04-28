@@ -8,28 +8,44 @@ Homepage
 
 
 {% block css %}
-    <link rel="stylesheet" href="{% static '/css/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}
     
-
-
 {% block content %}
-<section class="container-fluid especialidades bg-dark text-light">
+
+<!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
+<div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center">
+    <a href="" style="width: 50%;" onclick="scrollToSection(event, 'especialidades')" class="border border-light border-2 text-light p-5">EMPEZAR A EXPLORAR</a>
+</div>
+
+<br>
+
+
+
+<!-- Sección de anuncios de profesionales ordenados de forma aleatoria en un principio -->
+
+<section class="container-fluid especialidades bg-dark text-light" id="especialidades">
     <div class="row">
-        <div class="col-2 border p-3">Penal</div>
-        <div class="col-2 border p-3">Eclesiástico</div>
-        <div class="col-2 border p-3">Administrativo</div>
-        <div class="col-2 border p-3">Financiero</div>
-        <div class="col-2 border p-3">Mercantil</div>
-        <div class="col-2 border p-3">Civil</div>
+        <div class="col-3 border p-3 bg-penal">Penal</div>
+        <div class="col-3 border p-3 bg-eclesiastico">Eclesiástico</div>
+        <div class="col-3 border p-3 bg-administrativo">Administrativo</div>
+        <div class="col-3 border p-3 bg-financiero">Financiero</div>
     </div>
     <div class="row">
-        <div class="col-2 border p-3">Fiscal</div>
-        <div class="col-2 border p-3">Laboral</div>
-        <div class="col-2 border p-3">Internacional</div>
-        <div class="col-2 border p-3">Comunitario</div>
-        <div class="col-2 border p-3">Comercial</div>
-        <div class="col-2 border p-3">Digital</div>
+        <div class="col-3 border p-3 bg-mercantil">Mercantil</div>
+        <div class="col-3 border p-3 bg-civil">Civil</div>
+        <div class="col-3 border p-3 bg-fiscal">Fiscal</div>
+        <div class="col-3 border p-3 bg-laboral">Laboral</div>
+    </div>
+    <div class="row">
+        <div class="col-3 border p-3 bg-internacional">Internacional</div>
+        <div class="col-3 border p-3 bg-comunitario">Comunitario</div>
+        <div class="col-3 border p-3 bg-comercial">Comercial</div>
+        <div class="col-3 border p-3 bg-digital">Digital</div>
     </div>
 </section>
 
@@ -40,7 +56,7 @@ Homepage
         <div class="card bg-dark text-light mt-4" style="width: 100%;">
             <div class="card-body row">
                 <div class="col-8">
-                <h2 class="card-title">{{ profesional.nombre }} {{ profesional.apellidos }}</h2>
+                <h2 class="card-title">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</h2>
                 <hr>
                 <span class="border p-1 me-1">Especialidades: </span>
                 {% for especialidad in profesional.especialidad.all %}
@@ -64,7 +80,4 @@ Homepage
 
 </section>
 
-<div id="prueba">
-    sadf
-</div>
 {% endblock %}
