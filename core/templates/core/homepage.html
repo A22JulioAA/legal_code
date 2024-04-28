@@ -1,31 +1,70 @@
 {% extends "core/base.html" %}
 
+{% load static %}
+
 {% block title %}
 Homepage
 {% endblock %}
 
 
-{% block content %}
+{% block css %}
+    <link rel="stylesheet" href="{% static '/css/homepage.css' %}">
+{% endblock %}
+    
 
-<section class="container mt-3">
+
+{% block content %}
+<section class="container-fluid especialidades bg-dark text-light">
+    <div class="row">
+        <div class="col-2 border p-3">Penal</div>
+        <div class="col-2 border p-3">Eclesiástico</div>
+        <div class="col-2 border p-3">Administrativo</div>
+        <div class="col-2 border p-3">Financiero</div>
+        <div class="col-2 border p-3">Mercantil</div>
+        <div class="col-2 border p-3">Civil</div>
+    </div>
+    <div class="row">
+        <div class="col-2 border p-3">Fiscal</div>
+        <div class="col-2 border p-3">Laboral</div>
+        <div class="col-2 border p-3">Internacional</div>
+        <div class="col-2 border p-3">Comunitario</div>
+        <div class="col-2 border p-3">Comercial</div>
+        <div class="col-2 border p-3">Digital</div>
+    </div>
+</section>
+
+<section class="container mt-3 lista-profesionales">
 
     {% for profesional in lista_profesionales %}
 
         <div class="card bg-dark text-light mt-4" style="width: 100%;">
-            <div class="card-body">
+            <div class="card-body row">
+                <div class="col-8">
                 <h2 class="card-title">{{ profesional.nombre }} {{ profesional.apellidos }}</h2>
+                <hr>
+                <span class="border p-1 me-1">Especialidades: </span>
                 {% for especialidad in profesional.especialidad.all %}
-                    <div class="especialidades">
-                        <span class="card-subtitle mb-2 text-body-secondary">{{ especialidad }}</span> |
-                    </div>
+                        | <span class="card-subtitle mb-2 text-body-secondary">{{ especialidad }}</span>
                 {% endfor %}
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <hr>
+                <i class="fa-regular fa-map"> </i> {{ profesional.direccion }}
+                <p class="card-text">{{ profesional.descripcion }}</p>
+                <a href="#" class="btn btn-primary">Pedir Cita</a>
+                <a href="#" class="btn btn-primary">Contacta</a>
+            </div>
+            <div class="col-4">
+                <img src="{% static 'img/usuario.jpg' %}" class="card-img-top image-fluid" alt="Imagen de profesional">
+                <span class="small">Teléfono: {{ profesional.telefono }}</span><br>
+                <span class="small">Email: {{ profesional.email }}</span>
+            </div>
             </div>
         </div>
 
     {% endfor %}
 
 </section>
+
+<div id="prueba">
+    sadf
+</div>
 {% endblock %}

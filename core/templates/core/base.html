@@ -10,6 +10,12 @@ registros, ver -------
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Legal Roster | {% block title %}{% endblock %}</title>
 
+  
+  {% block css %}
+    
+  {% endblock %}
+    
+
   {% load static %}
 
   {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
@@ -20,7 +26,7 @@ registros, ver -------
          También la imagen de perfil y las opciones correspondientes. -->
   <header class="container-fluid p-0">
     <!-- TÍTULO PRINCIPAL -->
-    <h1 class="bg-dark p-3 m-0 text-center">
+    <h1 class="bg-dark p-3 m-0 text-center border-bottom">
       <a href="/" class="text-white">LEGAL ROSTER</a>
     </h1>
     <!-- FIN TÍTULO PRINCIPAL -->
