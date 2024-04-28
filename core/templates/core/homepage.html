@@ -6,12 +6,26 @@ Homepage
 
 
 {% block content %}
-{% for especialidad in lista_especialidades %}
-<h2>{{ especialidad }}</h2>
-{% endfor %}
-{% for profesional in lista_profesionales %}
-<h3>{{ profesional.nombre }}</h3>
-<h3>{{ profesional.email }}</h3>
-{% endfor %}
 
+<section class="container mt-3">
+
+    {% for profesional in lista_profesionales %}
+
+        <div class="card bg-dark text-light mt-4" style="width: 100%;">
+            <div class="card-body">
+                <h2 class="card-title">{{ profesional.nombre }} {{ profesional.apellidos }}</h2>
+                {% for especialidad in profesional.especialidad.all %}
+                    <div class="especialidades">
+                        <span class="card-subtitle mb-2 text-body-secondary">{{ especialidad }}</span> |
+                    </div>
+                {% endfor %}
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</section>
 {% endblock %}

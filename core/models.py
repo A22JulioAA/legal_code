@@ -18,6 +18,7 @@ class Profesional(models.Model):
     especialidad = models.ManyToManyField(Especialidad, default="General")
     precio_consulta = models.FloatField()
     direccion = models.TextField()
+    descripcion = models.TextField(max_length=450)
     
     def __str__(self) -> str:
         return self.nombre + self.apellidos + '\ Email: ' + self.email

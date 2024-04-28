@@ -2,11 +2,18 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
 from .forms import CustomUserCreationForm
+from .models import Profesional
 
 # Create your views here.
 
 def homepage(request):
-    return render(request, 'core/homepage.html')
+    lista_profesionales = Profesional.objects.all()
+    
+    data = {
+        'lista_profesionales': lista_profesionales
+    }
+    
+    return render(request, 'core/homepage.html', data)
 
 # TODO:A mejorar el registro e inicio de sesión. Implementar cambio de formulario según sea profesional o cliente.
 # TODO:Revisar permisos y crear permisos nuevos.
