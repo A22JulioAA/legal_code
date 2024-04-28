@@ -11,61 +11,145 @@
 .bg-financiero{
     background-image: url(../img/derecho-financiero.jpg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-financiero:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-penal{
     background-image: url(../img/derecho-penal.jpg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-penal:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-eclesiastico{
     background-image: url(../img/derecho-eclesiastico.jpg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-eclesiastico:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-mercantil{
     background-image: url(../img/derecho-mercantil.jpeg);
     background-size: cover;
+    
+    transition: filter 0.3s;
+}
+
+.bg-mercantil:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-digital{
     background-image: url(../img/derecho-digital.jpeg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-digital:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-fiscal{
     background-image: url(../img/derecho-fiscal.jpeg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-fiscal:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-laboral{
     background-image: url(../img/derecho-laboral.jpg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-laboral:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-internacional{
     background-image: url(../img/derecho-internacional.jpg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-internacional:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-comunitario{
     background-image: url(../img/derecho-comunitario.jpg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-comunitario:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-comercial{
     background-image: url(../img/derecho-comercial.jpg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-comercial:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-civil{
     background-image: url(../img/derecho-civil.jpeg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-civil:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .bg-administrativo{
     background-image: url(../img/derecho-administrativo.jpg);
     background-size: cover;
+
+    transition: filter 0.3s;
+}
+
+.bg-administrativo:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 h1{
