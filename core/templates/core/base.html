@@ -14,6 +14,7 @@ registros, ver -------
 
   {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
   <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
 
   {% block css %}
     
@@ -28,11 +29,16 @@ registros, ver -------
          También la imagen de perfil y las opciones correspondientes. -->
   <header class="container-fluid p-0 m-0">
     <!-- TÍTULO PRINCIPAL -->
-    <!-- <h1 class="bg-dark p-3 m-0 text-center border-bottom">
-      <a href="/" class="text-white">LEGAL ROSTER</a>
-    </h1> -->
+        <!-- <h1 class="row bg-dark p-3 m-0 text-center text-light border-bottom fuente-personalizada">
+            <a href="/" class="col-8 text-white"><i class="fa-solid fa-landmark"></i> LEGAL ROSTER</a>
+        </h1> --> 
 
-    <img src="{% static 'img/logo.png' %}" alt="Logo Legal Roster">
+        <div class="container-fluid m-0 p-0 bg-dark">
+            <a href="/">
+                <img src="{% static 'img/logo-legal.png' %}" class="img-fluid w-50 h-25" alt="Logo Legal Roster">
+            </a>
+        </div>
+    
     <!-- FIN TÍTULO PRINCIPAL -->
 
     <!-- MENÚ DE NAVEGACIÓN -->

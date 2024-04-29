@@ -1,162 +1,187 @@
 #inicio {
-    background-image: url('../img/fondo_pagina.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    height: 100vh;
+  background-image: url('../img/fondo_pagina.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 /* Aquí establecemos los estilos de las etiquetas de búsqueda de las diferentes especialidades */
 
-.bg-financiero {
-    background-image: url(../img/derecho-financiero.jpg);
-    background-size: cover;
+/* TODO:revisar estilos de selectores de especialidades */
 
-    transition: filter 0.3s;
+
+.bg-financiero {
+  background-image: url(../img/derecho-financiero.jpg);
+  background-size: cover;
+
+  transition: filter 0.3s;
 }
 
 .bg-financiero:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-penal {
-    background-image: url(../img/derecho-penal.jpg);
-    background-size: cover;
+  background-image: url(../img/derecho-penal.jpg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
+}
+
+.bg-penal div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-penal div span{
+  color: white;
 }
 
 .bg-penal:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-eclesiastico {
-    background-image: url(../img/derecho-eclesiastico.jpg);
-    background-size: cover;
+  background-image: url(../img/derecho-eclesiastico.jpg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
+}
+
+.bg-eclesiastico div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-eclesiastico div span{
+  color: white;
 }
 
 .bg-eclesiastico:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-mercantil {
-    background-image: url(../img/derecho-mercantil.jpeg);
-    background-size: cover;
+  background-image: url(../img/derecho-mercantil.jpeg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-mercantil:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-digital {
-    background-image: url(../img/derecho-digital.jpeg);
-    background-size: cover;
+  background-image: url(../img/derecho-digital.jpeg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-digital:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-fiscal {
-    background-image: url(../img/derecho-fiscal.jpeg);
-    background-size: cover;
+  background-image: url(../img/derecho-fiscal.jpeg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-fiscal:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-laboral {
-    background-image: url(../img/derecho-laboral.jpg);
-    background-size: cover;
+  background-image: url(../img/derecho-laboral.jpg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-laboral:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-internacional {
-    background-image: url(../img/derecho-internacional.jpg);
-    background-size: cover;
+  background-image: url(../img/derecho-internacional.jpg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-internacional:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-comunitario {
-    background-image: url(../img/derecho-comunitario.jpg);
-    background-size: cover;
+  background-image: url(../img/derecho-comunitario.jpg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-comunitario:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-comercial {
-    background-image: url(../img/derecho-comercial.jpg);
-    background-size: cover;
+  background-image: url(../img/derecho-comercial.jpg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-comercial:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-civil {
-    background-image: url(../img/derecho-civil.jpeg);
-    background-size: cover;
+  background-image: url(../img/derecho-civil.jpeg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-civil:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .bg-administrativo {
-    background-image: url(../img/derecho-administrativo.jpg);
-    background-size: cover;
+  background-image: url(../img/derecho-administrativo.jpg);
+  background-size: cover;
 
-    transition: filter 0.3s;
+  transition: filter 0.3s;
 }
 
 .bg-administrativo:hover {
-    cursor: pointer;
-    filter: grayscale(100%);
+  cursor: pointer;
+  filter: grayscale(100%);
 }
 
 h1 {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 
 .enlace_und {
-    text-decoration: none;
-
+  text-decoration: none;
 }
