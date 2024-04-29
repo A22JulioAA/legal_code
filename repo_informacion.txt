@@ -1,0 +1,25 @@
+%a: Representación abreviada del día de la semana (por ejemplo, "Lun" para lunes).|
+%A: Representación completa del día de la semana (por ejemplo, "Lunes").          |
+%w: Día de la semana como un número decimal (0 para domingo, 1 para lunes, etc.). |
+%d: Día del mes como un número decimal (01 a 31).                                 |
+%b: Representación abreviada del mes (por ejemplo, "Ene" para enero).             |
+%B: Representación completa del mes (por ejemplo, "Enero").                       |
+%m: Mes como un número decimal (01 para enero, 02 para febrero, etc.).            |
+%y: Año sin siglo como un número decimal (00 a 99).                               |
+%Y: Año con siglo como un número decimal.                                         |
+%H: Hora (00 a 23).                                                               |
+%I: Hora (01 a 12).                                                               |
+%p: AM o PM.                                                                      |
+%M: Minuto (00 a 59).                                                             |
+%S: Segundo (00 a 59).                                                            |
+__________________________________________________________________________________
+
+^
+|
+|
+|_________________________
+Esto sirve para formatear| 
+las fechas y horas en los| 
+filtros de las templates |
+de django                |
+__________________________

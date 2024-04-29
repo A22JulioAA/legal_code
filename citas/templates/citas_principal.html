@@ -1,0 +1,46 @@
+{% extends "core/base.html" %}
+
+{% load tz %} <!-- Importar la zona horaria -->
+{% load i18n %} <!-- Importar la internacionalización -->
+
+{% block content %}
+<section class="container-fluid bg-dark p-2">
+    <h2 class="text-light display-2 fw-semibold">Mis citas</h2>
+</section>
+
+{% language 'es' %} <!-- Establecer el idioma en español -->
+
+<section class="container mt-3">
+    <div class="row">
+        <div class="col-4">
+
+            <div id="list-example" class="list-group">
+                {% for cita in citas %}
+                <a class="list-group-item list-group-item-action" href="#list-item-{{ forloop.counter }}">Item
+                    {{ forloop.counter }}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+        <div class="col-8">
+            <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true"
+                class="scrollspy-example" tabindex="0">
+                {% for cita in citas %}
+                <h2 id="list-item-{{ forloop.counter }}">{{ cita.fecha_cita | date:'l d-m-Y' }}</h2>
+                <span>Hora {{ cita.fecha_cita | time:'H:i' }} H</span>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex similique quaerat itaque consequatur
+                    numquam
+                    dolore esse autem, magni iste distinctio error tempore libero atque unde tenetur. Necessitatibus
+                    tempore
+                    sequi non.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endlanguage %}
+
+
+
+
+{% endblock %}

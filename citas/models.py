@@ -8,7 +8,7 @@ class Cita(models.Model):
         ('R', 'RECHAZADA')
     )
     
-    profeisonal = models.ForeignKey(Profesional, on_delete=models.CASCADE)
+    profesional = models.ForeignKey(Profesional, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     fecha_cita = models.DateTimeField(null=False)
     precio = models.FloatField(null=False)
