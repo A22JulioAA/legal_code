@@ -1,10 +1,15 @@
 {% extends "core/base.html" %}
 
+{% block title %}
+Mis citas
+{% endblock %}
+
 {% load tz %} <!-- Importar la zona horaria -->
 {% load i18n %} <!-- Importar la internacionalización -->
 
 {% block content %}
-<section class="container-fluid bg-dark p-2">
+
+<section class="container-fluid bg-dark p-2 border-top">
     <h2 class="text-light display-2 fw-semibold">Mis citas</h2>
 </section>
 
@@ -16,13 +21,15 @@
 
             <div id="list-example" class="list-group">
                 {% for cita in citas %}
-                <a class="list-group-item list-group-item-action" href="#list-item-{{ forloop.counter }}">Item
-                    {{ forloop.counter }}</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-{{ forloop.counter }}">
+                    {{ cita.profesional.nombre }} {{ cita.profesional.apellidos }}<br>En:
+                    {{ cita.fecha_cita | timeuntil }}
+                </a>
                 {% endfor %}
             </div>
 
         </div>
-        <div class="col-8">
+        <div class="col-8 bg-dark text-light" style="height: 50vh; overflow: auto;">
             <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true"
                 class="scrollspy-example" tabindex="0">
                 {% for cita in citas %}
@@ -33,6 +40,11 @@
                     dolore esse autem, magni iste distinctio error tempore libero atque unde tenetur. Necessitatibus
                     tempore
                     sequi non.</p>
+                <span>Profesional: {{ cita.profesional.nombre }} {{ cita.profesional.apellidos }} ~
+                    {% for especialidad in cita.profesional.especialidad.all %}
+                    {{ especialidad.nombre }}
+                    {% endfor %}
+                </span>
                 {% endfor %}
             </div>
         </div>
