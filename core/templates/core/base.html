@@ -26,7 +26,7 @@ registros, ver -------
 <body>
   <!-- Header de la página en donde se situará el título y el menú de navegación. 
          También la imagen de perfil y las opciones correspondientes. -->
-  <header class="container-fluid text-center p-0">
+  <header class="container-fluid p-0 m-0">
     <!-- TÍTULO PRINCIPAL -->
     <!-- <h1 class="bg-dark p-3 m-0 text-center border-bottom">
       <a href="/" class="text-white">LEGAL ROSTER</a>
@@ -36,31 +36,31 @@ registros, ver -------
     <!-- FIN TÍTULO PRINCIPAL -->
 
     <!-- MENÚ DE NAVEGACIÓN -->
-    <nav class="row navbar navbar-dark navbar-expand-lg bg-dark">
+    <nav class="row navbar navbar-dark navbar-expand-lg bg-dark m-0 p-2">
       <div class="col-8 bg-dark text-center">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="/calendario">Calendario</a>
-            <a class="nav-link" href="/mis-solicitudes">Solicitudes</a>
-            <a class="nav-link" href="/solicitar-cita">Solicitar Cita</a>
-            <a class="nav-link" href="/sobre-nosotros">Sobre nosotros</a>
+            <a class="nav-link me-3" href="/calendario"><i class="fa-regular fa-calendar"></i> Calendario</a>
+            <a class="nav-link me-3" href="/mis-solicitudes"><i class="fa-regular fa-bell"></i> Solicitudes</a>
+            <a class="nav-link me-3" href="/solicitar-cita"><i class="fa-regular fa-hand-point-up"></i> Solicitar Cita</a>
+            <a class="nav-link" href="/sobre-nosotros"><i class="fa-solid fa-people-roof"></i> Sobre nosotros</a>
           </div>
         </div>
       </div>
-      <div class="col-4 bg-light text-dark text-center row">
+       <div class="col-4 bg-light text-dark text-center row m-0 rounded-3">
         <i class="fa-regular fa-user col-2 d-flex align-items-center"></i>
         <div class="col-10">
         {% if request.user.is_authenticated %}
         <a href="/profile">{{ user.username | upper }}</a><br>
         <a class="text-dark" href="{% url 'salir' %}">Salir</a>
         {% else %}
-        <a class="text-dark" href="{% url 'login' %}">Inicia sesión aquí</a>
-        <a class="text-dark" href="{% url 'register' %}">Registrate aquí</a>
+        <a class="text-dark row justify-content-center " href="{% url 'login' %}">Inicia sesión aquí</a>
+        <a class="text-dark row justify-content-center " href="{% url 'register' %}">Registrate aquí</a>
         {% endif %}
-          </div>
+          </div> 
         <br />
 
       </div>
@@ -75,129 +75,121 @@ registros, ver -------
     {% endblock %}
   </main>
 
-  <!-- TODO:Habilitar footer, no está terminado -->
-  <!-- TODO:Insertar redes sociales -->
   <!-- Footer de la página -->
 
   <footer class="text-center text-lg-start bg-body-tertiary text-muted">
-  <!-- Section: Social media -->
-  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    <!-- Left -->
-    <div class="me-5 d-none d-lg-block">
-      <span>Encuéntranos en nuestras redes sociales: </span>
+    <!-- Sección de redes sociales -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        <!-- Left -->
+        <div class="me-5 d-none d-lg-block">
+            <span>Encuéntranos en nuestras redes sociales: </span>
+        </div>
+        <!-- Left -->
+
+        <!-- Right -->
+        <div>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-facebook-f"> @legalroster_</i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-twitter"> @legal_roster</i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="fab fa-linkedin"> @legal_roster</i>
+            </a>
+            <a href="https://github.com/A22JulioAA" target="_blank" class="me-4 text-reset">
+                <i class="fab fa-github"> A22JulioAA</i>
+            </a>
+        </div>
+        <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"> Legal Roster S.L</i>
+                    </h6>
+                    <p>
+                        Esta es una página creada para el proyecto de fin de ciclo de DAW. No distribuír
+                        ni modificar el código sin consentimiento del creador.
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Servicios
+                    </h6>
+                    <p>
+                        <a href="/calendario" class="text-reset">Calendario</a>
+                    </p>
+                    <p>
+                        <a href="/mis-solicitudes" class="text-reset">Solicitudes</a>
+                    </p>
+                    <p>
+                        <a href="/solicitar-cita" class="text-reset">Solicitar Cita</a>
+                    </p>
+                    <p>
+                        <a href="sobre-nosotros" class="text-reset">Sobre Nosotros</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Enlaces útiles
+                    </h6>
+                    <p>
+                        <a href="/register" class="text-reset">Registrarse</a>
+                    </p>
+                    <p>
+                        <a href="/" class="text-reset">Ver Profesionales</a>
+                    </p>
+                    <p>
+                        <a href="/ayuda" class="text-reset">Ayuda</a>
+                    </p>
+                    <p>
+                        <a href="/accesibilidad" class="text-reset">Accesibilidad</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
+                    <!-- <p><i class="fas fa-home me-3"></i> -->IES San Clemente, Santiago de Compostela 15711</p>
+                    <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        a22julioaa@iessanclemente.net
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i> + 34 998676453</p>
+                    <p><i class="fas fa-print me-3"></i> + 34 778556334</p>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright:
+        <a class="text-reset fw-bold" href="https://legalRoster.com">legalRoster.com</a>
     </div>
-    <!-- Left -->
-
-    <!-- Right -->
-    <div>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-facebook-f"> @legalroster_</i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-google"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <!-- Right -->
-  </section>
-  <!-- Section: Social media -->
-
-  <!-- Section: Links  -->
-  <section class="">
-    <div class="container text-center text-md-start mt-5">
-      <!-- Grid row -->
-      <div class="row mt-3">
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <!-- Content -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3"></i>Legal Roster S.L
-          </h6>
-          <p>
-            Esta es una página creada para el proyecto de fin de ciclo de DAW. No distribuír
-            ni modificar el código sin consentimiento del creador.
-          </p>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            Servicios
-          </h6>
-          <p>
-            <a href="/calendario" class="text-reset">Calendario</a>
-          </p>
-          <p>
-            <a href="/mis-solicitudes" class="text-reset">Solicitudes</a>
-          </p>
-          <p>
-            <a href="/solicitar-cita" class="text-reset">Solicitar Cita</a>
-          </p>
-          <p>
-            <a href="sobre-nosotros" class="text-reset">Sobre Nosotros</a>
-          </p>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            Enlaces útiles
-          </h6>
-          <p>
-            <a href="/usuarios/registro" class="text-reset">Registrarse</a>
-          </p>
-          <p>
-            <a href="/" class="text-reset">Ver Profesionales</a>
-          </p>
-          <p>
-            <a href="/ayuda" class="text-reset">Ayuda</a>
-          </p>
-          <p>
-            <a href="/accesibilidad" class="text-reset">Accesibilidad</a>
-          </p>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">Contacto</h6>
-          <!-- <p><i class="fas fa-home me-3"></i> -->IES San Clemente, Santiago de Compostela 15711</p> 
-          <p>
-            <i class="fas fa-envelope me-3"></i>
-            a22julioaa@iessanclemente.net
-          </p>
-          <p><i class="fas fa-phone me-3"></i> + 34 998676453</p>
-          <p><i class="fas fa-print me-3"></i> + 34 778556334</p>
-        </div>
-        <!-- Grid column -->
-      </div>
-      <!-- Grid row -->
-    </div>
-  </section>
-  <!-- Section: Links  -->
-
-  <!-- Copyright -->
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2024 Copyright:
-    <a class="text-reset fw-bold" href="https://legalRoster.com">legalRoster.com</a>
-  </div>
-  <!-- Copyright -->
+    <!-- Copyright -->
 </footer>
 
   

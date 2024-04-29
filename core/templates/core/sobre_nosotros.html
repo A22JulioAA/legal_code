@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Sobre Nosotros
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Carousel que muestra imágenes relacionadas con el derecho. -->
+
+<div id="indicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#indicator1" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#indicator2" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#indicator3" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+            <img src="{% static 'img/slider1.jpg' %}" class="d-block w-100 h-100" alt="Imagen Derecho 1">
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="{% static 'img/slider2.webp' %}" class="d-block w-100 h-100" alt="Imagen Derecho 2">
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="{% static 'img/slider3.jpg' %}" class="d-block w-100 h-100" alt="Imagen Derecho 3">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#indicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#indicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<nav class="container mt-2">
+    <h2>Sobre Nosotros</h2>
+</nav>
+<section class="container">
+    Esta página está creada por Julio Acuña y ofrece un servicio de valoración y clasificación de
+    profesionales del sector legal como abogados, consultores etc. En la página principal puede verse
+    una lista con todos los profesionales, clasificados siguiendo diferentes criterios que el usuario
+    puede modificar. En cada uno de ellos se podrá acceder a la información del profesional, así como
+    un apartado para contactar y otro para comentar.
+</section>
+{% endblock %}

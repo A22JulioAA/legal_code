@@ -8,24 +8,28 @@ Homepage
 
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
 {% endblock %}
 
 {% block script %}
-  <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}
-    
+
 {% block content %}
 
 <!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
-<div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center">
-    <a href="" style="width: 50%;" onclick="scrollToSection(event, 'especialidades')" class="border border-light border-2 text-light p-5">EMPEZAR A EXPLORAR</a>
+<div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center p-0">
+    <!-- La función scrollToSection está definida en el script y sirve para desplazar
+    la vista hasta la sección de especialidades, que es donde empiezan los filtros y ofertas -->
+    <a href="" style="width: 50%;" onclick="scrollToSection(event, 'especialidades')"
+        class="border border-light border-2 text-light p-5 enlace_und">EMPEZAR A EXPLORAR</a>
 </div>
 
 <br>
 
 <!-- Sección de anuncios de profesionales ordenados de forma aleatoria en un principio -->
 
+<!-- Sección para mostrar las diferentes especialidades del derecho(sirve de filtro) -->
 <section class="container especialidades bg-dark text-light" id="especialidades">
     <div class="row">
         <div class="col-3 border p-3 bg-penal">Penal</div>
@@ -47,32 +51,38 @@ Homepage
     </div>
 </section>
 
+<!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
 <section class="container mt-3 lista-profesionales">
 
     {% for profesional in lista_profesionales %}
 
-        <div class="card bg-dark text-light mt-4" style="width: 100%;">
-            <div class="card-body row">
-                <div class="col-8">
-                <h2 class="card-title">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</h2>
+    <div class="card bg-dark text-light mt-4 mx-auto" style="width: 100%;">
+        <div class="card-body row">
+            <div class="col-8">
+                <h2 class="card-title">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }} |
+                    {{ profesional.campo | capfirst }}</h2>
                 <hr>
                 <span class="border p-1 me-1">Especialidades: </span>
                 {% for especialidad in profesional.especialidad.all %}
-                        | <span class="card-subtitle mb-2 text-body-secondary">{{ especialidad }}</span>
+                | <span class="card-subtitle mb-2 text-body-secondary">{{ especialidad }}</span>
                 {% endfor %}
                 <hr>
                 <i class="fa-regular fa-map"> </i> {{ profesional.direccion }}
+                <br><br>
                 <p class="card-text">{{ profesional.descripcion }}</p>
                 <a href="#" class="btn btn-primary">Pedir Cita</a>
                 <a href="#" class="btn btn-primary">Contacta</a>
+                <a href="#" class="btn btn-primary">Acerca de </a>
             </div>
             <div class="col-4">
                 <img src="{% static 'img/usuario.jpg' %}" class="card-img-top image-fluid" alt="Imagen de profesional">
                 <span class="small">Teléfono: {{ profesional.telefono }}</span><br>
                 <span class="small">Email: {{ profesional.email }}</span>
-            </div>
+                <!-- TODO: Calcular la media de valoraciones y mostrarla en la card de cada profesional. -->
+                <span class="small">Valoracion:</span>
             </div>
         </div>
+    </div>
 
     {% endfor %}
 

@@ -1,0 +1,8 @@
+El proyecto en dev estará desplegado en Docker.
+Este Docker contará con 3 servicios:
+    - Servidor Web(Django)
+    - PostgreSQL
+    - pgAdmin 4
+
+El servidor web estará definido en el Dockerfile y los servicios de bases de datos se obtendrán de 
+imágenes oficiales de Docker.

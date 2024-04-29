@@ -19,6 +19,7 @@ class Profesional(models.Model):
     precio_consulta = models.FloatField()
     direccion = models.TextField()
     descripcion = models.TextField(max_length=450, default='')
+    campo = models.CharField(max_length=50, default='Jurista')
     
     def __str__(self) -> str:
         return self.nombre + self.apellidos + '\ Email: ' + self.email

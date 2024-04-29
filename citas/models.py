@@ -1,5 +1,5 @@
 from django.db import models
-from usuarios.models import Profesional, Cliente # Importamos los modelos de la aplicación 'usuarios' para usar Profesional y Cliente
+from core.models import Profesional, Cliente # Importamos los modelos de la aplicación 'usuarios' para usar Profesional y Cliente
 
 class Cita(models.Model):
     OPCIONES_ESTADO = (

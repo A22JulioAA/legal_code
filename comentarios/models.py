@@ -1,5 +1,5 @@
 from django.db import models
-from usuarios.models import Profesional, Cliente # Importamos los modelos de la aplicación 'usuarios' para usar Profesional y Cliente
+from core.models import Profesional, Cliente # Importamos los modelos de la aplicación 'usuarios' para usar Profesional y Cliente
 from datetime import datetime
 
 class Comentario(models.Model):
@@ -10,4 +10,6 @@ class Comentario(models.Model):
     fecha_comentario = models.DateTimeField(null=False, default=datetime.now())
     valoracion = models.IntegerField(null=False, default=1)
     
-
+    def __str__(self):
+        return f"Comentario de {self.cliente} acerca de {self.profesional}"
+    

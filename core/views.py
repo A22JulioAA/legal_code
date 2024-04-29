@@ -3,14 +3,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
 from .forms import CustomUserCreationForm
 from .models import Profesional
+from comentarios.models import Comentario
 
 # Create your views here.
 
 def homepage(request):
     lista_profesionales = Profesional.objects.all()
-    
+
     data = {
-        'lista_profesionales': lista_profesionales
+        'lista_profesionales': lista_profesionales,
+
     }
     
     return render(request, 'core/homepage.html', data)
@@ -45,3 +47,6 @@ def register(request):
             return redirect('homepage')
 
     return render(request, 'registration/register.html', data)
+
+def sobre_nosotros(request):
+    return render(request, 'core/sobre_nosotros.html')
