@@ -4,7 +4,20 @@
 
 {% load crispy_forms_tags %}
 
-<form method="post">
+<section class="container-fluid bg-dark p-2 border-top">
+    <h2 class="text-light display-2 fw-semibold">Registrate</h2>
+    <h4 class="text-light text-center">Es gratis y tendrás acceso a todo el contenido y servicios de la web</h4>
+</section>
+
+<section class="container mt-3">
+    <h2>Registrar como: </h2>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-outline-dark active">Profesional</button>
+        <button type="button" class="btn btn-outline-dark">Cliente</button>
+    </div>
+</section>
+
+<form method="post" class="container mt-3" id="formulario_profesional">
     {% csrf_token %}
 
     <div class="card">
@@ -14,14 +27,30 @@
             {{ form | crispy }}
 
             <div class="row">
-                <a href="#" class="card-link col-3">Iniciar sesión</a>
+                <a href="{% url 'login' %}" class="card-link col-3">Iniciar sesión</a>
+                <a href="#" class="card-link col-3">Necesitas ayuda?</a>
+                <input class="btn btn-dark float-end col-5" type="submit" value="Registrarse">
+            </div>
+        </div>
+    </div>
+</form>
+
+<form method="post" class="container mt-3" id="formulario_cliente">
+    {% csrf_token %}
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Completa los campos</h5>
+
+            {{ form | crispy }}
+
+            <div class="row">
+                <a href="{% url 'login' %}" class="card-link col-3">Iniciar sesión</a>
                 <a href="#" class="card-link col-3">Necesitas ayuda?</a>
                 <input class="btn btn-primary float-end col-5" type="submit" value="Registrarse">
             </div>
         </div>
     </div>
-
-
 </form>
 
 {% endblock %}
