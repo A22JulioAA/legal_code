@@ -10,12 +10,22 @@
 
 /* TODO:revisar estilos de selectores de especialidades */
 
-
 .bg-financiero {
   background-image: url(../img/derecho-financiero.jpg);
   background-size: cover;
 
   transition: filter 0.3s;
+}
+
+.bg-financiero div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-financiero div span{
+  color: white;
 }
 
 .bg-financiero:hover {
@@ -76,6 +86,17 @@
   transition: filter 0.3s;
 }
 
+.bg-mercantil div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-mercantil div span{
+  color: white;
+}
+
 .bg-mercantil:hover {
   cursor: pointer;
   filter: grayscale(100%);
@@ -86,6 +107,17 @@
   background-size: cover;
 
   transition: filter 0.3s;
+}
+
+.bg-digital div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-digital div span{
+  color: white;
 }
 
 .bg-digital:hover {
@@ -100,6 +132,17 @@
   transition: filter 0.3s;
 }
 
+.bg-fiscal div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-fiscal div span{
+  color: white;
+}
+
 .bg-fiscal:hover {
   cursor: pointer;
   filter: grayscale(100%);
@@ -110,6 +153,17 @@
   background-size: cover;
 
   transition: filter 0.3s;
+}
+
+.bg-laboral div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-laboral div span{
+  color: white;
 }
 
 .bg-laboral:hover {
@@ -124,6 +178,17 @@
   transition: filter 0.3s;
 }
 
+.bg-internacional div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-internacional div span{
+  color: white;
+}
+
 .bg-internacional:hover {
   cursor: pointer;
   filter: grayscale(100%);
@@ -134,6 +199,17 @@
   background-size: cover;
 
   transition: filter 0.3s;
+}
+
+.bg-comunitario div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-comunitario div span{
+  color: white;
 }
 
 .bg-comunitario:hover {
@@ -148,6 +224,17 @@
   transition: filter 0.3s;
 }
 
+.bg-comercial div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-comercial div span{
+  color: white;
+}
+
 .bg-comercial:hover {
   cursor: pointer;
   filter: grayscale(100%);
@@ -160,6 +247,17 @@
   transition: filter 0.3s;
 }
 
+.bg-civil div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-civil div span{
+  color: white;
+}
+
 .bg-civil:hover {
   cursor: pointer;
   filter: grayscale(100%);
@@ -170,6 +268,17 @@
   background-size: cover;
 
   transition: filter 0.3s;
+}
+
+.bg-administrativo div{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  padding: 2%;
+
+}
+
+.bg-administrativo div span{
+  color: white;
 }
 
 .bg-administrativo:hover {
