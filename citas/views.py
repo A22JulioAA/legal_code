@@ -7,7 +7,13 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def citas_principal(request):
-    # Obtenemos todas las citas asociadas al profesional 
+    """
+        Esta función requiere de estar logueado y su función es obtener una 
+        lista de las citas del usuario y pasarlas como contexto a la template.
+        
+        Args:
+            request: representa la petición HTTP recibida por el servidor.
+    """
     citas = Cita.objects.all()
 
     data = {

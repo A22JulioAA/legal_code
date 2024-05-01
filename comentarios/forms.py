@@ -1,7 +1,11 @@
 from django import forms
-from usuarios.models import Profesional, Cliente
+from core.models import Profesional, Cliente
 
 class CrearComentarioForm(forms.Form):
+    '''
+        Este modelo establece los campos de Comentarios.
+    '''
+    
     profesional = forms.ModelChoiceField(label = 'Profesional ', queryset=Profesional.objects.all())
     cliente = forms.ModelChoiceField(label = 'Cliente ', queryset=Cliente.objects.all())
     texto_comentario = forms.CharField(label = 'Comentario ',max_length=400, required=False, widget=forms.Textarea(attrs={}))

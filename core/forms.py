@@ -4,8 +4,15 @@ from django.contrib.auth.models import User
 from .models import Profesional
 
 class CustomUserCreationForm(forms.ModelForm):
+    """
+
+    Args:
+        forms (ModelForm): Formulario que va a tener como base un Modelo creado
+        
+    """
+    
     class Meta:
-        model = Profesional
+        model = Profesional # Se toma como modelo Profesional
         fields = ['nombre', 'apellidos','email', 'password', 'fecha_nacimiento', 'dni', 'telefono', 'precio_consulta', 'direccion']
         labels = {
             'nombre': 'Nombre ',
@@ -26,4 +33,4 @@ class CustomUserCreationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['email'].widget.attrs['autocomplete'] = 'off'
+        self.fields['email'].widget.attrs['autocomplete'] = 'off' # Se desactiva el autocompletado que usa el navegador por defecto

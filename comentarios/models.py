@@ -3,6 +3,13 @@ from core.models import Profesional, Cliente # Importamos los modelos de la apli
 from datetime import datetime
 
 class Comentario(models.Model):
+    """
+
+    Args:
+        models (Model): Modelo principal del cual heredan
+
+    """
+    
     profesional = models.ForeignKey(Profesional, on_delete=models.CASCADE, null=False, default=1)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=False, default=1)
     texto_comentario = models.TextField(max_length=400, default='')
