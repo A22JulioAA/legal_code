@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'comentarios',
     'bootstrap5',
     'fontawesomefree',
+    'django_seed'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
@@ -91,7 +92,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "abc123.",
         "HOST": "127.0.0.1",
-        "PORT": "5433",
+        "PORT": "5432",
     }
 }
 

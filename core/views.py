@@ -16,6 +16,9 @@ from .models import Profesional
 # Vista para la página principal
 def homepage(request):
     """
+    Esta vista carga la página principal los profesionales de la base de datos organizados en 
+    cards
+
     Args:
         request (HTTP): Esta request se refiere a la petición que recibe del servidor.
 

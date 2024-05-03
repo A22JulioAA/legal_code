@@ -25,7 +25,7 @@ class Profesional(models.Model):
     """
     
     nombre = models.CharField(max_length=100, null=False)
-    apellidos = models.CharField(max_length=100, default='-')
+    apellidos = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=200, null=False, unique=True) # email y password se escriben en inglés por comodidad y para evitar caracteres especiales
     password = models.CharField(max_length=100, null=False)
     fecha_nacimiento = models.DateField(null=False)

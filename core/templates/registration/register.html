@@ -1,5 +1,11 @@
 {% extends "core/base-login.html" %}
 
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 
 {% load crispy_forms_tags %}
@@ -12,8 +18,8 @@
 <section class="container mt-3">
     <h2>Registrar como: </h2>
     <div class="btn-group" role="group">
-        <button type="button" class="btn btn-outline-dark active">Profesional</button>
-        <button type="button" class="btn btn-outline-dark">Cliente</button>
+        <button type="button" class="btn btn-outline-dark active" id="boton-profesional">Profesional</button>
+        <button type="button" class="btn btn-outline-dark" id="boton-cliente">Cliente</button>
     </div>
 </section>
 
@@ -35,7 +41,7 @@
     </div>
 </form>
 
-<form method="post" class="container mt-3" id="formulario_cliente">
+<form method="post" class="container mt-3 d-none" id="formulario_cliente">
     {% csrf_token %}
 
     <div class="card">

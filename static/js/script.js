@@ -10,3 +10,8 @@ function scrollToSection(event, id) {
         seccion.scrollIntoView({ behavior: 'smooth' });
     }
 }
+
+let boton_cliente = d.getElementById('boton-cliente');
+let boton_profesional = d.getElementById('boton-profesional');
+
+console.log(d.querySelector("#boton-cliente"));
