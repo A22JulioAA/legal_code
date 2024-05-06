@@ -1,1 +1,0 @@
-Al cambiar a PostgrSQL, necesitamos instalar el módulo  psycopg2.
