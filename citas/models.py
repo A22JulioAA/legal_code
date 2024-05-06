@@ -16,3 +16,6 @@ class Cita(models.Model):
     fecha_cita = models.DateTimeField(null=False)
     precio = models.FloatField(null=False)
     estado = models.CharField(max_length=1, null=False, choices=OPCIONES_ESTADO)
+
+    def __str__(self):
+        return self.cliente.nombre + ' - ' + self.estado

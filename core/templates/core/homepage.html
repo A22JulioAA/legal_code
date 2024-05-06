@@ -27,31 +27,34 @@ Homepage {% endblock %} {% block css %}
 
 <!-- Sección para mostrar las diferentes especialidades del derecho(sirve de filtro) -->
 <section
-  class="container especialidades bg-dark text-light"
+  class="container especialidades"
   id="especialidades"
 >
   <div class="row">
-    <div class="col-3 border p-3 bg-penal"><div><span class="texto-especialidad">Penal</span></div></div>
-    <div class="col-3 border p-3 bg-eclesiastico"><div><span class="texto-especialidad">Eclesiástico</span></div></div>
-    <div class="col-3 border p-3 bg-administrativo"><div><span class="texto-especialidad">Administrativo</span></div></div>
-    <div class="col-3 border p-3 bg-financiero"><div><span class="texto-especialidad">Financiero</span></div></div>
+    <div class="col-3 p-3 bg-penal"><a class="text-decoration-none text-light" href="especialidad/penal"><div><span class="texto-especialidad">Penal</span></div></a></div>
+    <div class="col-3 p-3 bg-eclesiastico"><a class="text-decoration-none text-light" href="especialidad/eclesiastico"><div><span class="texto-especialidad">Eclesiástico</span></div></a></div>
+    <div class="col-3 p-3 bg-administrativo"><a class="text-decoration-none text-light" href="especialidad/administrativo"><div><span class="texto-especialidad">Administrativo</span></div></a></div>
+    <div class="col-3 p-3 bg-financiero"><a class="text-decoration-none text-light" href="especialidad/financiero"><div><span class="texto-especialidad">Financiero</span></div></a></div>
   </div>
   <div class="row">
-    <div class="col-3 border p-3 bg-mercantil"><div><span class="texto-especialidad">Mercantil</span></div></div>
-    <div class="col-3 border p-3 bg-civil"><div><span class="texto-especialidad">Civil</span></div></div>
-    <div class="col-3 border p-3 bg-fiscal"><div><span class="texto-especialidad">Fiscal</span></div></div>
-    <div class="col-3 border p-3 bg-laboral"><div><span class="texto-especialidad">Laboral</span></div></div>
+    <div class="col-3 p-3 bg-mercantil"><a class="text-decoration-none text-light" href="especialidad/mercantil"><div><span class="texto-especialidad">Mercantil</span></div></a></div>
+    <div class="col-3 p-3 bg-civil"><a class="text-decoration-none text-light" href="especialidad/civil"><div><span class="texto-especialidad">Civil</span></div></a></div>
+    <div class="col-3 p-3 bg-fiscal"><a class="text-decoration-none text-light" href="especialidad/fiscal"><div><span class="texto-especialidad">Fiscal</span></div></a></div>
+    <div class="col-3 p-3 bg-laboral"><a class="text-decoration-none text-light" href="especialidad/laboral"><div><span class="texto-especialidad">Laboral</span></div></a></div>
   </div>
   <div class="row">
-    <div class="col-3 border p-3 bg-internacional"><div><span class="texto-especialidad">Internacional</span></div></div>
-    <div class="col-3 border p-3 bg-comunitario"><div><span class="texto-especialidad">Comunitario</span></div></div>
-    <div class="col-3 border p-3 bg-comercial"><div><span class="texto-especialidad">Comercial</span></div></div>
-    <div class="col-3 border p-3 bg-digital"><div><span class="texto-especialidad">Digital</span></div></div>
+    <div class="col-3 p-3 bg-internacional"><a class="text-decoration-none text-light" href="especialidad/internacional"><div><span class="texto-especialidad">Internacional</span></div></a></div>
+    <div class="col-3 p-3 bg-comunitario"><a class="text-decoration-none text-light" href="especialidad/comunitario"><div><span class="texto-especialidad">Comunitario</span></div></a></div>
+    <div class="col-3 p-3 bg-comercial"><a class="text-decoration-none text-light" href="especialidad/comercial"><div><span class="texto-especialidad">Comercial</span></div></a></div>
+    <div class="col-3 p-3 bg-digital"><a class="text-decoration-none text-light" href="especialidad/digital"><div><span class="texto-especialidad">Digital</span></div></a></div>
   </div>
 </section>
 
+{% if mensaje_error %}
+  <section class="container mt-3 border-top"><h2>{{mensaje_error}}</h2></section>
+{% else %}
 <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
-<section class="container mt-3 lista-profesionales">
+<section class="container mt-3 lista-profesionales border-top">
   {% for profesional in lista_profesionales %}
 
   <div class="card bg-dark text-light mt-4 mx-auto" style="width: 100%">
@@ -91,5 +94,8 @@ Homepage {% endblock %} {% block css %}
 
   {% endfor %}
 </section>
+{% endif %}
+
+
 
 {% endblock %}

@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'comentarios',
     'bootstrap5',
     'fontawesomefree',
-    'django_seed'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'

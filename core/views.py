@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
 from .forms import CustomUserCreationForm
-from .models import Profesional
+from .models import Profesional, Especialidad
 
 """
     Cada función define una vista de la web que luego se le pasarán al archivo urls.py
@@ -12,12 +12,11 @@ from .models import Profesional
 
 """
 
-
 # Vista para la página principal
-def homepage(request):
+def homepage(request, filtro_especialidad=None):
     """
     Esta vista carga la página principal los profesionales de la base de datos organizados en 
-    cards
+    cards. Si se introduce un filtro en la url los profesionales se ordenarán según ese filtro.
 
     Args:
         request (HTTP): Esta request se refiere a la petición que recibe del servidor.
@@ -26,19 +25,31 @@ def homepage(request):
         django.http.HttpResponse: El render carga una plantilla indicada en el 2 argumento y lo carga 
         junto con el contexto de data.
     """
-    lista_profesionales = Profesional.objects.all()
 
+    if filtro_especialidad == None:
+        lista_profesionales = Profesional.objects.all()
+    else:
+        # Se obtiene la especialidad asociada a ese nombre y luego se buscan los profesionales
+        # que la tengan en su lista de especialidades
+        especialidad = Especialidad.objects.get(nombre = filtro_especialidad)
+
+        lista_profesionales = especialidad.profesional_set.all()
+    
+    if len(lista_profesionales) == 0:
+        mensaje_error = 'No se han encontrado profesionales con esta especialidad. Lo sentimos mucho...'
+    else:
+        mensaje_error = ''
+        
+    print(filtro_especialidad)
     data = {
         'lista_profesionales': lista_profesionales,
-
+        'mensaje_error': mensaje_error
     }
     
     return render(request, 'core/homepage.html', data)
 
 # TODO:A mejorar el registro e inicio de sesión. Implementar cambio de formulario según sea profesional o cliente.
 # TODO:Revisar permisos y crear permisos nuevos.
-# TODO: Hay movida porque por defecto Django pilla el username para autenticar y los usuarios no tienen username aquí. Estaría de locos no meterlo en el formulario pero que se les creara automáticamente.
-
 
 def salir(request):
     """

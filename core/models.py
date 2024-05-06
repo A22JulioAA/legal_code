@@ -55,3 +55,7 @@ class Cliente(models.Model):
     password = models.CharField(max_length=100, null=False)
     fecha_nacimiento = models.DateField(null=False)
     telefono = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.nombre + ' - ' + self.email
+    

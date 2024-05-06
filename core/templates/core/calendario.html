@@ -1,7 +1,12 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block title %}
 Calendario
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/calendar.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -10,9 +15,8 @@ Calendario
     <h2 class="text-light display-2 fw-semibold">Calendario</h2>
 </section>
 
-<section class="container">
-    Aquí tendríamos el calendario generado con JS en el que se marcarían citas de una manera más
-    gráfica así como posibles eventos que el usuario quiera establecer.
+<section class="calendar">
+    
 </section>
 
 {% endblock %}
