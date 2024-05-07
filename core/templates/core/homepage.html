@@ -84,9 +84,9 @@ Homepage {% endblock %} {% block css %}
         <i class="fa-regular fa-map"> </i> {{ profesional.direccion }}
         <br /><br />
         <p class="card-text">{{ profesional.descripcion }}</p>
-        <a href="#" class="btn btn-primary">Pedir Cita</a>
-        <a href="#" class="btn btn-primary">Contacta</a>
-        <a href="#" class="btn btn-primary">Acerca de </a>
+        <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-primary">Pedir Cita</a>
+        <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-primary">Contacta</a>
+        <a href="https://www.github.com" target="blank" class="btn btn-primary">Acerca de </a>
       </div>
       <div class="col-4">
         <img

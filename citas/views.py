@@ -3,6 +3,7 @@ from .models import Cita
 from django.contrib.auth.decorators import login_required
 from .forms import CitaForm
 from django.contrib import messages
+from core.models import Profesional, Cliente, Especialidad
 
 # Create your views here.
 
@@ -24,7 +25,7 @@ def citas_principal(request):
     return render(request, 'citas_principal.html', data)
 
 @login_required
-def agendar_cita(request):
+def agendar_cita(request, id_profesional = None):
     if request.method == 'POST':
         form = CitaForm(request.POST)
         if form.is_valid():
@@ -32,7 +33,11 @@ def agendar_cita(request):
             messages.success(request, 'La cita se ha reservado correctamente. Nos vemos!')
             return redirect('homepage')
     else:
-        form = CitaForm()
+        if id_profesional is not None:
+            profesional = Profesional.objects.get(id=id_profesional)
+            form = CitaForm(initial={'profesional':profesional})
+        else:
+            form = CitaForm()
 
     data = {
         'form': form
