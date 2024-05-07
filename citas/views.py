@@ -5,8 +5,6 @@ from .forms import CitaForm
 from django.contrib import messages
 from core.models import Profesional, Cliente, Especialidad
 
-# Create your views here.
-
 @login_required
 def citas_principal(request):
     """
@@ -26,9 +24,25 @@ def citas_principal(request):
 
 @login_required
 def agendar_cita(request, id_profesional = None):
+    """
+        Esta función requiere estar logueado y sirve para agendar una cita con un pro-
+        fesional. Dependiendo de si se entra a este formulario a través del link del
+        navbar o a través de una card de las ofertas, el campo de profesional estará vacío
+        o con el profesional de la card precargado. Comprueba que la fecha esté libre y el 
+        profesional también y añade la cita a la base de datos.
+
+        Args:
+            request: representa la petición HTTP recibida por el servidor.
+            id_profesional: Puede ser None. Representa el ID del profesional para la cita.
+        
+        Returns:  
+            render: Renderizado del HTML que contiene el formulario de Citas.
+    """
+
     if request.method == 'POST':
         form = CitaForm(request.POST)
 
+        # Esto lo obtenemos para asegurarnos de que esa fecha y ese profesional estén disponibles.
         fecha_cita = request.POST['fecha_cita']
         profesional = request.POST['profesional']
 
@@ -39,6 +53,8 @@ def agendar_cita(request, id_profesional = None):
             return render(request, 'agendar_cita.html', {'error': f'{profesional} no tiene esa fecha disponible. Inténtelo con otra!', 'form': form})
         else:
             if form.is_valid():
+                # Guardamos en la base de datos y enviamos un mensaje flash al homepage para 
+                # advertir al usuario de que la cita se agendó con éxito.
                 form.save()
                 messages.success(request, 'La cita se ha reservado correctamente. Nos vemos!')
                 return redirect('homepage')

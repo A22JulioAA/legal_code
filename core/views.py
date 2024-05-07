@@ -36,14 +36,14 @@ def homepage(request, filtro_especialidad=None):
         lista_profesionales = especialidad.profesional_set.all()
     
     if len(lista_profesionales) == 0:
-        mensaje_error = 'No se han encontrado profesionales con esta especialidad. Lo sentimos mucho...'
+        no_profesionales_especialidad = 'No se han encontrado profesionales con esta especialidad. Lo sentimos mucho...'
     else:
-        mensaje_error = ''
+        no_profesionales_especialidad = ''
         
     print(filtro_especialidad)
     data = {
         'lista_profesionales': lista_profesionales,
-        'mensaje_error': mensaje_error
+        'no_profesionales_especialidad': no_profesionales_especialidad
     }
     
     return render(request, 'core/homepage.html', data)

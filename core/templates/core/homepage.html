@@ -60,8 +60,8 @@ Homepage {% endblock %} {% block css %}
   </div>
 </section>
 
-{% if mensaje_error %}
-  <section class="container mt-3 border-top"><h2>{{mensaje_error}}</h2></section>
+{% if no_profesionales_especialidad %}
+  <section class="container mt-3 border-top"><h2>{{no_profesionales_especialidad}}</h2></section>
 {% else %}
 <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
 <section class="container mt-3 lista-profesionales border-top">
