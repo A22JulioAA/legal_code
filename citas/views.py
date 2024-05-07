@@ -28,10 +28,20 @@ def citas_principal(request):
 def agendar_cita(request, id_profesional = None):
     if request.method == 'POST':
         form = CitaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'La cita se ha reservado correctamente. Nos vemos!')
-            return redirect('homepage')
+
+        fecha_cita = request.POST['fecha_cita']
+        profesional = request.POST['profesional']
+
+        cita_existe = Cita.objects.filter(fecha_cita=fecha_cita, profesional=profesional).exists()
+
+        if cita_existe:
+            form = CitaForm()
+            return render(request, 'agendar_cita.html', {'error': f'{profesional} no tiene esa fecha disponible. Inténtelo con otra!', 'form': form})
+        else:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'La cita se ha reservado correctamente. Nos vemos!')
+                return redirect('homepage')
     else:
         if id_profesional is not None:
             profesional = Profesional.objects.get(id=id_profesional)

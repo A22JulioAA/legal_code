@@ -19,10 +19,16 @@ Agendar Cita
 
 <form method='POST' class="container mt-3">
     {% csrf_token %}
-    {{ form | crispy}}
-    
-    <div class="row">
-        <input class="btn btn-dark float-end col-12" type="submit" value="Reservar">
+
+    <div class="card">
+        <div class="card-body">
+
+            {{ form | crispy }}
+
+            <div class="row">
+                <input class="btn btn-dark float-end col-12" type="submit" value="Reservar">
+            </div>
+        </div>
     </div>
 </form>
 
