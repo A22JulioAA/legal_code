@@ -27,7 +27,7 @@ class Profesional(models.Model):
     nombre = models.CharField(max_length=100, null=False)
     apellidos = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=200, null=False, unique=True) # email y password se escriben en inglés por comodidad y para evitar caracteres especiales
-    password = models.CharField(max_length=100, null=False)
+    password1 = models.CharField(max_length=100, null=False)
     fecha_nacimiento = models.DateField(null=False)
     dni = models.CharField(max_length=9, null=False, unique=True)
     telefono = models.CharField(max_length=20, null=False)
@@ -38,7 +38,7 @@ class Profesional(models.Model):
     campo = models.CharField(max_length=50, default='Jurista')
     
     def __str__(self) -> str:
-        return self.nombre + self.apellidos + '\ Email: ' + self.email
+        return self.nombre + ' ' + self.apellidos 
 
 class Cliente(models.Model):
     """
@@ -52,10 +52,10 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=100, null=False)
     apellidos = models.CharField(max_length=100)
     email = models.EmailField(max_length=200, null=False, unique=True)
-    password = models.CharField(max_length=100, null=False)
+    password1 = models.CharField(max_length=100, null=False)
     fecha_nacimiento = models.DateField(null=False)
     telefono = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nombre + ' - ' + self.email
+        return self.nombre + ' ' + self.apellidos 
     

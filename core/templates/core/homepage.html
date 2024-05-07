@@ -23,6 +23,16 @@ Homepage {% endblock %} {% block css %}
 
 <br />
 
+<!-- En esta sección mostraremos los mensajes flash que vayan ocurriendo en diferentes puntos de la web -->
+
+{% if messages %}
+  {% for message in messages %}
+    <section class="container-fluid text-center alert alert-{{ message.tags }}">
+      {{ message }}
+    </section>
+  {% endfor %}
+{% endif %}
+
 <!-- Sección de anuncios de profesionales ordenados de forma aleatoria en un principio -->
 
 <!-- Sección para mostrar las diferentes especialidades del derecho(sirve de filtro) -->
@@ -31,22 +41,22 @@ Homepage {% endblock %} {% block css %}
   id="especialidades"
 >
   <div class="row">
-    <div class="col-3 p-3 bg-penal"><a class="text-decoration-none text-light" href="especialidad/penal"><div><span class="texto-especialidad">Penal</span></div></a></div>
-    <div class="col-3 p-3 bg-eclesiastico"><a class="text-decoration-none text-light" href="especialidad/eclesiastico"><div><span class="texto-especialidad">Eclesiástico</span></div></a></div>
-    <div class="col-3 p-3 bg-administrativo"><a class="text-decoration-none text-light" href="especialidad/administrativo"><div><span class="texto-especialidad">Administrativo</span></div></a></div>
-    <div class="col-3 p-3 bg-financiero"><a class="text-decoration-none text-light" href="especialidad/financiero"><div><span class="texto-especialidad">Financiero</span></div></a></div>
+    <div class="col-3 p-3 bg-penal"><a class="text-decoration-none text-light" href="/especialidad/penal"><div><span class="texto-especialidad">Penal</span></div></a></div>
+    <div class="col-3 p-3 bg-eclesiastico"><a class="text-decoration-none text-light" href="/especialidad/eclesiastico"><div><span class="texto-especialidad">Eclesiástico</span></div></a></div>
+    <div class="col-3 p-3 bg-administrativo"><a class="text-decoration-none text-light" href="/especialidad/administrativo"><div><span class="texto-especialidad">Administrativo</span></div></a></div>
+    <div class="col-3 p-3 bg-financiero"><a class="text-decoration-none text-light" href="/especialidad/financiero"><div><span class="texto-especialidad">Financiero</span></div></a></div>
   </div>
   <div class="row">
-    <div class="col-3 p-3 bg-mercantil"><a class="text-decoration-none text-light" href="especialidad/mercantil"><div><span class="texto-especialidad">Mercantil</span></div></a></div>
-    <div class="col-3 p-3 bg-civil"><a class="text-decoration-none text-light" href="especialidad/civil"><div><span class="texto-especialidad">Civil</span></div></a></div>
-    <div class="col-3 p-3 bg-fiscal"><a class="text-decoration-none text-light" href="especialidad/fiscal"><div><span class="texto-especialidad">Fiscal</span></div></a></div>
-    <div class="col-3 p-3 bg-laboral"><a class="text-decoration-none text-light" href="especialidad/laboral"><div><span class="texto-especialidad">Laboral</span></div></a></div>
+    <div class="col-3 p-3 bg-mercantil"><a class="text-decoration-none text-light" href="/especialidad/mercantil"><div><span class="texto-especialidad">Mercantil</span></div></a></div>
+    <div class="col-3 p-3 bg-civil"><a class="text-decoration-none text-light" href="/especialidad/civil"><div><span class="texto-especialidad">Civil</span></div></a></div>
+    <div class="col-3 p-3 bg-fiscal"><a class="text-decoration-none text-light" href="/especialidad/fiscal"><div><span class="texto-especialidad">Fiscal</span></div></a></div>
+    <div class="col-3 p-3 bg-laboral"><a class="text-decoration-none text-light" href="/especialidad/laboral"><div><span class="texto-especialidad">Laboral</span></div></a></div>
   </div>
   <div class="row">
-    <div class="col-3 p-3 bg-internacional"><a class="text-decoration-none text-light" href="especialidad/internacional"><div><span class="texto-especialidad">Internacional</span></div></a></div>
-    <div class="col-3 p-3 bg-comunitario"><a class="text-decoration-none text-light" href="especialidad/comunitario"><div><span class="texto-especialidad">Comunitario</span></div></a></div>
-    <div class="col-3 p-3 bg-comercial"><a class="text-decoration-none text-light" href="especialidad/comercial"><div><span class="texto-especialidad">Comercial</span></div></a></div>
-    <div class="col-3 p-3 bg-digital"><a class="text-decoration-none text-light" href="especialidad/digital"><div><span class="texto-especialidad">Digital</span></div></a></div>
+    <div class="col-3 p-3 bg-internacional"><a class="text-decoration-none text-light" href="/especialidad/internacional"><div><span class="texto-especialidad">Internacional</span></div></a></div>
+    <div class="col-3 p-3 bg-comunitario"><a class="text-decoration-none text-light" href="/especialidad/comunitario"><div><span class="texto-especialidad">Comunitario</span></div></a></div>
+    <div class="col-3 p-3 bg-comercial"><a class="text-decoration-none text-light" href="/especialidad/comercial"><div><span class="texto-especialidad">Comercial</span></div></a></div>
+    <div class="col-3 p-3 bg-digital"><a class="text-decoration-none text-light" href="/especialidad/digital"><div><span class="texto-especialidad">Digital</span></div></a></div>
   </div>
 </section>
 

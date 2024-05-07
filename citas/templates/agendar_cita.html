@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Agendar Cita
+{% endblock %}
+
+{% load tz %} <!-- Importar la zona horaria -->
+{% load i18n %} <!-- Importar la internacionalización -->
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<section class="container-fluid bg-dark p-2 border-top">
+    <h2 class="text-light display-2 fw-semibold">Reserva tu cita ahora!</h2>
+</section>
+
+{% language 'es' %} <!-- Establecer el idioma en español -->
+
+<form method='POST' class="container mt-3">
+    {% csrf_token %}
+    {{ form | crispy}}
+    
+    <div class="row">
+        <input class="btn btn-dark float-end col-12" type="submit" value="Reservar">
+    </div>
+</form>
+
+<br>
+
+{% endlanguage %}
+
+{% endblock %}

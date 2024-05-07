@@ -7,8 +7,8 @@ class Cita(models.Model):
     """
     OPCIONES_ESTADO = (
         ('P', 'PENDIENTE'),
-        ('A', 'ACEPTADA'),
-        ('R', 'RECHAZADA')
+        ('E', 'ESPERA'),
+        ('C', 'CANCELADA')
     )
     
     profesional = models.ForeignKey(Profesional, on_delete=models.CASCADE)
@@ -16,6 +16,7 @@ class Cita(models.Model):
     fecha_cita = models.DateTimeField(null=False)
     precio = models.FloatField(null=False)
     estado = models.CharField(max_length=1, null=False, choices=OPCIONES_ESTADO)
+    descripcion = models.TextField(max_length=400, null=True, default='')
 
     def __str__(self):
         return self.cliente.nombre + ' - ' + self.estado

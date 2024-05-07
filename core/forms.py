@@ -13,12 +13,12 @@ class CustomUserCreationForm(forms.ModelForm):
     
     class Meta:
         model = Profesional # Se toma como modelo Profesional
-        fields = ['nombre', 'apellidos','email', 'password', 'fecha_nacimiento', 'dni', 'telefono', 'precio_consulta', 'direccion']
+        fields = ['nombre', 'apellidos','email', 'password1', 'fecha_nacimiento', 'dni', 'telefono', 'precio_consulta', 'direccion']
         labels = {
             'nombre': 'Nombre ',
             'apellidos': 'Apellidos',
             'email': 'Correo ',
-            'password': 'Contraseña ',
+            'password1': 'Contraseña ',
             'fecha_nacimiento': 'Fecha de nacimiento ',
             'dni': 'DNI ',
             'telefono': 'Telefono ',
@@ -26,7 +26,7 @@ class CustomUserCreationForm(forms.ModelForm):
             'direccion': 'Dirección '
         }
         widgets = {
-            'password': forms.PasswordInput(),
+            'password1': forms.PasswordInput(),
             'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'})
         }
     
