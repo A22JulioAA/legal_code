@@ -67,11 +67,11 @@ registros, ver base-login
         <a class="text-dark" href="{% url 'salir' %}" class='text-dark'><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
         {% else %}
         <div class="text-dark row justify-content-center mt-2">
-            <a href="{% url 'login' %}" class='text-decoration-none text-dark'>Inicia sesión aquí</a>
+            <a href="{% url 'login_view' %}" class='text-decoration-none text-dark'>Inicia sesión aquí</a>
         </div>
         <hr>
         <div class="text-dark row justify-content-center mb-2">
-            <a href="{% url 'register' %}" class='text-decoration-none text-dark'>Registrate aquí</a>
+            <a href="{% url 'register_view' %}" class='text-decoration-none text-dark'>Registrate aquí</a>
         </div>
         {% endif %}
           </div> 

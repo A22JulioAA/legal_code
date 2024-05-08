@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'comentarios',
     'bootstrap5',
     'fontawesomefree',
+    'account'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
@@ -144,4 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_REDIRECT_LOGOUT = 'homepage'
+
+AUTH_USER_MODEL = 'account.User'
 

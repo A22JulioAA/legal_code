@@ -1,0 +1,12 @@
+{% comment %} {% extends "core/base.html" %} {% endcomment %}
+
+{% block content %}
+<form method='POST'>
+
+    {% csrf_token %}
+    {{form}}
+
+    <input type="submit" value="iniciar"/>
+
+</form>
+{% endblock %}
