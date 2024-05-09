@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'citas',
-    'comentarios',
+    # 'comentarios',
+    'users',
     'bootstrap5',
     'fontawesomefree',
 ]
@@ -91,7 +92,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "abc123.",
         "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "PORT": "5433",
     }
 }
 
@@ -144,4 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_REDIRECT_LOGOUT = 'homepage'
+
+AUTH_USER_MODEL = 'users.Cliente'
 

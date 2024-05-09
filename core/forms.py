@@ -1,9 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from .models import Profesional
+from users.models import Cliente
 
-class CustomUserCreationForm(forms.ModelForm):
+class RegistroForm(UserCreationForm):
     """
 
     Args:
@@ -12,10 +11,10 @@ class CustomUserCreationForm(forms.ModelForm):
     """
     
     class Meta:
-        model = Profesional # Se toma como modelo Profesional
-        fields = ['nombre', 'apellidos','email', 'password1', 'fecha_nacimiento', 'dni', 'telefono', 'precio_consulta', 'direccion']
+        model = Cliente # Se toma como modelo Cliente
+        fields = ['name', 'apellidos','email', 'password1', 'password2', 'fecha_nacimiento']
         labels = {
-            'nombre': 'Nombre ',
+            'name': 'Nombre ',
             'apellidos': 'Apellidos',
             'email': 'Correo ',
             'password1': 'Contraseña ',

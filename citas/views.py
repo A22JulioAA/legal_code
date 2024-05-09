@@ -3,7 +3,8 @@ from .models import Cita
 from django.contrib.auth.decorators import login_required
 from .forms import CitaForm
 from django.contrib import messages
-from core.models import Profesional, Cliente, Especialidad
+from core.models import Profesional, Especialidad
+from users.models import Cliente
 
 @login_required
 def citas_principal(request):

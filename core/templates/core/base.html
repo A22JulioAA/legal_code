@@ -63,7 +63,7 @@ registros, ver base-login
         <i class="fa-regular fa-user col-2 d-flex align-items-center"></i>
         <div class="col-10">
         {% if request.user.is_authenticated %}
-        <a href="/profile" class='text-dark border border-dark'>{{ user.username | upper }}</a><br><span>Ult. Con: {{ user.last_login | time:'H:i A' }}</span><br>
+        <a href="/profile" class='text-dark border border-dark'>{{ user | upper }}</a><br><span>Ult. Con: {{ user.last_login | time:'H:i A' }}</span><br>
         <a class="text-dark" href="{% url 'salir' %}" class='text-dark'><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
         {% else %}
         <div class="text-dark row justify-content-center mt-2">

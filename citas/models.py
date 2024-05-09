@@ -1,5 +1,6 @@
 from django.db import models
-from core.models import Profesional, Cliente # Importamos los modelos de la aplicación 'core' para usar Profesional y Cliente
+from core.models import Profesional # Importamos los modelos de la aplicación 'core' para usar Profesional
+from users.models import Cliente
 
 class Cita(models.Model):
     """
