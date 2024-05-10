@@ -32,9 +32,9 @@ registros, ver base-login
          También la imagen de perfil y las opciones correspondientes. -->
   <header class="container-fluid p-0 m-0">
     <!-- TÍTULO PRINCIPAL -->
-         <h1 class="row bg-dark p-3 m-0 text-center text-light border-bottom fuente-personalizada">
+         <!--<h1 class="row bg-dark p-3 m-0 text-center text-light border-bottom fuente-personalizada">
             <a href="/" class="col-8 text-white text-decoration-none"><i class="fa-solid fa-landmark"></i> LEGAL ROSTER</a>
-        </h1>  
+        </h1>-->  
 
         <!-- <div class="container-fluid m-0 p-0 bg-dark">
             <a href="/">
@@ -45,7 +45,44 @@ registros, ver base-login
     <!-- FIN TÍTULO PRINCIPAL -->
 
     <!-- MENÚ DE NAVEGACIÓN -->
-    <nav class="row navbar navbar-dark navbar-expand-lg bg-dark m-0 p-2">
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark text-light p-4">
+        <div class="container-fluid">
+          <a class="navbar-brand fuente-personalizada" href="/"><i class="fa-solid fa-landmark"></i> LEGAL ROSTER</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mx-auto">
+              <a class="nav-link me-3" href="{% url 'calendario' %}"><i class="fa-regular fa-calendar"></i> Calendario</a>
+                <a class="nav-link me-3" href="{% url 'agendar-cita' %}"><i class="fa-regular fa-bell"></i> Agendar cita</a>
+                <a class="nav-link me-3" href="{% url 'citas-principal' %}"><i class="fa-regular fa-hand-point-up"></i> Mis citas</a>
+                <a class="nav-link" href="{% url 'sobre-nosotros' %}"><i class="fa-solid fa-people-roof"></i> Nosotros</a>
+                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-user"></i> Hi, {{ user.name }}!
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if request.user.is_authenticated %}
+                                <li><a class="dropdown-item" href="/profile"><i class="fa-regular fa-user"></i> Mi perfil</a></li>
+                                <hr>
+                                <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-door-open"></i> Cerrar sesión</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a></li>
+                                <hr>
+                                <li><a class="dropdown-item" href="{% url 'register' %}"><i class="fa-solid fa-arrow-right"></i> Registrarse</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+
+    <!--<nav class="row navbar navbar-dark navbar-expand-lg bg-dark m-0 p-2">
       <div class="col-8 bg-dark text-center">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
           <span class="navbar-toggler-icon"></span>
@@ -78,7 +115,7 @@ registros, ver base-login
         <br />
 
       </div>
-    </nav>
+    </nav>-->
     <!-- FIN MENÚ NAVEGACIÓN -->
   </header>
   <!-- FIN HEADER -->

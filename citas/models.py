@@ -20,4 +20,4 @@ class Cita(models.Model):
     descripcion = models.TextField(max_length=400, null=True, default='')
 
     def __str__(self):
-        return self.cliente.nombre + ' - ' + self.estado
+        return self.cliente.name + ' - ' + self.estado

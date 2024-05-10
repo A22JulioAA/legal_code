@@ -10,19 +10,6 @@
 
 {% load crispy_forms_tags %}
 
-<section class="container-fluid bg-dark p-2 border-top">
-    <h2 class="text-light display-2 fw-semibold">Registrate</h2>
-    <h4 class="text-light text-center">Es gratis y tendrás acceso a todo el contenido y servicios de la web</h4>
-</section>
-
-<section class="container mt-3">
-    <h2>Registrar como: </h2>
-    <div class="btn-group" role="group">
-        <button type="button" class="btn btn-outline-dark active" id="boton-profesional">Profesional</button>
-        <button type="button" class="btn btn-outline-dark" id="boton-cliente">Cliente</button>
-    </div>
-</section>
-
 <form method="post" class="container mt-3" id="formulario_profesional">
     {% csrf_token %}
 
