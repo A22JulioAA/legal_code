@@ -15,45 +15,57 @@ Mis citas
 
 {% language 'es' %} <!-- Establecer el idioma en español -->
 
-<section class="container mt-3">
-    <div class="row">
-        <div class="col-4">
+<div id="advertencia" class="container mt-3">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Advertencia</h4>
+        <p>Recuerde! Cualquier cancelación está sujeta a las condiciones establecidas por los profesionales. En caso de
+            no especificarse nada, el período de cancelación
+            gratuita es de 48 horas antes de la consulta.
+        </p>
+        <hr>
+        <p class="mb-0">Términos y condiciones de cancelación: <a href=""
+                class="text-dark text-decoration-none"><strong>Ver
+                    enlace</strong></a></p>
+    </div>
+</div>
 
-            <!-- Se crea una lista para mostrar las citas de los usuarios, con sus datos y los datos de la cita -->
-            <div id="list-example" class="list-group">
-                {% for cita in citas %}
-                <a class="list-group-item list-group-item-action" href="#list-item-{{ forloop.counter }}">
-                    {{ cita.profesional.nombre }} {{ cita.profesional.apellidos }}<br>En:
-                    {{ cita.fecha_cita | timeuntil }}
-                </a>
-                {% endfor %}
+{% if citas %}
+
+<div class="accordion container mt-3">
+    {% for cita in citas %}
+    <div class="accordion-item mt-3">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cita{{cita.id}}">
+                {{cita.profesional.nombre}} {{cita.profesional.apellidos}} - {{cita.fecha_cita}}
+            </button>
+        </h2>
+        <div id="cita{{cita.id}}" class="accordion-collapse collapse show row" data-bs-parent="#cita{{cita.id}}">
+            <div class="accordion-body col-8">
+                <p>{{cita.descripcion}}</p>
+                <p>Especialidades: {% for especialidad in cita.profesional.especialidad.all %}
+                    {{especialidad | capfirst}},
+                    {% endfor %}</p>
             </div>
-
+            <div class="col-4">
+                <strong>Precio: {{cita.precio}}€</strong>
+                <strong>Estado: {{cita.get_estado_display}}</strong>
+            </div>
         </div>
-        <div class="col-8 bg-dark text-light" style="height: 50vh; overflow: auto;">
-            <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true"
-                class="scrollspy-example" tabindex="0">
-                {% for cita in citas %}
-                <h2 id="list-item-{{ forloop.counter }}">{{ cita.fecha_cita | date:'l d-m-Y' }}</h2>
-                <span>Hora {{ cita.fecha_cita | time:'H:i' }} H</span>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex similique quaerat itaque consequatur
-                    numquam
-                    dolore esse autem, magni iste distinctio error tempore libero atque unde tenetur. Necessitatibus
-                    tempore
-                    sequi non.</p>
-                <span>Profesional: {{ cita.profesional.nombre }} {{ cita.profesional.apellidos }} ~
-                    {% for especialidad in cita.profesional.especialidad.all %}
-                    {{ especialidad.nombre }}
-                    {% endfor %}
-                </span>
-                {% endfor %}
-            </div>
+        <div class="row">
+            <!-- <button class="btn btn-danger col-6">Anular cita</button>
+            <button class="btn btn-danger col-6">Cambiar fecha</button> -->
         </div>
     </div>
-</section>
-{% endlanguage %}
+    {% endfor %}
+
+    {% else %}
+
+    {{citas | length}}
+
+    {% endif %}
+    {% endlanguage %}
 
 
 
 
-{% endblock %}
+    {% endblock %}

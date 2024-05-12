@@ -15,7 +15,7 @@ def citas_principal(request):
         Args:
             request: representa la petición HTTP recibida por el servidor.
     """
-    citas = Cita.objects.all()
+    citas = Cita.objects.filter(cliente_id=request.user.id)
 
     data = {
         'citas': citas,
