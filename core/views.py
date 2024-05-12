@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
-from .forms import CustomUserCreationForm
+from .forms import RegistroForm
 from .models import Profesional, Especialidad
+from users.models import Cliente
 
 """
     Cada función define una vista de la web que luego se le pasarán al archivo urls.py
@@ -79,22 +80,26 @@ def register(request):
         django.http.HttpResponse: El render carga una plantilla indicada en el 2 argumento y lo carga 
         junto con el contexto de data.
     """
+    if request.user.is_anonymous:
+        if request.method == 'POST': 
+            form = RegistroForm(request.POST)
+            if form.is_valid():
+                email = form.cleaned_data.get('email')
+                password = form.cleaned_data.get('password1')
+                form.save()
+                new_user = authenticate(email=email, password=password)
+                if new_user is not None:
+                    login(request, new_user)
+                    return redirect(homepage)            
+    else:
+        return redirect('logout')
+    
+    form = RegistroForm()
     
     data = {
-        'form': CustomUserCreationForm
+        'form': form
     }
-
-    if request.method == 'POST':
-        user_creation_form = CustomUserCreationForm(data=request.POST)
-
-        if user_creation_form.is_valid():
-            user_creation_form.save()
-
-            user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
-            login(request, user)
-
-            return redirect('homepage')
-
+        
     return render(request, 'registration/register.html', data)
 
 @login_required

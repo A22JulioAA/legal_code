@@ -64,46 +64,45 @@ Homepage {% endblock %} {% block css %}
   <section class="container mt-3 border-top"><h2>{{no_profesionales_especialidad}}</h2></section>
 {% else %}
 <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
-<section class="container mt-3 lista-profesionales border-top">
+<section class='seccion-profesionales container mt-3'>
   {% for profesional in lista_profesionales %}
+    <div class='row mt-4'>
+      <div class="col-12 col-lg-8 p-0">
 
-  <div class="card bg-dark text-light mt-4 mx-auto" style="width: 100%">
-    <div class="card-body row">
-      <div class="col-8">
-        <h2 class="card-title">
-          {{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }} | {{ profesional.campo | capfirst }}
-        </h2>
-        <hr />
-        <span class="border p-1 me-1">Especialidades: </span>
-        {% for especialidad in profesional.especialidad.all %} |
-        <span class="card-subtitle mb-2 text-body-secondary"
-          >{{ especialidad }}</span
-        >
-        {% endfor %}
-        <hr />
-        <i class="fa-regular fa-map"> </i> {{ profesional.direccion }}
-        <br /><br />
-        <p class="card-text">{{ profesional.descripcion }}</p>
-        <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-primary">Pedir Cita</a>
-        <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-primary">Contacta</a>
-        <a href="https://www.github.com" target="blank" class="btn btn-primary">Acerca de </a>
+        <div class="card row m-0 p-2" style="width: 100%;">
+          <div class="row g-0">
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title">{{profesional.nombre | capfirst}} {{profesional.apellidos | capfirst}} | {{profesional.campo}}</h5>
+                <p><i class="fa-solid fa-location-dot"></i> {{profesional.direccion}}</p>
+                <hr class="border border-dark border-1 opacity-75">
+                <p class="card-text">{{ profesional.descripcion }}</p>
+                Especialidades:
+                <ul class="list-group mb-3">
+                  {% for especialidad in profesional.especialidad.all %}
+                    <li class="list-group-item">{{especialidad.nombre | capfirst}}</li>
+                  {% endfor %}
+                </ul>
+                <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark">Pedir Cita</a>
+                <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-dark">Contacta</a>
+                <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de </a>
+              </div>
+            </div>
+            <div class="col-4">
+              <img 
+                src="{% static 'img/imagen-abogado.jpg' %}"
+                class="card-img-top image-fluid"
+                alt="Imagen de profesional"
+              >
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-4">
-        <img
-          src="{% static 'img/imagen-abogado.jpg' %}"
-          class="card-img-top image-fluid"
-          alt="Imagen de profesional"
-        />
-        <span class="small">Teléfono: {{ profesional.telefono }}</span><br />
-        <span class="small">Email: {{ profesional.email }}</span>
-        <!-- TODO: Calcular la media de valoraciones y mostrarla en la card de cada profesional. -->
-        <span class="small">Valoracion:</span>
-      </div>
-    </div>
-  </div>
-
+    </div>  
   {% endfor %}
 </section>
+
+
 {% endif %}
 
 

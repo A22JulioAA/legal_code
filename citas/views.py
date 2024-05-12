@@ -3,7 +3,8 @@ from .models import Cita
 from django.contrib.auth.decorators import login_required
 from .forms import CitaForm
 from django.contrib import messages
-from core.models import Profesional, Cliente, Especialidad
+from core.models import Profesional, Especialidad
+from users.models import Cliente
 
 @login_required
 def citas_principal(request):
@@ -53,6 +54,18 @@ def agendar_cita(request, id_profesional = None):
             return render(request, 'agendar_cita.html', {'error': f'{profesional} no tiene esa fecha disponible. Inténtelo con otra!', 'form': form})
         else:
             if form.is_valid():
+                # Cuando ponemos commit=False no añadimos la cita a la base de datos, se crea una instancia que 
+                # luego modificaremos según los valores que querramos que tenga. 
+                cita = form.save(commit=False)
+                # Guardamos el id del cliente que tiene la sesión iniciada.
+                cita.cliente = request.user
+                # Aquí obtenemos el precio del profesional seleccionado. Cada profesional tiene un precio por
+                # consulta preestablecido en su registro de la base de datos. El usuario no puede cambiarlo.
+                profesional_cita = Profesional.objects.get(id=profesional)
+                cita.precio = profesional_cita.precio_consulta
+                # Por último, establecemos el estado en PENDIENTE, que significa que se ha aceptado y se espera
+                # al día de la cita. Más adelante se puede CANCELAR o poneerla en ESPERA.
+                cita.estado = 'P'
                 # Guardamos en la base de datos y enviamos un mensaje flash al homepage para 
                 # advertir al usuario de que la cita se agendó con éxito.
                 form.save()
