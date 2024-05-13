@@ -1,8 +1,16 @@
 {
-  "dependencies": {
-    "@fullcalendar/core": "^6.1.11",
-    "@fullcalendar/daygrid": "^6.1.11",
-    "@fullcalendar/list": "^6.1.11",
-    "@fullcalendar/timegrid": "^6.1.11"
+  "name": "legal_code",
+  "version": "1.0.0",
+  "description": "Actualmente el proyecto no está listo para deslegarse en Docker.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --watch --mode development"
+  },
+  "author": "julio",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   }
 }
