@@ -85,7 +85,8 @@ Homepage {% endblock %} {% block css %}
                 </ul>
                 <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark">Pedir Cita</a>
                 <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-dark">Contacta</a>
-                <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de </a>
+                <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de </a><br>
+                <p class="mt-2">Precio Consulta: {{ profesional.precio_consulta }}€</p>
               </div>
             </div>
             <div class="col-4">
