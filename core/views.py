@@ -1,9 +1,10 @@
+import json
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
 from .forms import RegistroForm
 from .models import Profesional, Especialidad
-from users.models import Cliente
+from citas.models import Cita
 
 """
     Cada función define una vista de la web que luego se le pasarán al archivo urls.py
@@ -114,7 +115,14 @@ def calendario(request):
         django.http.HttpResponse: El render carga una plantilla indicada en el 2 argumento y lo carga 
         junto con el contexto de data.
     """
-    return render(request, 'core/calendario.html')
+
+    citas = Cita.objects.filter(cliente_id = request.user.id)
+
+    data = {
+        'citas': citas
+    }
+
+    return render(request, 'core/calendario.html', data)
 
 def sobre_nosotros(request):
     """

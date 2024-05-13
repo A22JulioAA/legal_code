@@ -1,0 +1,7 @@
+.fc-toolbar-title {
+    font-weight: bold;
+}
+
+.fc-toolbar-title::first-letter {
+    text-transform: capitalize;
+}
