@@ -4,6 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
+import '../styles/calendar.css'
+
 document.addEventListener('DOMContentLoaded', function () {
     let calendarEl = document.getElementById('calendar');
 
@@ -29,7 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
         navLinks: true,
         editable: true,
         dayMaxEvents: true,
-        // events: citas
+        events: [
+            
+        ]
 
     });
 

@@ -5,3 +5,11 @@
 .fc-toolbar-title::first-letter {
     text-transform: capitalize;
 }
+
+.fc-daygrid-day-number {
+    color: black;
+}
+
+.fc-col-header {
+    color: black; 
+}
