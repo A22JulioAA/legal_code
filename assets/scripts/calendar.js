@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         dayMaxEvents: true,
         events: [
             
+            
         ]
 
     });
