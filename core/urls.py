@@ -17,5 +17,6 @@ urlpatterns = [
     path('sobre-nosotros/', views.sobre_nosotros, name='sobre-nosotros'),
     path('calendario/', views.calendario, name='calendario'),
     path('solicitudes/', views.solicitudes, name='solicitudes'),
+    path('obtener-citas', views.obtener_citas, name='obtener-citas')
 ]
 

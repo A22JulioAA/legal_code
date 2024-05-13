@@ -5,6 +5,7 @@ from django.contrib.auth import logout, authenticate, login
 from .forms import RegistroForm
 from .models import Profesional, Especialidad
 from citas.models import Cita
+from django.http import JsonResponse
 
 """
     Cada función define una vista de la web que luego se le pasarán al archivo urls.py
@@ -49,9 +50,6 @@ def homepage(request, filtro_especialidad=None):
     }
     
     return render(request, 'core/homepage.html', data)
-
-# TODO:A mejorar el registro e inicio de sesión. Implementar cambio de formulario según sea profesional o cliente.
-# TODO:Revisar permisos y crear permisos nuevos.
 
 def salir(request):
     """
@@ -116,13 +114,7 @@ def calendario(request):
         junto con el contexto de data.
     """
 
-    citas = Cita.objects.filter(cliente_id = request.user.id)
-
-    data = {
-        'citas': citas
-    }
-
-    return render(request, 'core/calendario.html', data)
+    return render(request, 'core/calendario.html')
 
 def sobre_nosotros(request):
     """
@@ -151,4 +143,9 @@ def solicitudes(request):
     """
 
     return render(request, 'core/solicitudes.html')
+
+def obtener_citas(request):
+    citas = list(Cita.objects.filter(cliente_id=request.user.id).values())
+
+    return JsonResponse(citas, safe=False)
 
