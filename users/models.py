@@ -41,7 +41,7 @@ class Cliente(AbstractBaseUser, PermissionsMixin):
     password = models.CharField('Contraseña', max_length=100, null=False)
     fecha_nacimiento = models.DateField('Fecha de nacimiento del usuario', null=False)
     telefono = models.CharField('Teléfono del usuario', max_length=20)
-    imagen_perfil = models.ImageField('Imagen de perfil', upload_to='images/perfil/', height_field=None, width_field=None, max_length=200)
+    imagen_perfil = models.ImageField('Imagen de perfil', upload_to='static/img/perfil/', height_field=None, width_field=None, max_length=200)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

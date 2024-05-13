@@ -1,1 +1,31 @@
 {% extends "core/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Perfil
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="container mt-3 p-0 border bg-dark text-light">
+    <div class="row">
+        <div class="p-3">
+            <figure class="p-3 text-center">
+                <img src="{{user.imagen_perfil.url}}" alt="Imagen de perfil" class="img-fluid" width="50%">
+                <figcaption><a href="">Editar imagen</a></figcaption>
+            </figure>
+            <div class="p-3">
+                <strong>Nombre: </strong>{{user.name}}<br>
+                <strong>Apellidos:</strong> {{user.apellidos}}<br>
+                <strong>Fecha de nacimiento: </strong>{{user.fecha_nacimiento}}<br>
+                <strong>Email: </strong>{{user.email}}<br>
+                <strong>Teléfono: </strong>{{user.telefono}}<br>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

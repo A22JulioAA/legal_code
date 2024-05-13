@@ -39,7 +39,7 @@ Mis citas
                 {{cita.profesional.nombre}} {{cita.profesional.apellidos}} - {{cita.fecha_cita}}
             </button>
         </h2>
-        <div id="cita{{cita.id}}" class="accordion-collapse collapse show row" data-bs-parent="#cita{{cita.id}}">
+        <div id="cita{{cita.id}}" class="accordion-collapse collapse row" data-bs-parent="#cita{{cita.id}}">
             <div class="accordion-body col-8">
                 <p>{{cita.descripcion}}</p>
                 <p>Especialidades: {% for especialidad in cita.profesional.especialidad.all %}
@@ -59,8 +59,9 @@ Mis citas
     {% endfor %}
 
     {% else %}
-
-    {{citas | length}}
+    <section class="container">
+        <h2>Actualmente no hay ninguna cita activa</h2>  
+    </section>
 
     {% endif %}
     {% endlanguage %}
