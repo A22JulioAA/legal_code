@@ -11,7 +11,4 @@ function scrollToSection(event, id) {
     }
 }
 
-let boton_cliente = d.getElementById('boton-cliente');
-let boton_profesional = d.getElementById('boton-profesional');
 
-console.log(d.querySelector("#boton-cliente"));

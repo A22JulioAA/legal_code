@@ -2,6 +2,7 @@
 registros, ver base-login 
 -->
 
+{% load static %}
 {% load tz %} <!-- Importar la zona horaria -->
 {% load i18n %} <!-- Importar la internacionalización -->
 
@@ -12,6 +13,7 @@ registros, ver base-login
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legal Roster | {% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'legalicon.ico' %}">
 
     {% load static %}
 
@@ -59,8 +61,6 @@ registros, ver base-login
                     <div class="navbar-nav mx-auto">
                         <a class="nav-link me-3" href="{% url 'calendario' %}"><i class="fa-regular fa-calendar"></i>
                             Calendario</a>
-                        <a class="nav-link me-3" href="{% url 'agendar-cita' %}"><i class="fa-regular fa-bell"></i>
-                            Agendar cita</a>
                         <a class="nav-link me-3" href="{% url 'citas-principal' %}"><i
                                 class="fa-regular fa-hand-point-up"></i> Mis citas</a>
                         <a class="nav-link" href="{% url 'sobre-nosotros' %}"><i class="fa-solid fa-people-roof"></i>
@@ -197,9 +197,6 @@ registros, ver base-login
                         </p>
                         <p>
                             <a href="/citas" class="text-reset">Mis citas</a>
-                        </p>
-                        <p>
-                            <a href="/citas/agendar-cita" class="text-reset">Agendar Cita</a>
                         </p>
                         <p>
                             <a href="/" class="text-reset">Ver Profesionales</a>

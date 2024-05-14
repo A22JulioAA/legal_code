@@ -40,6 +40,9 @@ def agendar_cita(request, id_profesional = None):
             render: Renderizado del HTML que contiene el formulario de Citas.
     """
 
+    if id_profesional:
+        profesional = Profesional.objects.filter(id=id_profesional)
+
     if request.method == 'POST':
         form = CitaForm(request.POST)
 
@@ -79,7 +82,8 @@ def agendar_cita(request, id_profesional = None):
             form = CitaForm()
 
     data = {
-        'form': form
+        'form': form,
+        'profesional': profesional
     }
 
     return render(request, 'agendar_cita.html', data)

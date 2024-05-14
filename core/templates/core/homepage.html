@@ -1,4 +1,4 @@
-{% extends "core/base.html" %} {% load static %} {% block title %} 
+{% extends "core/base.html" %} {% load static %} {% block title %}
 Homepage {% endblock %} {% block css %}
 <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
 {% endblock %} {% block script %}
@@ -6,19 +6,11 @@ Homepage {% endblock %} {% block css %}
 {% endblock %} {% block content %}
 
 <!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
-<div
-  id="inicio"
-  class="container-fluid d-flex justify-content-center align-items-center text-center p-0"
->
+<div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center p-0">
   <!-- La función scrollToSection está definida en el script y sirve para desplazar
     la vista hasta la sección de especialidades, que es donde empiezan los filtros y ofertas -->
-  <a
-    href=""
-    style="width: 50%"
-    onclick="scrollToSection(event, 'especialidades')"
-    class="border border-light border-2 text-light p-5 enlace_und"
-    >EMPEZAR A EXPLORAR</a
-  >
+  <a href="" style="width: 50%" onclick="scrollToSection(event, 'especialidades')"
+    class="border border-light border-2 text-light p-5 enlace_und">EMPEZAR A EXPLORAR</a>
 </div>
 
 <br />
@@ -26,80 +18,107 @@ Homepage {% endblock %} {% block css %}
 <!-- En esta sección mostraremos los mensajes flash que vayan ocurriendo en diferentes puntos de la web -->
 
 {% if messages %}
-  {% for message in messages %}
-    <section class="container-fluid text-center alert alert-{{ message.tags }}">
-      {{ message }}
-    </section>
-  {% endfor %}
+{% for message in messages %}
+<section class="container-fluid text-center alert alert-{{ message.tags }}">
+  {{ message }}
+</section>
+{% endfor %}
 {% endif %}
 
 <!-- Sección de anuncios de profesionales ordenados de forma aleatoria en un principio -->
 
 <!-- Sección para mostrar las diferentes especialidades del derecho(sirve de filtro) -->
-<section
-  class="container especialidades"
-  id="especialidades"
->
+{% comment %} <section class="container especialidades" id="especialidades">
   <div class="row">
-    <div class="col-3 p-3 bg-penal"><a class="text-decoration-none text-light" href="/especialidad/penal"><div><span class="texto-especialidad">Penal</span></div></a></div>
-    <div class="col-3 p-3 bg-eclesiastico"><a class="text-decoration-none text-light" href="/especialidad/eclesiastico"><div><span class="texto-especialidad">Eclesiástico</span></div></a></div>
-    <div class="col-3 p-3 bg-administrativo"><a class="text-decoration-none text-light" href="/especialidad/administrativo"><div><span class="texto-especialidad">Administrativo</span></div></a></div>
-    <div class="col-3 p-3 bg-financiero"><a class="text-decoration-none text-light" href="/especialidad/financiero"><div><span class="texto-especialidad">Financiero</span></div></a></div>
+    <div class="col-3 p-3 bg-penal"><a class="text-decoration-none text-light" href="/especialidad/penal">
+        <div><span class="texto-especialidad">Penal</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-eclesiastico"><a class="text-decoration-none text-light" href="/especialidad/eclesiastico">
+        <div><span class="texto-especialidad">Eclesiástico</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-administrativo"><a class="text-decoration-none text-light"
+        href="/especialidad/administrativo">
+        <div><span class="texto-especialidad">Administrativo</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-financiero"><a class="text-decoration-none text-light" href="/especialidad/financiero">
+        <div><span class="texto-especialidad">Financiero</span></div>
+      </a></div>
   </div>
   <div class="row">
-    <div class="col-3 p-3 bg-mercantil"><a class="text-decoration-none text-light" href="/especialidad/mercantil"><div><span class="texto-especialidad">Mercantil</span></div></a></div>
-    <div class="col-3 p-3 bg-civil"><a class="text-decoration-none text-light" href="/especialidad/civil"><div><span class="texto-especialidad">Civil</span></div></a></div>
-    <div class="col-3 p-3 bg-fiscal"><a class="text-decoration-none text-light" href="/especialidad/fiscal"><div><span class="texto-especialidad">Fiscal</span></div></a></div>
-    <div class="col-3 p-3 bg-laboral"><a class="text-decoration-none text-light" href="/especialidad/laboral"><div><span class="texto-especialidad">Laboral</span></div></a></div>
+    <div class="col-3 p-3 bg-mercantil"><a class="text-decoration-none text-light" href="/especialidad/mercantil">
+        <div><span class="texto-especialidad">Mercantil</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-civil"><a class="text-decoration-none text-light" href="/especialidad/civil">
+        <div><span class="texto-especialidad">Civil</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-fiscal"><a class="text-decoration-none text-light" href="/especialidad/fiscal">
+        <div><span class="texto-especialidad">Fiscal</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-laboral"><a class="text-decoration-none text-light" href="/especialidad/laboral">
+        <div><span class="texto-especialidad">Laboral</span></div>
+      </a></div>
   </div>
   <div class="row">
-    <div class="col-3 p-3 bg-internacional"><a class="text-decoration-none text-light" href="/especialidad/internacional"><div><span class="texto-especialidad">Internacional</span></div></a></div>
-    <div class="col-3 p-3 bg-comunitario"><a class="text-decoration-none text-light" href="/especialidad/comunitario"><div><span class="texto-especialidad">Comunitario</span></div></a></div>
-    <div class="col-3 p-3 bg-comercial"><a class="text-decoration-none text-light" href="/especialidad/comercial"><div><span class="texto-especialidad">Comercial</span></div></a></div>
-    <div class="col-3 p-3 bg-digital"><a class="text-decoration-none text-light" href="/especialidad/digital"><div><span class="texto-especialidad">Digital</span></div></a></div>
+    <div class="col-3 p-3 bg-internacional"><a class="text-decoration-none text-light"
+        href="/especialidad/internacional">
+        <div><span class="texto-especialidad">Internacional</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-comunitario"><a class="text-decoration-none text-light" href="/especialidad/comunitario">
+        <div><span class="texto-especialidad">Comunitario</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-comercial"><a class="text-decoration-none text-light" href="/especialidad/comercial">
+        <div><span class="texto-especialidad">Comercial</span></div>
+      </a></div>
+    <div class="col-3 p-3 bg-digital"><a class="text-decoration-none text-light" href="/especialidad/digital">
+        <div><span class="texto-especialidad">Digital</span></div>
+      </a></div>
   </div>
+</section> {% endcomment %}
+
+<section id="filtro_especialidades" class="container especialidades">
+
 </section>
 
 {% if no_profesionales_especialidad %}
-  <section class="container mt-3 border-top"><h2>{{no_profesionales_especialidad}}</h2></section>
+<section class="container mt-3 border-top">
+  <h2>{{no_profesionales_especialidad}}</h2>
+</section>
 {% else %}
 <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
 <section class='seccion-profesionales container mt-3'>
   {% for profesional in lista_profesionales %}
-    <div class='row mt-4'>
-      <div class="col-12 col-lg-8 p-0">
+  <div class='row mt-4'>
+    <div class="col-12 col-lg-8 p-0">
 
-        <div class="card row m-0 p-2" style="width: 100%;">
-          <div class="row g-0">
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title">{{profesional.nombre | capfirst}} {{profesional.apellidos | capfirst}} | {{profesional.campo}}</h5>
-                <p><i class="fa-solid fa-location-dot"></i> {{profesional.direccion}}</p>
-                <hr class="border border-dark border-1 opacity-75">
-                <p class="card-text">{{ profesional.descripcion }}</p>
-                Especialidades:
-                <ul class="list-group mb-3">
-                  {% for especialidad in profesional.especialidad.all %}
-                    <li class="list-group-item">{{especialidad.nombre | capfirst}}</li>
-                  {% endfor %}
-                </ul>
-                <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark">Pedir Cita</a>
-                <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-dark">Contacta</a>
-                <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de </a><br>
-                <p class="mt-2">Precio Consulta: {{ profesional.precio_consulta }}€</p>
-              </div>
+      <div class="card row m-0 p-2" style="width: 100%;">
+        <div class="row g-0">
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">{{profesional.nombre | capfirst}} {{profesional.apellidos | capfirst}} |
+                {{profesional.campo}}</h5>
+              <p><i class="fa-solid fa-location-dot"></i> {{profesional.direccion}}</p>
+              <hr class="border border-dark border-1 opacity-75">
+              <p class="card-text">{{ profesional.descripcion }}</p>
+              Especialidades:
+              <ul class="list-group mb-3">
+                {% for especialidad in profesional.especialidad.all %}
+                <li class="list-group-item">{{especialidad.nombre | capfirst}}</li>
+                {% endfor %}
+              </ul>
+              <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark">Pedir Cita</a>
+              <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-dark">Contacta</a>
+              <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de </a><br>
+              <p class="mt-2">Precio Consulta: {{ profesional.precio_consulta }}€</p>
             </div>
-            <div class="col-4">
-              <img 
-                src="{% static 'img/imagen-abogado.jpg' %}"
-                class="card-img-top image-fluid"
-                alt="Imagen de profesional"
-              >
-            </div>
+          </div>
+          <div class="col-4">
+            <img src="{% static 'img/imagen-abogado.jpg' %}" class="card-img-top image-fluid"
+              alt="Imagen de profesional">
           </div>
         </div>
       </div>
-    </div>  
+    </div>
+  </div>
   {% endfor %}
 </section>
 
