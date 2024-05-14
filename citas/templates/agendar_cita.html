@@ -17,15 +17,33 @@ Agendar Cita
 
 {% language 'es' %} <!-- Establecer el idioma en español -->
 
+<div id="advertencia-citas" class="container mt-3">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Aviso</h4>
+        <p>Porfavor, sea claro y conciso con el motivo de la cita. El profesional valorará la viabilidad
+            de la consulta y tendrá el derecho de aceptarla o rechazarla.
+        </p>
+        <hr>
+        <p class="mb-0">Si solamente quiere obtener información, envíe un email a: <a
+                href="mailto:{{profesional.email}}" class="text-dark">{{profesional.email}}</a></p>
+    </div>
+</div>
+
 <form method='POST' class="container mt-3">
     {% csrf_token %}
 
     <div class="card">
+        <h2 class="card-title bg-dark text-light p-3 rounded-top text-center">Va a pedir cita con:
+            {{profesional.nombre}}
+            {{profesional.apellidos}}</h2>
         <div class="card-body">
-            <h2 class="card-title bg-dark text-light p-3">Va a pedir cita con: {{profesional.nombre}}
-                {{profesional.apellidos}}</h2>
 
             {{ form | crispy }}
+
+            <div class="row mb-3">
+                <h5 class="col-6 text-end">Precio Consulta:</h5>
+                <h5 class="col-6">{{profesional.precio_consulta}}€</h5>
+            </div>
 
             <div class="row">
                 <input class="btn btn-dark float-end col-12" type="submit" value="Reservar">

@@ -48,7 +48,8 @@ def agendar_cita(request, id_profesional = None):
 
         # Esto lo obtenemos para asegurarnos de que esa fecha y ese profesional estén disponibles.
         fecha_cita = request.POST['fecha_cita']
-        profesional = request.POST['profesional']
+        # profesional = request.POST['profesional']
+        profesional = Profesional.objects.filter(id = id_profesional)
 
         cita_existe = Cita.objects.filter(fecha_cita=fecha_cita, profesional=profesional).exists()
 

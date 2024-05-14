@@ -4,7 +4,7 @@ from .models import Cita
 class CitaForm(forms.ModelForm):
     class Meta:
         model = Cita
-        fields = ['descripcion', 'fecha_cita', 'precio']
+        fields = ['descripcion', 'fecha_cita']
 
         widgets = {
             'descripcion': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Describe brevemente el motivo de la cita...'}),
