@@ -15,15 +15,19 @@ Perfil
     <div class="row">
         <div class="p-3">
             <figure class="p-3 text-center">
+                {% if user.imagen_perfil %}
                 <img src="{{user.imagen_perfil.url}}" alt="Imagen de perfil" class="img-fluid" width="50%">
+                {% else %}
+                <img src="{% static 'img/usuario.jpg' %}" alt="Imagen de perfil sin establecer">
+                {% endif %}
                 <figcaption><a href="">Editar imagen</a></figcaption>
             </figure>
             <div class="p-3">
                 <strong>Nombre: </strong>{{user.name}}<br>
-                <strong>Apellidos:</strong> {{user.apellidos}}<br>
-                <strong>Fecha de nacimiento: </strong>{{user.fecha_nacimiento}}<br>
+                <strong>Apellidos:</strong> {{ user.apellidos|default_if_none:'-' }}<br> <strong>Fecha de nacimiento:
+                </strong>{{user.fecha_nacimiento}}<br>
                 <strong>Email: </strong>{{user.email}}<br>
-                <strong>Teléfono: </strong>{{user.telefono}}<br>
+                <strong>Teléfono: </strong>{{user.telefono|default:'-'}}<br>
             </div>
         </div>
     </div>
