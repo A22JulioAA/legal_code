@@ -100,25 +100,47 @@ Homepage {% endblock %} {% block css %}
 <!-- <section id="especialidades" class="container especialidades">
   <div class="row">
     {% for especialidad in especialidades %}
-      {% if especialidad.subespecialidades.exists %}
-        <div class="dropdown col-3 border p-3 btn-group">
-          <a class="btn btn-secondary" href="#" role="button">
-            {{especialidad | capfirst}}
-          </a>
-          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-        
-          <ul class="dropdown-menu">
-            {% for subespecialidad in especialidad.subespecialidades.all %}
-              <li><a class="dropdown-item" href="#">{{subespecialidad|capfirst}}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
+    {% if especialidad.subespecialidades.exists %}
+    <div class="dropdown col-2 border p-3 btn-group">
+      <a class="btn btn-secondary" href="#" role="button">
+        {{especialidad | capfirst}}
+      </a>
+      <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <span class="visually-hidden">Toggle Dropdown</span>
+      </button>
+
+      <ul class="dropdown-menu">
+        {% for subespecialidad in especialidad.subespecialidades.all %}
+        <li><a class="dropdown-item" href="#">{{subespecialidad|capfirst}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
     {% endfor %}
   </div>
 </section> -->
+
+<section id="especialidades" class="container especialidades">
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    {% for especialidad in especialidades %}
+    {% if especialidad.subespecialidades.exists %}
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+        type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{especialidad}}</button>
+    </li>
+
+
+    {% endif %}
+    <div class="tab-content" id="pills-tabContent">
+      {% for subespecialidad in especialidad.subespecialidades.all %}
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+        tabindex="0">{{subespecialidad}}</div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </ul>
+</section>
 
 {% if no_profesionales_especialidad %}
 <section class="container mt-3 border-top">
