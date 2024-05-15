@@ -1,0 +1,13 @@
+<div class="btn-group col-3 m-3">
+      <button class="btn btn-secondary btn-lg" type="button">
+        {{especialidad|capfirst}}
+      </button>
+      <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
+        <span class="visually-hidden">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu">
+        {% for subespecialidad in especialidad.subespecialidades.all %}
+          <li>{{subespecialidad|capfirst}}</li>
+        {% endfor %}
+      </ul>
+    </div>

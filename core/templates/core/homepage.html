@@ -3,7 +3,29 @@ Homepage {% endblock %} {% block css %}
 <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
 {% endblock %} {% block script %}
 <script src="{% static 'js/script.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var myToast = new bootstrap.Toast(document.querySelector('.toast'));
+    myToast.show();
+  });
+</script>
 {% endblock %} {% block content %}
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert">
+    <div class="toast-header">
+      <img src="{% static 'img/alert.png' %}" width=50 class="rounded me-2" alt="Icono de alerta">
+      <strong class="me-auto">Página en construcción</strong>
+      <small>now</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body">
+      <strong><span class="text-danger">Página en contrucción!.</span></strong> Si se detecta cualquier error, ponerse
+      en contacto: a22julioaa@iessanclemente.net
+    </div>
+  </div>
+</div>
+
 
 <!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
 <div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center p-0">
@@ -75,9 +97,28 @@ Homepage {% endblock %} {% block css %}
   </div>
 </section> -->
 
-<section id="especialidades" class="container especialidades">
-  especialidades
-</section>
+<!-- <section id="especialidades" class="container especialidades">
+  <div class="row">
+    {% for especialidad in especialidades %}
+      {% if especialidad.subespecialidades.exists %}
+        <div class="dropdown col-3 border p-3 btn-group">
+          <a class="btn btn-secondary" href="#" role="button">
+            {{especialidad | capfirst}}
+          </a>
+          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+        
+          <ul class="dropdown-menu">
+            {% for subespecialidad in especialidad.subespecialidades.all %}
+              <li><a class="dropdown-item" href="#">{{subespecialidad|capfirst}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section> -->
 
 {% if no_profesionales_especialidad %}
 <section class="container mt-3 border-top">

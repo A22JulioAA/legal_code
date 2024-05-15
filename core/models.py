@@ -10,6 +10,7 @@ class Especialidad(models.Model):
     """
     
     nombre = models.CharField(max_length=100, null=False)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='subespecialidades')
     
     def __str__(self) -> str:
         return self.nombre
@@ -31,7 +32,7 @@ class Profesional(models.Model):
     fecha_nacimiento = models.DateField(null=False)
     dni = models.CharField(max_length=9, null=False, unique=True)
     telefono = models.CharField(max_length=20, null=False)
-    especialidad = models.ManyToManyField(Especialidad, default="General")
+    especialidad = models.ManyToManyField(Especialidad, null=False)
     precio_consulta = models.FloatField()
     direccion = models.TextField()
     descripcion = models.TextField(max_length=450, default='')

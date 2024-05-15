@@ -29,6 +29,9 @@ def homepage(request, filtro_especialidad=None):
         junto con el contexto de data.
     """
 
+    # Primero sacamos todas las especialidades para cargarlas en la sección de filtros.
+    especialidades = Especialidad.objects.all()
+
     if filtro_especialidad == None:
         lista_profesionales = Profesional.objects.all()
     else:
@@ -46,7 +49,8 @@ def homepage(request, filtro_especialidad=None):
     print(filtro_especialidad)
     data = {
         'lista_profesionales': lista_profesionales,
-        'no_profesionales_especialidad': no_profesionales_especialidad
+        'no_profesionales_especialidad': no_profesionales_especialidad,
+        'especialidades': especialidades
     }
     
     return render(request, 'core/homepage.html', data)
