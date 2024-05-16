@@ -12,6 +12,7 @@ views.py
 urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('especialidad/<slug:filtro_especialidad>/', views.homepage, name='homepage_filtered'),
+    path('subespecialidad/<slug:filtro_subespecialidad>/', views.homepage, name='homepage_double_filtered'),
     path('logout/', views.salir, name='salir'),
     path('register/', views.register, name='register'),
     path('sobre-nosotros/', views.sobre_nosotros, name='sobre-nosotros'),

@@ -11,6 +11,7 @@ Homepage {% endblock %} {% block css %}
 </script>
 {% endblock %} {% block content %}
 
+<!-- Un simple toast para advertir de que la página está en construcción -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <div id="liveToast" class="toast" role="alert">
     <div class="toast-header">
@@ -25,7 +26,6 @@ Homepage {% endblock %} {% block css %}
     </div>
   </div>
 </div>
-
 
 <!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
 <div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center p-0">
@@ -47,108 +47,48 @@ Homepage {% endblock %} {% block css %}
 {% endfor %}
 {% endif %}
 
+<!-- Sección para filtros por especialidades y subespecialidades -->
+
+<section id="especialidades" class="container border p-3">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      Selecciona una especialidad
+    </button>
+    <ul class="dropdown-menu">
+      {% for especialidad in especialidades %}
+      {% if especialidad.subespecialidades.exists %}
+      <li><a class="dropdown-item" href="/especialidad/{{especialidad.id}}">{{especialidad | capfirst }}</a></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% if subespecialidades %}
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      Selecciona una subespecialidad
+    </button>
+    <ul class="dropdown-menu">
+      {% for subespecialidad in subespecialidades %}
+      <li><a class="dropdown-item" href="/subespecialidad/{{subespecialidad.id}}">{{subespecialidad | capfirst }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</section>
+
 <!-- Sección de anuncios de profesionales ordenados de forma aleatoria en un principio -->
 
-<!-- Sección para mostrar las diferentes especialidades del derecho(sirve de filtro) -->
-<!-- <section class="container especialidades" id="especialidades">
-  <div class="row">
-    <div class="col-3 p-3 bg-penal"><a class="text-decoration-none text-light" href="/especialidad/penal">
-        <div><span class="texto-especialidad">Penal</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-eclesiastico"><a class="text-decoration-none text-light" href="/especialidad/eclesiastico">
-        <div><span class="texto-especialidad">Eclesiástico</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-administrativo"><a class="text-decoration-none text-light"
-        href="/especialidad/administrativo">
-        <div><span class="texto-especialidad">Administrativo</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-financiero"><a class="text-decoration-none text-light" href="/especialidad/financiero">
-        <div><span class="texto-especialidad">Financiero</span></div>
-      </a></div>
-  </div>
-  <div class="row">
-    <div class="col-3 p-3 bg-mercantil"><a class="text-decoration-none text-light" href="/especialidad/mercantil">
-        <div><span class="texto-especialidad">Mercantil</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-civil"><a class="text-decoration-none text-light" href="/especialidad/civil">
-        <div><span class="texto-especialidad">Civil</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-fiscal"><a class="text-decoration-none text-light" href="/especialidad/fiscal">
-        <div><span class="texto-especialidad">Fiscal</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-laboral"><a class="text-decoration-none text-light" href="/especialidad/laboral">
-        <div><span class="texto-especialidad">Laboral</span></div>
-      </a></div>
-  </div>
-  <div class="row">
-    <div class="col-3 p-3 bg-internacional"><a class="text-decoration-none text-light"
-        href="/especialidad/internacional">
-        <div><span class="texto-especialidad">Internacional</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-comunitario"><a class="text-decoration-none text-light" href="/especialidad/comunitario">
-        <div><span class="texto-especialidad">Comunitario</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-comercial"><a class="text-decoration-none text-light" href="/especialidad/comercial">
-        <div><span class="texto-especialidad">Comercial</span></div>
-      </a></div>
-    <div class="col-3 p-3 bg-digital"><a class="text-decoration-none text-light" href="/especialidad/digital">
-        <div><span class="texto-especialidad">Digital</span></div>
-      </a></div>
-  </div>
-</section> -->
-
-<!-- <section id="especialidades" class="container especialidades">
-  <div class="row">
-    {% for especialidad in especialidades %}
-    {% if especialidad.subespecialidades.exists %}
-    <div class="dropdown col-2 border p-3 btn-group">
-      <a class="btn btn-secondary" href="#" role="button">
-        {{especialidad | capfirst}}
-      </a>
-      <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        <span class="visually-hidden">Toggle Dropdown</span>
-      </button>
-
-      <ul class="dropdown-menu">
-        {% for subespecialidad in especialidad.subespecialidades.all %}
-        <li><a class="dropdown-item" href="#">{{subespecialidad|capfirst}}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-    {% endfor %}
-  </div>
-</section> -->
-
-<section id="especialidades" class="container especialidades">
-  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-    {% for especialidad in especialidades %}
-    {% if especialidad.subespecialidades.exists %}
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-        type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{especialidad}}</button>
-    </li>
-
-
-    {% endif %}
-    <div class="tab-content" id="pills-tabContent">
-      {% for subespecialidad in especialidad.subespecialidades.all %}
-      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
-        tabindex="0">{{subespecialidad}}</div>
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </ul>
-</section>
+<!-- En esta sección se muestra un mensaje si no existen profesionales asociados a ese campo -->
 
 {% if no_profesionales_especialidad %}
 <section class="container mt-3 border-top">
   <h2>{{no_profesionales_especialidad}}</h2>
 </section>
 {% else %}
+
 <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
-<section class='seccion-profesionales container mt-3'>
+<section class='seccion-profesionales container mt-3' id="seccion-profesionales">
   {% for profesional in lista_profesionales %}
   <div class='row mt-4'>
     <div class="col-12 col-lg-8 p-0">
@@ -185,9 +125,6 @@ Homepage {% endblock %} {% block css %}
   {% endfor %}
 </section>
 
-
 {% endif %}
-
-
 
 {% endblock %}

@@ -16,7 +16,7 @@ from django.http import JsonResponse
 """
 
 # Vista para la página principal
-def homepage(request, filtro_especialidad=None):
+def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
     """
     Esta vista carga la página principal los profesionales de la base de datos organizados en 
     cards. Si se introduce un filtro en la url los profesionales se ordenarán según ese filtro.
@@ -31,13 +31,15 @@ def homepage(request, filtro_especialidad=None):
 
     # Primero sacamos todas las especialidades para cargarlas en la sección de filtros.
     especialidades = Especialidad.objects.all()
+    subespecialidades = None
 
     if filtro_especialidad == None:
         lista_profesionales = Profesional.objects.all()
     else:
         # Se obtiene la especialidad asociada a ese nombre y luego se buscan los profesionales
         # que la tengan en su lista de especialidades
-        especialidad = Especialidad.objects.get(nombre = filtro_especialidad)
+        especialidad = Especialidad.objects.get(id = filtro_especialidad)
+        subespecialidades = especialidad.subespecialidades.all()
 
         lista_profesionales = especialidad.profesional_set.all()
     
@@ -46,11 +48,11 @@ def homepage(request, filtro_especialidad=None):
     else:
         no_profesionales_especialidad = ''
         
-    print(filtro_especialidad)
     data = {
         'lista_profesionales': lista_profesionales,
         'no_profesionales_especialidad': no_profesionales_especialidad,
-        'especialidades': especialidades
+        'especialidades': especialidades,
+        'subespecialidades': subespecialidades,
     }
     
     return render(request, 'core/homepage.html', data)
