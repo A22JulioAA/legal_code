@@ -18,3 +18,8 @@ h1 {
 .enlace_und {
   text-decoration: none;
 }
+
+.scrollable-menu{
+  max-height: 200px; 
+  overflow-y: auto;
+}

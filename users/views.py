@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def profile(request):
     data = {
@@ -7,6 +8,17 @@ def profile(request):
     }
     
     return render(request, 'profile.html', data)
+
+@login_required
+def eliminar_perfil(request):
+    if request.method == 'POST':
+        user = request.user 
+        user.delete()
+        messages.success(request, 'Tu usuario se ha eliminado con éxito.')
+        return redirect('homepage')
+    else:
+        messages.error(request, 'No se ha podido eliminar tu usuario.')
+        return redirect('profile')
 
 
 

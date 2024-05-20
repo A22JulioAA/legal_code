@@ -49,33 +49,49 @@ Homepage {% endblock %} {% block css %}
 
 <!-- Sección para filtros por especialidades y subespecialidades -->
 
-<section id="especialidades" class="container border p-3">
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-      Selecciona una especialidad
-    </button>
-    <ul class="dropdown-menu">
-      {% for especialidad in especialidades %}
-      {% if especialidad.subespecialidades.exists %}
-      <li><a class="dropdown-item" href="/especialidad/{{especialidad.id}}">{{especialidad | capfirst }}</a></li>
-      {% endif %}
-      {% endfor %}
-    </ul>
+<section id="especialidades" class="container border p-3 bg-dark text-light">
+  <h3>Personaliza tu búsqueda!</h3>
+  <hr class="border border-light border-1 opacity-100">
+  <div class="row">
+    <div class="col">
+      <div class="dropdown">
+        <p class="text-light"><i class="fa-solid fa-magnifying-glass"></i> Especialidad: </p>
+        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          {% if filtro %}
+          {{ filtro|capfirst }}
+          {% else %}
+          Selecciona una especialidad
+          {% endif %}
+        </button>
+        <ul class="dropdown-menu scrollable-menu">
+          <li><a class="dropdown-item" href="/">-</a></li>
+          {% for especialidad in especialidades %}
+          {% if especialidad.subespecialidades.exists %}
+          <li><a class="dropdown-item" href="/especialidad/{{ especialidad.id }}">{{ especialidad|capfirst }}</a></li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% if subespecialidades %}
+    <div class="col">
+      <div class="dropdown">
+        <p class="text-light"><i class="fas fa-book-open"></i> Campo: </p>
+        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          Selecciona un campo de Derecho {{filtro | capfirst}}
+        </button>
+        <ul class="dropdown-menu scrollable-menu">
+          {% for subespecialidad in subespecialidades %}
+          <li><a class="dropdown-item" href="/subespecialidad/{{ subespecialidad.id }}">{{subespecialidad|capfirst}}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
   </div>
-  {% if subespecialidades %}
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-      Selecciona una subespecialidad
-    </button>
-    <ul class="dropdown-menu">
-      {% for subespecialidad in subespecialidades %}
-      <li><a class="dropdown-item" href="/subespecialidad/{{subespecialidad.id}}">{{subespecialidad | capfirst }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-  {% endif %}
 </section>
+
 
 <!-- Sección de anuncios de profesionales ordenados de forma aleatoria en un principio -->
 
@@ -92,31 +108,40 @@ Homepage {% endblock %} {% block css %}
   {% for profesional in lista_profesionales %}
   <div class='row mt-4'>
     <div class="col-12 col-lg-8 p-0">
-
       <div class="card row m-0 p-2" style="width: 100%;">
         <div class="row g-0">
           <div class="col-8">
             <div class="card-body">
+              <!-- Nombre y campo del profesional -->
               <h5 class="card-title">{{profesional.nombre | capfirst}} {{profesional.apellidos | capfirst}} |
                 {{profesional.campo}}</h5>
+              <!-- Direccion del profesional -->
               <p><i class="fa-solid fa-location-dot"></i> {{profesional.direccion}}</p>
               <hr class="border border-dark border-1 opacity-75">
+              <!-- Descripción del profesional -->
               <p class="card-text">{{ profesional.descripcion }}</p>
+              <!-- Especialidades del profesional. Cada especialidad tiene asociadas las subespecialidades si es que el profesional las ocupa -->
               Especialidades:
               <ul class="list-group mb-3">
                 {% for especialidad in profesional.especialidad.all %}
                 <li class="list-group-item">{{especialidad.nombre | capfirst}}</li>
                 {% endfor %}
               </ul>
+              <!-- Enlaces tanto para pedir cita, para contactar con el profesional como para ver la página personal del profesional -->
               <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark">Pedir Cita</a>
               <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-dark">Contacta</a>
-              <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de </a><br>
-              <p class="mt-2">Precio Consulta: {{ profesional.precio_consulta }}€</p>
+              <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de</a><br>
             </div>
           </div>
           <div class="col-4">
-            <img src="{% static 'img/imagen-abogado.jpg' %}" class="card-img-top image-fluid"
-              alt="Imagen de profesional">
+            <!-- Imagen del profesional -->
+            <!-- <img src="{% static 'img/imagen-abogado.jpg' %}" class="card-img-top image-fluid"
+              alt="Imagen de profesional"> -->
+            <img src="https://thispersondoesnotexist.com/" class="card-img-top image-fluid" alt="Imagen de profesional">
+            <!-- Información acerca del profesional, tanto precio como email y teléfono -->
+            <p class="mt-2 bg-dark text-light p-2 rounded">Precio Consulta: {{ profesional.precio_consulta }}€</p>
+            <p class="mt-2 bg-dark text-light p-2 rounded">Correo: {{ profesional.email }}</p>
+            <p class="mt-2 bg-dark text-light p-2 rounded">Teléfono: {{ profesional.telefono }}</p>
           </div>
         </div>
       </div>

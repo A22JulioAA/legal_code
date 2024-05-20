@@ -28,6 +28,7 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
         django.http.HttpResponse: El render carga una plantilla indicada en el 2 argumento y lo carga 
         junto con el contexto de data.
     """
+    filtro = None
 
     # Primero sacamos todas las especialidades para cargarlas en la sección de filtros.
     especialidades = Especialidad.objects.all()
@@ -40,6 +41,7 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
         # que la tengan en su lista de especialidades
         especialidad = Especialidad.objects.get(id = filtro_especialidad)
         subespecialidades = especialidad.subespecialidades.all()
+        filtro = especialidad.nombre
 
         lista_profesionales = especialidad.profesional_set.all()
     
@@ -53,6 +55,7 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
         'no_profesionales_especialidad': no_profesionales_especialidad,
         'especialidades': especialidades,
         'subespecialidades': subespecialidades,
+        'filtro': filtro
     }
     
     return render(request, 'core/homepage.html', data)

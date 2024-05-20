@@ -49,7 +49,7 @@ def agendar_cita(request, id_profesional = None):
         # Esto lo obtenemos para asegurarnos de que esa fecha y ese profesional estén disponibles.
         fecha_cita = request.POST['fecha_cita']
         # profesional = request.POST['profesional']
-        profesional = Profesional.objects.filter(id = id_profesional)
+        profesional = Profesional.objects.get(id = id_profesional)
 
         cita_existe = Cita.objects.filter(fecha_cita=fecha_cita, profesional=profesional).exists()
 
@@ -61,11 +61,12 @@ def agendar_cita(request, id_profesional = None):
                 # Cuando ponemos commit=False no añadimos la cita a la base de datos, se crea una instancia que 
                 # luego modificaremos según los valores que querramos que tenga. 
                 cita = form.save(commit=False)
+                cita.profesional_id = profesional.id
                 # Guardamos el id del cliente que tiene la sesión iniciada.
                 cita.cliente = request.user
                 # Aquí obtenemos el precio del profesional seleccionado. Cada profesional tiene un precio por
                 # consulta preestablecido en su registro de la base de datos. El usuario no puede cambiarlo.
-                profesional_cita = Profesional.objects.get(id=profesional)
+                profesional_cita = profesional
                 cita.precio = profesional_cita.precio_consulta
                 # Por último, establecemos el estado en PENDIENTE, que significa que se ha aceptado y se espera
                 # al día de la cita. Más adelante se puede CANCELAR o poneerla en ESPERA.

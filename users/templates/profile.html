@@ -28,8 +28,37 @@ Perfil
                 </strong>{{user.fecha_nacimiento}}<br>
                 <strong>Email: </strong>{{user.email}}<br>
                 <strong>Teléfono: </strong>{{user.telefono|default:'-'}}<br>
+
+                <button type=" submit" class="btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#modalConfirmacion">Eliminar Perfil</button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación-->
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1">
+        <div class="modal-dialog text-dark">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación de Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar tu perfil? <br>Esta acción no se puede deshacer.
+                    <hr>
+                    Se eliminarán todos los datos asociados a tu cuenta y se anularán todas las citas pendientes.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form id="deleteProfileForm" action="{% url 'eliminar-perfil' %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar Perfil</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
 {% endblock %}
