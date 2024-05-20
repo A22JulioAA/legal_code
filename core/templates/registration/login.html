@@ -1,27 +1,46 @@
 {% extends "core/base-login.html" %}
-
+#TODO:Revisar los estilos de inicios y registros.
 {% block content %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let ventanaModal = new bootstrap.Modal(document.getElementById('modalLogin'));
+        ventanaModal.show();
+    });
+</script>
+{% endblock %}
 
 {% load crispy_forms_tags %}
 
-<form method="post" class='container mt-3'>
-    {% csrf_token %}
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Ingresa tus credenciales</h5>
-
-            {{ form | crispy }}
-
-            <div class="row">
-                <a href="{% url 'register' %}" class="card-link col-3">Registrarse</a>
-                <a href="#" class="card-link col-3">Olvidaste tu contraseña?</a>
-                <input class="btn btn-dark float-end col-5" type="submit" value="Entrar">
+<div class="modal fade" id="modalLogin" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Inicia Sesión!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Ingresa tus credenciales</h5>
+
+                            {{ form | crispy }}
+
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="card-link">Olvidaste tu contraseña?</a>
+                <a href="{% url 'register' %}" class="card-link col-3 btn btn-secondary">Registrarse</a>
+                <input type="submit" class="btn btn-dark" value="Iniciar"></input>
+            </div>
+            </form>
         </div>
     </div>
-
-
-</form>
+</div>
 
 {% endblock %}

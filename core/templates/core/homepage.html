@@ -55,7 +55,7 @@ Homepage {% endblock %} {% block css %}
   <div class="row">
     <div class="col">
       <div class="dropdown">
-        <p class="text-light"><i class="fa-solid fa-magnifying-glass"></i> Especialidad: </p>
+        <h5 class="text-light"><i class="fa-solid fa-magnifying-glass"></i> Especialidad: </h5>
         <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
           {% if filtro %}
           {{ filtro|capfirst }}
@@ -76,7 +76,7 @@ Homepage {% endblock %} {% block css %}
     {% if subespecialidades %}
     <div class="col">
       <div class="dropdown">
-        <p class="text-light"><i class="fas fa-book-open"></i> Campo: </p>
+        <h5 class="text-light"><i class="fas fa-book-open"></i> Campo: </h5>
         <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
           Selecciona un campo de Derecho {{filtro | capfirst}}
         </button>
@@ -103,6 +103,7 @@ Homepage {% endblock %} {% block css %}
 </section>
 {% else %}
 
+#TODO: En general poner más bonita la página.
 <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
 <section class='seccion-profesionales container mt-3' id="seccion-profesionales">
   {% for profesional in lista_profesionales %}
@@ -122,15 +123,21 @@ Homepage {% endblock %} {% block css %}
               <p class="card-text">{{ profesional.descripcion }}</p>
               <!-- Especialidades del profesional. Cada especialidad tiene asociadas las subespecialidades si es que el profesional las ocupa -->
               Especialidades:
-              <ul class="list-group mb-3">
+
+              <ul class="list-group mb-3 mt-2">
                 {% for especialidad in profesional.especialidad.all %}
+                {% if especialidad.subespecialidades.exists %}
                 <li class="list-group-item">{{especialidad.nombre | capfirst}}</li>
+                {% else %}
+                <li class="list-group-item">{{especialidad.nombre | capfirst}}</li>
+                {% endif %}
                 {% endfor %}
               </ul>
+
               <!-- Enlaces tanto para pedir cita, para contactar con el profesional como para ver la página personal del profesional -->
               <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark">Pedir Cita</a>
               <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-dark">Contacta</a>
-              <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de</a><br>
+              <a href="https://www.github.com" target="_blank" class="btn btn-dark d-lg-none">Acerca de</a><br>
             </div>
           </div>
           <div class="col-4">
@@ -145,6 +152,10 @@ Homepage {% endblock %} {% block css %}
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-4 bg-secondary">
+      Aumentar Info<br>
+      <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de</a><br>
     </div>
   </div>
   {% endfor %}

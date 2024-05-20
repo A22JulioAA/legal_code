@@ -1,31 +1,45 @@
 {% extends "core/base-login.html" %}
 
-{% load static %}
+{% block content %}
 
 {% block script %}
-<script src="{% static 'js/script.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let ventanaModal = new bootstrap.Modal(document.getElementById('modalLogin'));
+        ventanaModal.show();
+    });
+</script>
 {% endblock %}
-
-{% block content %}
 
 {% load crispy_forms_tags %}
 
-<form method="post" class="container mt-3" id="formulario_profesional">
-    {% csrf_token %}
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Completa los campos</h5>
-
-            {{ form | crispy }}
-
-            <div class="row">
-                <a href="{% url 'login' %}" class="card-link col-3">Iniciar sesión</a>
-                <a href="#" class="card-link col-3">Necesitas ayuda?</a>
-                <input class="btn btn-dark float-end col-5" type="submit" value="Registrarse">
+<div class="modal fade" id="modalLogin" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Registrate GRATIS!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Completa todos los campos</h5>
+
+                            {{ form | crispy }}
+
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'login' %}" class="card-link col-3 btn btn-secondary">Inciar sesión?</a>
+                <input type="submit" class="btn btn-dark" value="Registrarse"></input>
+            </div>
+            </form>
         </div>
     </div>
-</form>
+</div>
 
 {% endblock %}
