@@ -1,15 +1,20 @@
 {% extends "core/base-login.html" %}
-#TODO:Revisar los estilos de inicios y registros.
-{% block content %}
+{% load static %}
 
 {% block script %}
 <script>
+    <!-- Con la configuración de backdrop y keyboard evitamos que el usuario pueda cerra la modal de todas las formas posibles -->
     document.addEventListener('DOMContentLoaded', function () {
-        let ventanaModal = new bootstrap.Modal(document.getElementById('modalLogin'));
+        let ventanaModal = new bootstrap.Modal(document.getElementById('modalLogin'), {
+            backdrop: 'static',
+            keyboard: false
+        });
         ventanaModal.show();
     });
 </script>
 {% endblock %}
+
+{% block content %}
 
 {% load crispy_forms_tags %}
 
@@ -18,7 +23,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title" id="exampleModalLabel">Inicia Sesión!</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="post">
@@ -33,10 +37,10 @@
                         </div>
                     </div>
             </div>
-            <div class="modal-footer">
-                <a href="#" class="card-link">Olvidaste tu contraseña?</a>
-                <a href="{% url 'register' %}" class="card-link col-3 btn btn-secondary">Registrarse</a>
-                <input type="submit" class="btn btn-dark" value="Iniciar"></input>
+            <div class="modal-footer bg-dark">
+                <a href="#" class="card-link text-light">Olvidaste tu contraseña?</a>
+                <a href="{% url 'register' %}" class="card-link btn btn-light">Registrarse</a>
+                <input type="submit" class="btn btn-light" value="Iniciar"></input>
             </div>
             </form>
         </div>

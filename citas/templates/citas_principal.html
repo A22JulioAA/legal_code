@@ -6,6 +6,8 @@ Mis citas
 {% load tz %} <!-- Importar la zona horaria -->
 {% load i18n %} <!-- Importar la internacionalización -->
 
+{% load static %}
+
 {% block content %}
 
 <section class="container-fluid bg-dark p-2 border-top">
@@ -14,7 +16,7 @@ Mis citas
 
 {% language 'es' %} <!-- Establecer el idioma en español -->
 
-<div id="advertencia" class="container mt-3">
+<div id="advertencia" class="container mt-3 mb-5">
     <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Advertencia</h4>
         <p>Recuerde! Cualquier cancelación está sujeta a las condiciones establecidas por los profesionales. En caso de
@@ -48,18 +50,28 @@ Mis citas
             <div class="col-4">
                 <strong>Precio: {{cita.precio}}€</strong>
                 <strong>Estado: {{cita.get_estado_display}}</strong>
+                <form method="post" action="{% url 'anular_cita' cita.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger mt-3">Anular Cita</button>
+                </form>
             </div>
-        </div>
-        <div class="row">
-            <!-- <button class="btn btn-danger col-6">Anular cita</button>
-            <button class="btn btn-danger col-6">Cambiar fecha</button> -->
         </div>
     </div>
     {% endfor %}
 
     {% else %}
     <section class="container">
-        <h2>Actualmente no hay ninguna cita activa</h2>
+        <div class="row">
+            <img src="{% static 'img/imagenCitas2.svg' %}" class="img-fluid col-4" alt="Imagen graciosa citas">
+            <div class="container-fluid full-height d-flex justify-content-center align-items-center col-8">
+                <div class="col-8 d-flex flex-column align-items-center">
+                    <h4 class="text-center fs-1 fs-lg-5">Actualmente no hay ninguna cita activa</h4>
+                    <div class="container text-center mt-3">
+                        <a href="{% url 'homepage' %}" class="btn btn-success">Ver profesionales</a><br>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     {% endif %}

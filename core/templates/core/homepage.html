@@ -103,7 +103,7 @@ Homepage {% endblock %} {% block css %}
 </section>
 {% else %}
 
-#TODO: En general poner más bonita la página.
+<!-- TODO: En general poner más bonita la página. -->
 <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
 <section class='seccion-profesionales container mt-3' id="seccion-profesionales">
   {% for profesional in lista_profesionales %}
@@ -153,9 +153,33 @@ Homepage {% endblock %} {% block css %}
         </div>
       </div>
     </div>
-    <div class="d-none d-lg-block col-lg-4 bg-secondary">
-      Aumentar Info<br>
-      <a href="https://www.github.com" target="_blank" class="btn btn-dark">Acerca de</a><br>
+    <div class="d-none d-lg-block col-lg-4 bg-dark rounded text-light">
+      <div class="row">
+        <h4 class="col-12 text-center mt-3 mb-3">Comenta que te ha parecido!</h4><br>
+      </div>
+      <div class="row">
+        <form method="post">
+          {% csrf_token %}
+          <textarea name="opinion" id="opinion" rows="4" class="form-control"></textarea>
+          <div class="star-rating mt-2">
+            <i class="fas fa-star" data-value="1"></i>
+            <i class="fas fa-star" data-value="2"></i>
+            <i class="fas fa-star" data-value="3"></i>
+            <i class="fas fa-star" data-value="4"></i>
+            <i class="fas fa-star" data-value="5"></i>
+          </div>
+          <input type="hidden" name="rating" id="rating" value="0">
+          <input type="submit" class="btn btn-light text-dark mt-3" style="width: 100%;" value="Enviar">
+        </form>
+      </div>
+      <hr class="border border-light border-1 opacity-75">
+      <div class="row">
+        <span class="col-12 text-center">OPINIONES</span><br>
+      </div>
+      <div class="row">
+
+      </div>
+      <!-- <a href=" https://www.github.com" target="_blank" class="btn btn-dark">Acerca de</a><br> -->
     </div>
   </div>
   {% endfor %}

@@ -5,7 +5,10 @@
 {% block script %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        let ventanaModal = new bootstrap.Modal(document.getElementById('modalLogin'));
+        let ventanaModal = new bootstrap.Modal(document.getElementById('modalRegister'), {
+            backdrop: 'static',
+            keyboard: false
+        });
         ventanaModal.show();
     });
 </script>
@@ -13,12 +16,11 @@
 
 {% load crispy_forms_tags %}
 
-<div class="modal fade" id="modalLogin" tabindex="-1">
+<div class="modal fade" id="modalRegister" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title" id="exampleModalLabel">Registrate GRATIS!</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="post">
@@ -33,9 +35,9 @@
                         </div>
                     </div>
             </div>
-            <div class="modal-footer">
-                <a href="{% url 'login' %}" class="card-link col-3 btn btn-secondary">Inciar sesión?</a>
-                <input type="submit" class="btn btn-dark" value="Registrarse"></input>
+            <div class="modal-footer bg-dark">
+                <a href="{% url 'login' %}" class="card-link btn btn-light">Inciar sesión?</a>
+                <input type="submit" class="btn btn-light" value="Registrarse">
             </div>
             </form>
         </div>

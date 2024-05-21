@@ -26,7 +26,8 @@ class RegistroForm(UserCreationForm):
         }
         widgets = {
             'password1': forms.PasswordInput(),
-            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'})
+            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'correo@ejemplo.es', 'autocomplete': 'off'})
         }
     
     def __init__(self, *args, **kwargs):

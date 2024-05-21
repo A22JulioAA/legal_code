@@ -6,6 +6,7 @@ from .forms import RegistroForm
 from .models import Profesional, Especialidad
 from citas.models import Cita
 from django.http import JsonResponse
+from django.contrib import messages
 
 """
     Cada función define una vista de la web que luego se le pasarán al archivo urls.py
@@ -157,4 +158,15 @@ def obtener_citas(request):
     citas = list(Cita.objects.filter(cliente_id=request.user.id).values())
 
     return JsonResponse(citas, safe=False)
+
+@login_required
+def anular_cita(request, id_cita):
+    if request.method == 'POST':
+        cita = Cita.objects.get(id=id_cita)
+        cita.delete()
+        messages.success(request, 'Tu cita se ha anulado con éxito.')
+        return redirect('homepage')
+    else:
+        messages.error(request, 'No se ha podido anular tu cita.')
+        return redirect('homepage')
 
