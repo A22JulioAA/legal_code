@@ -20,5 +20,6 @@ urlpatterns = [
     path('solicitudes/', views.solicitudes, name='solicitudes'),
     path('obtener-citas/', views.obtener_citas, name='obtener_citas'),
     path('anular-cita/<int:id_cita>/', views.anular_cita, name='anular_cita'),
+    path('politica-cancelaciones/', views.politica_cancelaciones, name='politica_cancelaciones'),
 ]
 

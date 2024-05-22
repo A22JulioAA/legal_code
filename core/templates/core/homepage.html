@@ -109,7 +109,7 @@ Homepage {% endblock %} {% block css %}
   {% for profesional in lista_profesionales %}
   <div class='row mt-4'>
     <div class="col-12 col-lg-8 p-0">
-      <div class="card row m-0 p-2" style="width: 100%;">
+      <div class="card row m-0 p-2 border-dark" style="width: 100%;">
         <div class="row g-0">
           <div class="col-8">
             <div class="card-body">
@@ -126,11 +126,11 @@ Homepage {% endblock %} {% block css %}
 
               <ul class="list-group mb-3 mt-2">
                 {% for especialidad in profesional.especialidad.all %}
-                {% if especialidad.subespecialidades.exists %}
-                <li class="list-group-item">{{especialidad.nombre | capfirst}}</li>
-                {% else %}
-                <li class="list-group-item">{{especialidad.nombre | capfirst}}</li>
-                {% endif %}
+                  {% if not especialidad.subespecialidades.exists %}
+                    <li class="list-group-item">{{especialidad.parent | capfirst}} | {{especialidad | capfirst}}</li>
+                  {% else %}
+                    <li class="list-group-item">{{especialidad | capfirst}}</li>
+                  {% endif %}
                 {% endfor %}
               </ul>
 
@@ -142,8 +142,6 @@ Homepage {% endblock %} {% block css %}
           </div>
           <div class="col-4">
             <!-- Imagen del profesional -->
-            <!-- <img src="{% static 'img/imagen-abogado.jpg' %}" class="card-img-top image-fluid"
-              alt="Imagen de profesional"> -->
             <img src="https://thispersondoesnotexist.com/" class="card-img-top image-fluid" alt="Imagen de profesional">
             <!-- Información acerca del profesional, tanto precio como email y teléfono -->
             <p class="mt-2 bg-dark text-light p-2 rounded">Precio Consulta: {{ profesional.precio_consulta }}€</p>

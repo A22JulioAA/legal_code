@@ -161,12 +161,27 @@ def obtener_citas(request):
 
 @login_required
 def anular_cita(request, id_cita):
+    """
+    Anula una cita existente en el sistema.
+
+    Parameters:
+        request (HttpRequest): La solicitud HTTP recibida.
+        id_cita (int): El ID de la cita a anular.
+
+    Returns:
+        HttpResponseRedirect: Una redirección a la página de inicio.
+
+    """
+
     if request.method == 'POST':
         cita = Cita.objects.get(id=id_cita)
         cita.delete()
         messages.success(request, 'Tu cita se ha anulado con éxito.')
-        return redirect('homepage')
+        return redirect('citas-principal')
     else:
         messages.error(request, 'No se ha podido anular tu cita.')
-        return redirect('homepage')
+        return redirect('citas-principal')
+    
+def politica_cancelaciones(request):
+    return render(request, 'core/politica-cancelaciones.html')
 

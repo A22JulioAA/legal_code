@@ -1,4 +1,7 @@
 img {
     border-radius: 50%;
+    width: 20vh;
+    height: 20vh;
     border: 2px solid white;
+    object-fit: cover;
 }
