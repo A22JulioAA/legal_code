@@ -155,6 +155,17 @@ def solicitudes(request):
     return render(request, 'core/solicitudes.html')
 
 def obtener_citas(request):
+    '''
+    Obtiene las citas del cliente actual.
+
+    Args:
+        request (HTTP): La solicitud HTTP recibida.
+
+    Returns:
+        Un objeto JsonResponse que contiene las citas del cliente actual.
+
+    '''
+    
     citas = list(Cita.objects.filter(cliente_id=request.user.id).values())
 
     return JsonResponse(citas, safe=False)
@@ -183,5 +194,15 @@ def anular_cita(request, id_cita):
         return redirect('citas-principal')
     
 def politica_cancelaciones(request):
+    """
+    Vista para la política de cancelaciones.
+
+    Parameters:
+        request (HttpRequest): La solicitud HTTP recibida.
+
+    Returns:
+        HttpResponse: La respuesta HTTP que se enviará al cliente.
+
+    """
     return render(request, 'core/politica-cancelaciones.html')
 

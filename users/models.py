@@ -4,7 +4,27 @@ from django.contrib.auth.models import UserManager, AbstractBaseUser, Permission
 from django.utils import timezone
 
 class CustomUserManager(UserManager):
+    '''
+    A custom user manager for managing user creation and authentication.
+
+    Inherits from Django's UserManager class.
+    '''
+
     def _create_user(self, email: str, password: str, **extra_fields: Any) -> Any:
+        '''
+        Crea un usuario con el email, contraseña y campos adicionales proporcionados.
+
+        Args:
+            email (str): El email del usuario
+            password (str): La contraseña del usuario
+            **extra_fields: Campos adicionales a guardar para el usuario
+
+        Returns:
+            Any: El usuario
+        
+        Raises:
+            ValueError: Si no se proporciona un email
+        '''
         if not email:
             raise ValueError('El email es obligatorio!')
         email = self.normalize_email(email)
@@ -15,11 +35,33 @@ class CustomUserManager(UserManager):
         return usuario
     
     def create_user(self, email=None, password=None, **extra_field):
+        '''
+        Crea un usuario con el email, contraseña y campos adicionales proporcionados.
+
+        Args:
+            email (str): El email del usuario.
+            password (str): La contraseña del usuario.
+            **extra_fields: Campos adicionales a guardar para el usuario.
+
+        Returns:
+            Any: El usuario creado.
+        '''
         extra_field.setdefault('is_staff', False)
         extra_field.setdefault('is_superuser', False)
         return self._create_user(email, password, **extra_field)
 
     def create_superuser(self, email=None, password=None, **extra_field):
+        '''
+        Crea un superusuario con el email, contraseña y campos adicionales proporcionados.
+
+        Args:
+            email (str): El email del usuario.
+            password (str): La contraseña del usuario.
+            **extra_fields: Campos adicionales a guardar para el usuario.
+
+        Returns:
+            Any: El superusuario creado.
+        '''
         extra_field.setdefault('is_staff', True)
         extra_field.setdefault('is_superuser', True)
         extra_field.setdefault('name', 'admin')

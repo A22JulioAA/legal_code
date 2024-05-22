@@ -32,7 +32,7 @@ Mis citas
     </div>
 </div>
 
-<!-- En caso de que existn citas para el usuario -->
+<!-- En caso de que existan citas para el usuario -->
 
 {% if citas %}
 
@@ -41,15 +41,19 @@ Mis citas
     <div class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cita{{cita.id}}">
-                {{cita.profesional.nombre}} {{cita.profesional.apellidos}} - {{cita.fecha_cita}}<br>{{cita.profesional.campo}}
+                {{cita.profesional.nombre}} {{cita.profesional.apellidos}} -
+                {{cita.fecha_cita}}<br>{{cita.profesional.campo}}
             </button>
         </h2>
         <div id="cita{{cita.id}}" class="accordion-collapse collapse show row mb-3" data-bs-parent="#cita{{cita.id}}">
             <div class="accordion-body col-8">
                 <p><strong>Motivo de la cita: </strong>{{cita.descripcion}}</p>
-                <p><strong>Especialidades:</strong><ul>{% for especialidad in cita.profesional.especialidad.all %}
+                <p><strong>Especialidades:</strong>
+                <ul>{% for especialidad in cita.profesional.especialidad.all %}
                     <li>{{especialidad | capfirst}}</li>
-                    {% endfor %}</ul></p>
+                    {% endfor %}
+                </ul>
+                </p>
             </div>
             <div class="col-4 mt-3">
                 <strong>Precio: {{cita.precio}}€</strong><br>
@@ -65,22 +69,22 @@ Mis citas
 
     <!-- En caso de que no existan citas para el usuario -->
 
-{% else %}
-<section class="container">
-    <div class="row">
-        <img src="{% static 'img/imagenCitas2.svg' %}" class="img-fluid col-4" alt="Imagen graciosa citas">
-        <div class="container-fluid full-height d-flex justify-content-center align-items-center col-8">
-            <div class="col-8 d-flex flex-column align-items-center">
-                <h4 class="text-center fs-1 fs-lg-5">Actualmente no hay ninguna cita activa</h4>
-                <div class="container text-center mt-3">
-                    <a href="{% url 'homepage' %}" class="btn btn-success">Ver profesionales</a><br>
+    {% else %}
+    <section class="container">
+        <div class="row">
+            <img src="{% static 'img/imagenCitas2.svg' %}" class="img-fluid col-4" alt="Imagen graciosa citas">
+            <div class="container-fluid full-height d-flex justify-content-center align-items-center col-8">
+                <div class="col-8 d-flex flex-column align-items-center">
+                    <h4 class="text-center fs-1 fs-lg-5">Actualmente no hay ninguna cita activa</h4>
+                    <div class="container text-center mt-3">
+                        <a href="{% url 'homepage' %}" class="btn btn-success">Ver profesionales</a><br>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-{% endif %}
-{% endlanguage %}
+    {% endif %}
+    {% endlanguage %}
 
-{% endblock %}
+    {% endblock %}

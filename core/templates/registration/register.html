@@ -4,6 +4,7 @@
 
 {% block script %}
 <script>
+    <!-- Con la configuración de backdrop y keyboard evitamos que el usuario pueda cerra la modal de todas las formas posibles -->
     document.addEventListener('DOMContentLoaded', function () {
         let ventanaModal = new bootstrap.Modal(document.getElementById('modalRegister'), {
             backdrop: 'static',
@@ -13,6 +14,8 @@
     });
 </script>
 {% endblock %}
+
+<!-- El formulario de Registro. Es una modal pero no se puede salir de ella. -->
 
 {% load crispy_forms_tags %}
 

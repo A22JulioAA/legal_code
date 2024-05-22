@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'users',
     'bootstrap5',
     'fontawesomefree',
-    'corsheaders'
+    'corsheaders',
+    'debug_toolbar',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
@@ -62,6 +63,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -97,7 +103,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "abc123.",
         "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "PORT": "5433",
     }
 }
 

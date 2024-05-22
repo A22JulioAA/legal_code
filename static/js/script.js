@@ -11,6 +11,8 @@ function scrollToSection(event, id) {
     }
 }
 
+// Con este evento se crea la animación de las estrellas en la sección de comentarios.
+
 document.addEventListener('DOMContentLoaded', (e) => {
     const stars = document.querySelectorAll('.star-rating i');
     console.log(stars);

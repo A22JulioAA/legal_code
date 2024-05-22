@@ -21,7 +21,7 @@ Homepage {% endblock %} {% block css %}
       <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
     </div>
     <div class="toast-body">
-      <strong><span class="text-danger">Página en contrucción!.</span></strong> Si se detecta cualquier error, ponerse
+      <strong><span class="text-danger">Página en construcción!.</span></strong> Si se detecta cualquier error, ponerse
       en contacto: a22julioaa@iessanclemente.net
     </div>
   </div>
@@ -126,11 +126,11 @@ Homepage {% endblock %} {% block css %}
 
               <ul class="list-group mb-3 mt-2">
                 {% for especialidad in profesional.especialidad.all %}
-                  {% if not especialidad.subespecialidades.exists %}
-                    <li class="list-group-item">{{especialidad.parent | capfirst}} | {{especialidad | capfirst}}</li>
-                  {% else %}
-                    <li class="list-group-item">{{especialidad | capfirst}}</li>
-                  {% endif %}
+                {% if not especialidad.subespecialidades.exists %}
+                <li class="list-group-item">{{especialidad.parent | capfirst}} | {{especialidad | capfirst}}</li>
+                {% else %}
+                <li class="list-group-item">{{especialidad | capfirst}}</li>
+                {% endif %}
                 {% endfor %}
               </ul>
 
@@ -151,6 +151,7 @@ Homepage {% endblock %} {% block css %}
         </div>
       </div>
     </div>
+    <!-- Esta sección aparecerá al lado de la card del anuncio en pantallas grandes. Contendrá los comentarios(publicación y histórico) del profesional. -->
     <div class="d-none d-lg-block col-lg-4 bg-dark rounded text-light">
       <div class="row">
         <h4 class="col-12 text-center mt-3 mb-3">Comenta que te ha parecido!</h4><br>

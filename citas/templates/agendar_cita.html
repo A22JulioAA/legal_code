@@ -16,6 +16,7 @@ Agendar Cita
 
 {% language 'es' %} <!-- Establecer el idioma en español -->
 
+<!-- Aviso sobre el motivo de la cita -->
 <div id="advertencia-citas" class="container mt-3">
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Aviso</h4>
@@ -27,6 +28,8 @@ Agendar Cita
                 href="mailto:{{profesional.email}}" class="text-dark">{{profesional.email}}</a></p>
     </div>
 </div>
+
+<!-- Formulario para agendar una cita -->
 
 <form method='POST' class="container mt-3">
     {% csrf_token %}

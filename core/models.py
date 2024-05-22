@@ -32,7 +32,7 @@ class Profesional(models.Model):
     fecha_nacimiento = models.DateField(null=False)
     dni = models.CharField(max_length=9, null=False, unique=True)
     telefono = models.CharField(max_length=20, null=False)
-    especialidad = models.ManyToManyField(Especialidad, null=False)
+    especialidad = models.ManyToManyField(Especialidad)
     precio_consulta = models.FloatField()
     direccion = models.TextField()
     descripcion = models.TextField(max_length=450, default='')

@@ -9,14 +9,23 @@ def profile(request):
     }
     
     return render(request, 'profile.html', data)
-
-# @login_required
-# def modificar_perfil(request):
-#     if request.method == 'POST':
         
 
 @login_required
 def eliminar_perfil(request):
+    '''
+    Vista para eliminar el perfil de un usuario.
+
+    Esta función elimina el perfil de un usuario. Comprueba si la solicitud es de tipo POST y elimina el usuario si es así. 
+    En caso contrario, muestra un mensaje de error y redirige al perfil del usuario.
+
+    Parameters:
+    - request: La solicitud HTTP recibida.
+
+    Returns:
+    - Una redirección a la página de inicio.
+
+    '''
     if request.method == 'POST':
         user = request.user 
         user.delete()

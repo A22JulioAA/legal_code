@@ -36,6 +36,9 @@ class RegistroForm(UserCreationForm):
         self.fields['email'].widget.attrs['autocomplete'] = 'off' # Se desactiva el autocompletado que usa el navegador por defecto
 
 class ModificarUsuarioForm(forms.ModelForm):
+    '''
+        Formulario para modificar los datos de un usuario. SIN IMPLENENTAR
+    '''
     class Meta:
         model = Cliente
         fields = ['name', 'apellidos', 'telefono', 'imagen_perfil']

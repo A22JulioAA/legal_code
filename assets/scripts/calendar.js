@@ -6,8 +6,12 @@ import listPlugin from '@fullcalendar/list';
 
 import '../styles/calendar.css'
 
+// En este sctript se configura el calendario de FullCalendar y se renderiza en el documento HTML
+
 document.addEventListener('DOMContentLoaded', function () {
     let calendarEl = document.getElementById('calendar');
+
+    // Configuración del calendario
 
     let calendar = new Calendar(calendarEl, {
         locale: 'es',
@@ -37,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
         ]
 
     });
+
+    // Renderizado del calendario
 
     calendar.render();
 });
