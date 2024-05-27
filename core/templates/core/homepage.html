@@ -73,25 +73,8 @@ Homepage {% endblock %} {% block css %}
         </ul>
       </div>
     </div>
-    {% if subespecialidades %}
-    <div class="col">
-      <div class="dropdown">
-        <h5 class="text-light"><i class="fas fa-book-open"></i> Campo: </h5>
-        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-          Selecciona un campo de Derecho {{filtro | capfirst}}
-        </button>
-        <ul class="dropdown-menu scrollable-menu">
-          {% for subespecialidad in subespecialidades %}
-          <li><a class="dropdown-item" href="/subespecialidad/{{ subespecialidad.id }}">{{subespecialidad|capfirst}}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-    {% endif %}
   </div>
 </section>
-
 
 <!-- Sección de anuncios de profesionales ordenados de forma aleatoria en un principio -->
 
@@ -103,7 +86,6 @@ Homepage {% endblock %} {% block css %}
 </section>
 {% else %}
 
-<!-- TODO: En general poner más bonita la página. -->
 <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
 <section class='seccion-profesionales container mt-3' id="seccion-profesionales">
   {% for profesional in lista_profesionales %}
@@ -159,7 +141,7 @@ Homepage {% endblock %} {% block css %}
       <div class="row">
         <form method="post">
           {% csrf_token %}
-          <textarea name="opinion" id="opinion" rows="4" class="form-control"></textarea>
+          {% comment %} <textarea name="opinion" id="opinion" rows="4" class="form-control"></textarea>
           <div class="star-rating mt-2">
             <i class="fas fa-star" data-value="1"></i>
             <i class="fas fa-star" data-value="2"></i>
@@ -168,7 +150,23 @@ Homepage {% endblock %} {% block css %}
             <i class="fas fa-star" data-value="5"></i>
           </div>
           <input type="hidden" name="rating" id="rating" value="0">
-          <input type="submit" class="btn btn-light text-dark mt-3" style="width: 100%;" value="Enviar">
+          <input type="submit" class="btn btn-light text-dark mt-3" style="width: 100%;" value="Enviar"> {% endcomment %}
+          <div class="row">
+            <div class="col-12 mx-auto">
+              <label for="">{{comment_form.texto_comentario.label}}</label>
+              {{ comment_form.texto_comentario }}
+            </div>
+          </div>
+          <div class="row">
+            <label for="">{{comment_form.valoracion.label}}</label>
+            <div class="col-6">{{comment_form.valoracion}}</div>
+            <label for="">{{comment_form.recomendacion.label}}</label>
+            <div class="col-6">Sí {{comment_form.recomendacion}}</div>
+          </div>
+          <div class="row">
+            <button class="btn btn-light col-9 mx-auto" type="submit">Comentar</button>
+          </div>
+        
         </form>
       </div>
       <hr class="border border-light border-1 opacity-75">

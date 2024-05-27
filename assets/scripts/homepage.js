@@ -3,5 +3,3 @@ document.addEventListener('DOMContentLoaded', function () {
     let myToast = new bootstrap.Toast(document.querySelector('.toast'));
     myToast.show();
 });
-
-console.log(document.querySelector(('.toast')));

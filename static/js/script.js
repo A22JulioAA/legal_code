@@ -15,7 +15,6 @@ function scrollToSection(event, id) {
 
 document.addEventListener('DOMContentLoaded', (e) => {
     const stars = document.querySelectorAll('.star-rating i');
-    console.log(stars);
         const ratingInput = document.getElementById('rating');
         
         stars.forEach(star => {
@@ -59,6 +58,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
             });
         }
     });
+
+$(document).ready(function () {
+    $(".rating").rating();
+});
 
 
 

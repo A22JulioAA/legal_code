@@ -7,6 +7,7 @@ from .models import Profesional, Especialidad
 from citas.models import Cita
 from django.http import JsonResponse
 from django.contrib import messages
+from comentarios.forms import CrearComentarioForm
 
 """
     Cada función define una vista de la web que luego se le pasarán al archivo urls.py
@@ -33,7 +34,6 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
 
     # Primero sacamos todas las especialidades para cargarlas en la sección de filtros.
     especialidades = Especialidad.objects.all()
-    subespecialidades = None
 
     if filtro_especialidad == None:
         lista_profesionales = Profesional.objects.all()
@@ -41,7 +41,6 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
         # Se obtiene la especialidad asociada a ese nombre y luego se buscan los profesionales
         # que la tengan en su lista de especialidades
         especialidad = Especialidad.objects.get(id = filtro_especialidad)
-        subespecialidades = especialidad.subespecialidades.all()
         filtro = especialidad.nombre
 
         lista_profesionales = especialidad.profesional_set.all()
@@ -51,12 +50,22 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
     else:
         no_profesionales_especialidad = ''
         
+    if request.method == 'POST':
+        comment_form = CrearComentarioForm(request.POST)
+        print("gadf")
+        if comment_form.is_valid():
+            comment_form.save()
+            messages.success(request, 'Tu comentario se ha enviado con éxito.')
+            return redirect('homepage')
+    else:
+        comment_form = CrearComentarioForm()
+                
     data = {
         'lista_profesionales': lista_profesionales,
         'no_profesionales_especialidad': no_profesionales_especialidad,
         'especialidades': especialidades,
-        'subespecialidades': subespecialidades,
-        'filtro': filtro
+        'filtro': filtro,
+        'comment_form': comment_form
     }
     
     return render(request, 'core/homepage.html', data)

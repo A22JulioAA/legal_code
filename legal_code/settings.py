@@ -42,12 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'citas',
-    # 'comentarios',
+    'comentarios',
     'users',
     'bootstrap5',
     'fontawesomefree',
     'corsheaders',
     'debug_toolbar',
+    'star_ratings'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
@@ -103,7 +104,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "abc123.",
         "HOST": "127.0.0.1",
-        "PORT": "5433",
+        "PORT": "5432",
     }
 }
 
