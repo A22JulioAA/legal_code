@@ -140,6 +140,7 @@ Homepage {% endblock %} {% block css %}
       </div>
       <div class="row">
         <form method="post">
+          <input type="hidden" name="profesional_id" value="{{profesional.id}}">
           {% csrf_token %}
           {% comment %} <textarea name="opinion" id="opinion" rows="4" class="form-control"></textarea>
           <div class="star-rating mt-2">

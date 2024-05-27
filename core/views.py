@@ -52,9 +52,14 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
         
     if request.method == 'POST':
         comment_form = CrearComentarioForm(request.POST)
-        print("gadf")
+
         if comment_form.is_valid():
+            comentario = comment_form.save(commit=False)
+            
+            comentario.cliente = request.user
+            
             comment_form.save()
+
             messages.success(request, 'Tu comentario se ha enviado con éxito.')
             return redirect('homepage')
     else:
