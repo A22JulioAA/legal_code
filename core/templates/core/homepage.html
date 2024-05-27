@@ -90,7 +90,7 @@ Homepage {% endblock %} {% block css %}
 <section class='seccion-profesionales container mt-3' id="seccion-profesionales">
   {% for profesional in lista_profesionales %}
   <div class='row mt-4'>
-    <div class="col-12 col-lg-8 mx-auto p-0">
+    <div class="col-12 col-lg-8 p-0">
       <div class="card row m-0 p-2 border-dark" style="width: 100%;">
         <div class="row g-0">
           <div class="col-8">
@@ -134,7 +134,60 @@ Homepage {% endblock %} {% block css %}
       </div>
     </div>
     <!-- Esta sección aparecerá al lado de la card del anuncio en pantallas grandes. Contendrá los comentarios(publicación y histórico) del profesional. -->
+    <div class="d-none d-lg-block col-lg-4 bg-dark rounded text-light">
+      <div class="row">
+        <h4 class="col-12 text-center mt-3 mb-3">Comenta que te ha parecido!</h4><br>
+      </div>
+      <div class="row">
+        <form method="post">
+          <input type="hidden" name="profesional_id" value="{{profesional.id}}">
+          {% csrf_token %}
+          <!-- <textarea name="opinion" id="opinion" rows="4" class="form-control"></textarea>
+          <div class="star-rating mt-2">
+            <i class="fas fa-star" data-value="1"></i>
+            <i class="fas fa-star" data-value="2"></i>
+            <i class="fas fa-star" data-value="3"></i>
+            <i class="fas fa-star" data-value="4"></i>
+            <i class="fas fa-star" data-value="5"></i>
+          </div>
+          <input type="hidden" name="rating" id="rating" value="0">
+          <input type="submit" class="btn btn-light text-dark mt-3" style="width: 100%;" value="Enviar"> -->
+          <div class="row">
+            <div class="col-12 mx-auto">
+              <label for="">{{comment_form.texto_comentario.label}}</label>
+              {{ comment_form.texto_comentario }}
+            </div>
+          </div>
+          <div class="row">
+            <label for="">{{comment_form.valoracion.label}}</label>
+            <div class="col-6">{{comment_form.valoracion}}</div>
+            <label for="">{{comment_form.recomendacion.label}}</label>
+            <div class="col-6">Sí {{comment_form.recomendacion}}</div>
+          </div>
+          <div class="row">
+            <button class="btn btn-light col-9 mx-auto" type="submit">Comentar</button>
+          </div>
 
+        </form>
+      </div>
+      <hr class="border border-light border-1 opacity-75">
+      <div class="row">
+        <span class="col-12 text-center">OPINIONES <span class="badge bg-light text-dark">4</span></span><br>
+      </div>
+      <div class="row">
+
+        {% if profesional.comentarios.all %}
+        {% for comentario in profesional.comentarios.all %}
+        {{comentario}}
+        {% endfor %}
+
+        {% else %}
+        <p class="col-12 text-center">No hay opiniones aún</p>
+        {% endif %}
+
+      </div>
+      <!-- <a href=" https://www.github.com" target="_blank" class="btn btn-dark">Acerca de</a><br> -->
+    </div>
   </div>
   {% endfor %}
 </section>
