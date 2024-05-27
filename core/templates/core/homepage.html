@@ -177,10 +177,11 @@ Homepage {% endblock %} {% block css %}
       <div class="row">
 
         {% if profesional.comentarios.all %}
-        {% for comentario in profesional.comentarios.all %}
-        {{comentario}}
-        {% endfor %}
-
+        <ul>
+          {% for comentario in profesional.comentarios.all %}
+          <li>{{comentario.texto_comentario}} - {{comentario.cliente}}</li>
+          {% endfor %}
+        </ul>
         {% else %}
         <p class="col-12 text-center">No hay opiniones aún</p>
         {% endif %}
