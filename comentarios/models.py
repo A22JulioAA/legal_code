@@ -11,7 +11,7 @@ class Comentario(models.Model):
 
     """
     
-    profesional = models.ForeignKey(Profesional, on_delete=models.CASCADE, null=False, default=1)
+    profesional = models.ForeignKey(Profesional, on_delete=models.CASCADE, null=False, related_name='comentarios')
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=False, default=1)
     texto_comentario = models.TextField(max_length=400, default='')
     recomendacion = models.BooleanField(default=True)

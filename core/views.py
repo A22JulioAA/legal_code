@@ -54,8 +54,12 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
         comment_form = CrearComentarioForm(request.POST)
 
         if comment_form.is_valid():
+            profesional_id = request.POST.get('profesional_id')
+            profesional = Profesional.objects.get(id=profesional_id)
+            
             comentario = comment_form.save(commit=False)
             
+            comentario.profesional = profesional
             comentario.cliente = request.user
             
             comment_form.save()
