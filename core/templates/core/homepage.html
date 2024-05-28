@@ -80,20 +80,17 @@ Homepage {% endblock %} {% block css %}
               <div class="card mb-5" style="width: 100%;">
                 <div class="row no-gutters">
                     <div class="col-4">
-                        <img src="https://thispersondoesnotexist.com/" class="card-img m-2 border border-dark" alt="Imagen perfil profesional">
-                        <div class="card-footer">
-                          <div class="row">
-                            <div class="col">
-                              <strong>Precio:</strong> $PLACEHOLDER$
-                            </div>
-                            <div class="col">
-                              <strong>Correo:</strong> $PLACEHOLDER$
-                            </div>
-                            <div class="col">
-                              <strong>Teléfono:</strong> $PLACEHOLDER$
-                            </div>
+                        <img src="https://thispersondoesnotexist.com/" class="card-img m-2 border border-dark" alt="Imagen perfil profesional">             
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#contactoCollapse">
+                          Ver detalles de contacto
+                      </button>
+                      <div class="collapse" id="contactoCollapse">
+                          <div class="mt-3">
+                              <h6>Contacto:</h6>
+                              <p>{{ profesional.correo }}</p>
+                              <!-- Agrega más detalles de contacto aquí según sea necesario -->
                           </div>
-                        </div>
+                      </div>
                     </div>
                     <div class="col-8">
                         <div class="card-body">
