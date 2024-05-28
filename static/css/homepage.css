@@ -38,3 +38,26 @@ h1 {
 .star-rating i.hovered {
     color: #ffcc00;
 }
+
+@media (min-width: 768px) {
+  .sidebar-sticky {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+  }
+}
+
+.sidebar .dropdown .btn {
+  width: 100%; /* Hacer que el botón ocupe el 100% del ancho del contenedor */
+  box-sizing: border-box; /* Incluir padding y border en el ancho total */
+  white-space: nowrap; /* Prevenir que el texto del botón se divida en varias líneas */
+  overflow: hidden; /* Ocultar el desbordamiento del texto */
+  text-overflow: ellipsis; /* Añadir puntos suspensivos si el texto es demasiado largo */
+  font-size: 16px; /* Ajustar el tamaño de la fuente según sea necesario */
+}
+
+.sidebar .dropdown {
+  width: 100%; /* Asegurarse de que el contenedor del botón ocupe el 100% del ancho disponible */
+}

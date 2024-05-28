@@ -9,190 +9,94 @@ Homepage {% endblock %} {% block css %}
     myToast.show();
   });
 </script>
-{% endblock %} {% block content %}
+{% endblock %} 
+{% block content %}
 
-<!-- Un simple toast para advertir de que la página está en construcción -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" class="toast" role="alert">
-    <div class="toast-header">
-      <img src="{% static 'img/alert.png' %}" width=50 class="rounded me-2" alt="Icono de alerta">
-      <strong class="me-auto">Página en construcción</strong>
-      <small>now</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-    </div>
-    <div class="toast-body">
-      <strong><span class="text-danger">Página en construcción!.</span></strong> Si se detecta cualquier error, ponerse
-      en contacto: a22julioaa@iessanclemente.net
-    </div>
+  <!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
+  <div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center p-0">
+    <!-- La función scrollToSection está definida en el script y sirve para desplazar
+      la vista hasta la sección de especialidades, que es donde empiezan los filtros y ofertas -->
+    <a href="" style="width: 50%" onclick="scrollToSection(event, 'especialidades')"
+      class="border border-light border-2 text-light p-5 enlace_und">EMPEZAR A EXPLORAR</a>
   </div>
-</div>
-
-<!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
-<div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center p-0">
-  <!-- La función scrollToSection está definida en el script y sirve para desplazar
-    la vista hasta la sección de especialidades, que es donde empiezan los filtros y ofertas -->
-  <a href="" style="width: 50%" onclick="scrollToSection(event, 'especialidades')"
-    class="border border-light border-2 text-light p-5 enlace_und">EMPEZAR A EXPLORAR</a>
-</div>
-
-<br />
-
-<!-- En esta sección mostraremos los mensajes flash que vayan ocurriendo en diferentes puntos de la web -->
-
-{% if messages %}
-{% for message in messages %}
-<section class="container-fluid text-center alert alert-{{ message.tags }}">
-  {{ message }}
-</section>
-{% endfor %}
-{% endif %}
-
-<!-- Sección para filtros por especialidades y subespecialidades -->
-
-<section id="especialidades" class="container border p-3 bg-dark text-light">
-  <h3>Personaliza tu búsqueda!</h3>
-  <hr class="border border-light border-1 opacity-100">
-  <div class="row">
-    <div class="col">
-      <div class="dropdown">
-        <h5 class="text-light"><i class="fa-solid fa-magnifying-glass"></i> Especialidad: </h5>
-        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-          {% if filtro %}
-          {{ filtro|capfirst }}
-          {% else %}
-          Selecciona una especialidad
-          {% endif %}
-        </button>
-        <ul class="dropdown-menu scrollable-menu">
-          <li><a class="dropdown-item" href="/">-</a></li>
-          {% for especialidad in especialidades %}
-          {% if especialidad.subespecialidades.exists %}
-          <li><a class="dropdown-item" href="/especialidad/{{ especialidad.id }}">{{ especialidad|capfirst }}</a></li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Sección de anuncios de profesionales ordenados de forma aleatoria en un principio -->
-
-<!-- En esta sección se muestra un mensaje si no existen profesionales asociados a ese campo -->
-
-{% if no_profesionales_especialidad %}
-<section class="container mt-3 border-top">
-  <h2>{{no_profesionales_especialidad}}</h2>
-</section>
-{% else %}
-
-<!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
-<section class='seccion-profesionales container mt-3' id="seccion-profesionales">
-  {% for profesional in lista_profesionales %}
-  <div class='row mt-4'>
-    <div class="col-12 col-lg-8 p-0">
-      <div class="card row m-0 p-2 border-dark" style="width: 100%;">
-        <div class="row g-0">
-          <div class="col-8">
-            <div class="card-body">
-              <!-- Nombre y campo del profesional -->
-              <h5 class="card-title">{{profesional.nombre | capfirst}} {{profesional.apellidos | capfirst}} |
-                {{profesional.campo}}</h5>
-              <!-- Direccion del profesional -->
-              <p><i class="fa-solid fa-location-dot"></i> {{profesional.direccion}}</p>
-              <hr class="border border-dark border-1 opacity-75">
-              <!-- Descripción del profesional -->
-              <p class="card-text">{{ profesional.descripcion }}</p>
-              <!-- Especialidades del profesional. Cada especialidad tiene asociadas las subespecialidades si es que el profesional las ocupa -->
-              Especialidades:
-
-              <ul class="list-group mb-3 mt-2">
-                {% for especialidad in profesional.especialidad.all %}
-                {% if not especialidad.subespecialidades.exists %}
-                <li class="list-group-item">{{especialidad.parent | capfirst}} | {{especialidad | capfirst}}</li>
-                {% else %}
-                <li class="list-group-item">{{especialidad | capfirst}}</li>
-                {% endif %}
-                {% endfor %}
-              </ul>
-
-              <!-- Enlaces tanto para pedir cita, para contactar con el profesional como para ver la página personal del profesional -->
-              <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark">Pedir Cita</a>
-              <a href="mailto:a22julioaa@iessanclemente.net" class="btn btn-dark">Contacta</a>
-              <a href="https://www.github.com" target="_blank" class="btn btn-dark d-lg-none">Acerca de</a><br>
-            </div>
-          </div>
-          <div class="col-4">
-            <!-- Imagen del profesional -->
-            <img src="https://thispersondoesnotexist.com/" class="card-img-top image-fluid" alt="Imagen de profesional">
-            <!-- Información acerca del profesional, tanto precio como email y teléfono -->
-            <p class="mt-2 bg-dark text-light p-2 rounded">Precio Consulta: {{ profesional.precio_consulta }}€</p>
-            <p class="mt-2 bg-dark text-light p-2 rounded">Correo: {{ profesional.email }}</p>
-            <p class="mt-2 bg-dark text-light p-2 rounded">Teléfono: {{ profesional.telefono }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Esta sección aparecerá al lado de la card del anuncio en pantallas grandes. Contendrá los comentarios(publicación y histórico) del profesional. -->
-    <div class="d-none d-lg-block col-lg-4 bg-dark rounded text-light">
-      <div class="row">
-        <h4 class="col-12 text-center mt-3 mb-3">Comenta que te ha parecido!</h4><br>
-      </div>
-      <div class="row">
-        <form method="post">
-          <input type="hidden" name="profesional_id" value="{{profesional.id}}">
-          {% csrf_token %}
-          <!-- <textarea name="opinion" id="opinion" rows="4" class="form-control"></textarea>
-          <div class="star-rating mt-2">
-            <i class="fas fa-star" data-value="1"></i>
-            <i class="fas fa-star" data-value="2"></i>
-            <i class="fas fa-star" data-value="3"></i>
-            <i class="fas fa-star" data-value="4"></i>
-            <i class="fas fa-star" data-value="5"></i>
-          </div>
-          <input type="hidden" name="rating" id="rating" value="0">
-          <input type="submit" class="btn btn-light text-dark mt-3" style="width: 100%;" value="Enviar"> -->
-          <div class="row">
-            <div class="col-12 mx-auto">
-              <label for="">{{comment_form.texto_comentario.label}}</label>
-              {{ comment_form.texto_comentario }}
-            </div>
-          </div>
-          <div class="row">
-            <label for="">{{comment_form.valoracion.label}}</label>
-            <div class="col-6">{{comment_form.valoracion}}</div>
-            <label for="">{{comment_form.recomendacion.label}}</label>
-            <div class="col-6">Sí {{comment_form.recomendacion}}</div>
-          </div>
-          <div class="row">
-            <button class="btn btn-light col-9 mx-auto" type="submit">Comentar</button>
-          </div>
-
-        </form>
-      </div>
-      <hr class="border border-light border-1 opacity-75">
-      <div class="row">
-        <span class="col-12 text-center">OPINIONES <span class="badge bg-light text-dark">4</span></span><br>
-      </div>
-      <div class="row">
-
-        {% if profesional.comentarios.all %}
-        <ul>
-          {% for comentario in profesional.comentarios.all %}
-          <li>{{comentario.texto_comentario}} - {{comentario.cliente}}</li>
-          {% endfor %}
-        </ul>
-        {% else %}
-        <p class="col-12 text-center">No hay opiniones aún</p>
-        {% endif %}
-
-      </div>
-      <!-- <a href=" https://www.github.com" target="_blank" class="btn btn-dark">Acerca de</a><br> -->
-    </div>
-  </div>
+  
+  <br />
+  
+  <!-- En esta sección mostraremos los mensajes flash que vayan ocurriendo en diferentes puntos de la web -->
+  
+  {% if messages %}
+  {% for message in messages %}
+  <section class="container-fluid text-center alert alert-{{ message.tags }}">
+    {{ message }}
+  </section>
   {% endfor %}
-</section>
+  {% endif %}
 
-{% endif %}
+<!-- Filtro de las ofertas. Es posible filtrar por especialidad o precio. -->
+<div class="container mt-3" id="especialidades">
+  <div class="row">
+      <div class="col-12 col-md-4 col-lg-3 order-1 order-md-1 order-lg-1 bg-dark text-light sidebar-sticky rounded">
+          <div class="sidebar p-2">
+            <h3 class="text-center">Personaliza tu búsqueda!</h3>
+            <hr class="border border-light border-1 opacity-100">
+            <div class="row">
+              <div class="col">
+                <form method="post">
+                  {% csrf_token %}
+                  <label for="especialidadInput">Especialidad: </label>
+                  <select class="form-select" name="especialidad" id="especialidadInput">
+                    <option value="" selected>Selecciona una especialidad</option>
+                    {% for especialidad in especialidades %}
+                    {% if especialidad.subespecialidades.exists%}
+                    <option value="{{especialidad.id}}">{{especialidad | capfirst}}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                  <br>
+                  <label for="precioInput">Precio máximo: </label>
+                  <input type="number" name="precio" id="precioInput" class="form-control" placeholder="Precio máximo">
+
+                  <button type="submit" class="btn btn-light mt-3">Buscar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <!-- Mensaje si no se encuentrar profesionales con esa especialidad -->
+
+      <div class="col-12 col-md-8 col-lg-9 order-2 order-md-2 order-lg-2 p-0">
+          <div class="oferta">
+            {% if no_profesionales_especialidad %}
+            <section class="container mt-3">
+              <h2>{{no_profesionales_especialidad}}</h2>
+            </section>
+            {% else %}
+            
+            <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
+            <section class='seccion-profesionales container p-0 ps-md-3 mt-3 mt-md-0' id="seccion-profesionales">
+              {% for profesional in lista_profesionales %}
+              
+              <div class="card mb-4" style="width: 100%;">
+                <div class="card-body">
+                  <div class="row">
+                    <h5 class="card-title border-bottom pb-2 col-10">{{ profesional.nombre | capfirst}} {{ profesional.apellidos | capfirst }}</h5>
+                    <img src="https://thispersondoesnotexist.com/" alt="Imagen perfil profesional" class="card-img-top">
+                  </div>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">{{ profesional.campo | capfirst }}</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+              </div>
+              
+              {% endfor %}
+            </section>
+            
+            {% endif %}
+          </div>
+      </div>
+  </div>
+</div>
 
 {% endblock %}
