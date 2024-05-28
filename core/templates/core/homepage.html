@@ -77,19 +77,42 @@ Homepage {% endblock %} {% block css %}
             <section class='seccion-profesionales container p-0 ps-md-3 mt-3 mt-md-0' id="seccion-profesionales">
               {% for profesional in lista_profesionales %}
               
-              <div class="card mb-4" style="width: 100%;">
-                <div class="card-body">
-                  <div class="row">
-                    <h5 class="card-title border-bottom pb-2 col-10">{{ profesional.nombre | capfirst}} {{ profesional.apellidos | capfirst }}</h5>
-                    <img src="https://thispersondoesnotexist.com/" alt="Imagen perfil profesional" class="card-img-top">
-                  </div>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">{{ profesional.campo | capfirst }}</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+              <div class="card mb-5" style="width: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-4">
+                        <img src="https://thispersondoesnotexist.com/" class="card-img m-2 border border-dark" alt="Imagen perfil profesional">
+                        <div class="card-footer">
+                          <div class="row">
+                            <div class="col">
+                              <strong>Precio:</strong> $PLACEHOLDER$
+                            </div>
+                            <div class="col">
+                              <strong>Correo:</strong> $PLACEHOLDER$
+                            </div>
+                            <div class="col">
+                              <strong>Teléfono:</strong> $PLACEHOLDER$
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title border-bottom pb-2">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{ profesional.campo | capfirst}} </h6>
+                            <p class="card-text">{{ profesional.descripcion }}</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="especialidades-container bg-dark mt-3 p-2" style="width: 100%;">
+                              <span class="text-light">Especialidades: </span>
+                              {% for especialidad in profesional.especialidad.all %}
+                              {% if especialidad.subespecialidades.exists %}
+                              <span class="badge badge-secondary border">{{ especialidad | capfirst}}</span>
+                              {% endif %} 
+                              {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              
+            </div>
               {% endfor %}
             </section>
             
