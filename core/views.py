@@ -58,30 +58,31 @@ def homepage(request):
         no_profesionales_especialidad = ''
             
         
-    # if request.method == 'POST':
-    #     comment_form = CrearComentarioForm(request.POST)
+    if request.method == 'POST':
+        comment_form = CrearComentarioForm(request.POST)
+        
+        if form_type == 'comentario': 
+            if comment_form.is_valid():
+                profesional_id = request.POST.get('profesional_id')
+                profesional = Profesional.objects.get(id=profesional_id)
+                
+                comentario = comment_form.save(commit=False)
+                
+                comentario.profesional = profesional
+                comentario.cliente = request.user
+                
+                comment_form.save()
 
-    #     if comment_form.is_valid():
-    #         profesional_id = request.POST.get('profesional_id')
-    #         profesional = Profesional.objects.get(id=profesional_id)
-            
-    #         comentario = comment_form.save(commit=False)
-            
-    #         comentario.profesional = profesional
-    #         comentario.cliente = request.user
-            
-    #         comment_form.save()
-
-    #         messages.success(request, 'Tu comentario se ha enviado con éxito.')
-    #         return redirect('homepage')
-    # else:
-    #     comment_form = CrearComentarioForm()
+                messages.success(request, 'Tu comentario se ha enviado con éxito.')
+                return redirect('homepage')
+    else:
+        comment_form = CrearComentarioForm()
                 
     data = {
         'lista_profesionales': lista_profesionales,
         'no_profesionales_especialidad': no_profesionales_especialidad,
         'especialidades': especialidades,
-        # 'comment_form': comment_form
+        'comment_form': comment_form
     }
     
     return render(request, 'core/homepage.html', data)
