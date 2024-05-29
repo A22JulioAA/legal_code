@@ -43,6 +43,7 @@ Homepage {% endblock %} {% block css %}
               <div class="col">
                 <form method="post">
                   {% csrf_token %}
+                  <input type="hidden" name="form_type" value="filtro_especialidad">
                   <label for="especialidadInput">Especialidad: </label>
                   <select class="form-select" name="especialidad" id="especialidadInput">
                     <option value="" selected>Selecciona una especialidad</option>

@@ -18,7 +18,7 @@ from comentarios.forms import CrearComentarioForm
 """
 
 # Vista para la página principal
-def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
+def homepage(request):
     """
     Esta vista carga la página principal los profesionales de la base de datos organizados en 
     cards. Si se introduce un filtro en la url los profesionales se ordenarán según ese filtro.
@@ -30,51 +30,58 @@ def homepage(request, filtro_especialidad=None, filtro_subespecialidad=None):
         django.http.HttpResponse: El render carga una plantilla indicada en el 2 argumento y lo carga 
         junto con el contexto de data.
     """
-    filtro = None
 
     # Primero sacamos todas las especialidades para cargarlas en la sección de filtros.
     especialidades = Especialidad.objects.all()
-
-    if filtro_especialidad == None:
-        lista_profesionales = Profesional.objects.all()
-    else:
-        # Se obtiene la especialidad asociada a ese nombre y luego se buscan los profesionales
-        # que la tengan en su lista de especialidades
-        especialidad = Especialidad.objects.get(id = filtro_especialidad)
-        filtro = especialidad.nombre
-
-        lista_profesionales = especialidad.profesional_set.all()
     
-    if len(lista_profesionales) == 0:
-        no_profesionales_especialidad = 'No se han encontrado profesionales con esta especialidad. Lo sentimos mucho...'
-    else:
-        no_profesionales_especialidad = ''
+    lista_profesionales = Profesional.objects.all()
         
     if request.method == 'POST':
-        comment_form = CrearComentarioForm(request.POST)
+        form_type = request.POST.get('form_type')
+        
+        if form_type == 'filtro_especialidad':
+            especialidad_id = request.POST.get('especialidad')
+            if especialidad_id:
+                especialidad = Especialidad.objects.get(id=especialidad_id)
+            else:
+                especialidad = None
+            precio_maximo = request.POST.get('precio')
 
-        if comment_form.is_valid():
-            profesional_id = request.POST.get('profesional_id')
-            profesional = Profesional.objects.get(id=profesional_id)
-            
-            comentario = comment_form.save(commit=False)
-            
-            comentario.profesional = profesional
-            comentario.cliente = request.user
-            
-            comment_form.save()
-
-            messages.success(request, 'Tu comentario se ha enviado con éxito.')
-            return redirect('homepage')
+            if especialidad:
+                lista_profesionales = especialidad.profesional_set.all()
+            if precio_maximo:
+                lista_profesionales = lista_profesionales.filter(precio_consulta__lte=precio_maximo)
+    
+    if len(lista_profesionales) == 0:
+        no_profesionales_especialidad = 'No se han encontrado profesionales con esta especialidad y precio. Lo sentimos mucho...'
     else:
-        comment_form = CrearComentarioForm()
+        no_profesionales_especialidad = ''
+            
+        
+    # if request.method == 'POST':
+    #     comment_form = CrearComentarioForm(request.POST)
+
+    #     if comment_form.is_valid():
+    #         profesional_id = request.POST.get('profesional_id')
+    #         profesional = Profesional.objects.get(id=profesional_id)
+            
+    #         comentario = comment_form.save(commit=False)
+            
+    #         comentario.profesional = profesional
+    #         comentario.cliente = request.user
+            
+    #         comment_form.save()
+
+    #         messages.success(request, 'Tu comentario se ha enviado con éxito.')
+    #         return redirect('homepage')
+    # else:
+    #     comment_form = CrearComentarioForm()
                 
     data = {
         'lista_profesionales': lista_profesionales,
         'no_profesionales_especialidad': no_profesionales_especialidad,
         'especialidades': especialidades,
-        'filtro': filtro,
-        'comment_form': comment_form
+        # 'comment_form': comment_form
     }
     
     return render(request, 'core/homepage.html', data)
