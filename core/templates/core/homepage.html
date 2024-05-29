@@ -77,27 +77,18 @@ Homepage {% endblock %} {% block css %}
             <section class='seccion-profesionales container p-0 ps-md-3 mt-3 mt-md-0' id="seccion-profesionales">
               {% for profesional in lista_profesionales %}
               
-              <div class="card mb-5" style="width: 100%;">
+              <div class="card mb-5 border-dark" style="width: 100%;">
                 <div class="row no-gutters">
                     <div class="col-4">
-                        <img src="https://thispersondoesnotexist.com/" class="card-img m-2 border border-dark" alt="Imagen perfil profesional">             
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#contactoCollapse">
-                          Ver detalles de contacto
-                      </button>
-                      <div class="collapse" id="contactoCollapse">
-                          <div class="mt-3">
-                              <h6>Contacto:</h6>
-                              <p>{{ profesional.correo }}</p>
-                              <!-- Agrega más detalles de contacto aquí según sea necesario -->
-                          </div>
-                      </div>
+                        <img src="https://thispersondoesnotexist.com/" class="card-img m-2 img-fluid" alt="Imagen perfil profesional">             
+                        <span class="m-2"><strong>Precio: </strong>{{ profesional.precio_consulta }}<small>€/consulta</small></span><br>
+                        <button class="btn btn-dark m-2">Contacto</button>
                     </div>
                     <div class="col-8">
                         <div class="card-body">
-                            <h5 class="card-title border-bottom pb-2">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">{{ profesional.campo | capfirst}} </h6>
+                            <h3 class="card-title border-bottom pb-2">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</h3>
+                            <h6 class="card-subtitle mb-2 text-body-secondary fw-bold">{{ profesional.campo | capfirst}} </h6>
                             <p class="card-text">{{ profesional.descripcion }}</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
                             <div class="especialidades-container bg-dark mt-3 p-2" style="width: 100%;">
                               <span class="text-light">Especialidades: </span>
                               {% for especialidad in profesional.especialidad.all %}
@@ -106,8 +97,26 @@ Homepage {% endblock %} {% block css %}
                               {% endif %} 
                               {% endfor %}
                             </div>
+                            <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark mt-2">Pedir Cita</a>
+                            <button class="btn btn-dark mt-2" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}">Ver comentarios</button>
                         </div>
                     </div>
+                </div>
+                <div class="bg-dark collapse text-light" id="comentarios-{{profesional.id}}">
+                  {% if not profesional.comentarios.all %}
+                  <div class="border m-2 p-2 text-center">
+                    <p><i>No se han encontrado comentarios de este profesional. Sé tú el primero!</i></p>
+                  </div>
+                  {% else %}
+                    {% for comentario in profesional.comentarios.all %}
+                      <div class="border m-2 p-2">
+                        <p>{{ comentario.texto_comentario }}</p>
+                        <p>De: <i>{{ comentario.cliente }}</i> | Hace: <i>{{ comentario.fecha_comentario | timesince }}</i></p>
+                        <p></p>
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+
                 </div>
             </div>
               {% endfor %}
