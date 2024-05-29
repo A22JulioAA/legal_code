@@ -10,6 +10,9 @@ Homepage {% endblock %} {% block css %}
   });
 </script>
 {% endblock %} 
+
+{% load crispy_forms_tags %}
+
 {% block content %}
 
   <!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
@@ -77,6 +80,30 @@ Homepage {% endblock %} {% block css %}
             <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
             <section class='seccion-profesionales container p-0 ps-md-3 mt-3 mt-md-0' id="seccion-profesionales">
               {% for profesional in lista_profesionales %}
+
+              <!-- Ventana modal para los comentarios. -->
+              <div class="modal fade" id="modalComentario-{{ profesional.id }}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Valora a {{profesional.nombre}} {{ profesional.apellidos }}</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                      {% csrf_token %}
+                      <input type="hidden" name="form_type" value="comentario">
+                      {{ form_comentario | crispy}}
+
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
               <div class="card mb-5 border-dark" style="width: 100%;">
                 <div class="row no-gutters">
@@ -100,6 +127,7 @@ Homepage {% endblock %} {% block css %}
                             </div>
                             <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark mt-2">Pedir Cita</a>
                             <button class="btn btn-dark mt-2" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}">Ver comentarios</button>
+                            <button class="btn btn-dark mt-2" data-bs-toggle="modal" data-bs-target="#modalComentario-{{ profesional.id }}">Valorar</button>
                         </div>
                     </div>
                 </div>
@@ -117,7 +145,6 @@ Homepage {% endblock %} {% block css %}
                       </div>
                     {% endfor %}
                   {% endif %}
-
                 </div>
             </div>
               {% endfor %}
@@ -128,5 +155,6 @@ Homepage {% endblock %} {% block css %}
       </div>
   </div>
 </div>
+
 
 {% endblock %}
