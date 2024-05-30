@@ -37,6 +37,7 @@ class Profesional(models.Model):
     direccion = models.TextField()
     descripcion = models.TextField(max_length=450, default='')
     campo = models.CharField(max_length=50, default='Jurista')
+    imagenPerfil = models.ImageField(upload_to='images/', default='images/default.jpg')
     
     def __str__(self) -> str:
         return self.nombre + ' ' + self.apellidos 

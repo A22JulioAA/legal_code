@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 """
 En este array se almacenan las rutas que tendremos disponibles
@@ -21,5 +23,5 @@ urlpatterns = [
     path('obtener-citas/', views.obtener_citas, name='obtener_citas'),
     path('anular-cita/<int:id_cita>/', views.anular_cita, name='anular_cita'),
     path('politica-cancelaciones/', views.politica_cancelaciones, name='politica_cancelaciones'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

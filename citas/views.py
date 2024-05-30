@@ -74,7 +74,7 @@ def agendar_cita(request, id_profesional = None):
                 # Guardamos en la base de datos y enviamos un mensaje flash al homepage para 
                 # advertir al usuario de que la cita se agendó con éxito.
                 form.save()
-                messages.success(request, 'La cita se ha reservado correctamente. Nos vemos!')
+                messages.success(request, 'La cita se ha reservado correctamente. Nos vemos muy pronto!')
                 return redirect('homepage')
     else:
         if id_profesional is not None:

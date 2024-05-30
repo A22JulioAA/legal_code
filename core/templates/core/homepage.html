@@ -38,7 +38,7 @@ Homepage {% endblock %} {% block css %}
 <!-- Filtro de las ofertas. Es posible filtrar por especialidad o precio. -->
 <div class="container mt-3" id="especialidades">
   <div class="row">
-      <div class="col-12 col-md-4 col-lg-3 order-1 order-md-1 order-lg-1 bg-dark text-light sidebar-sticky rounded">
+      <div class="col-12 col-md-4 col-lg-3 order-1 order-md-1 order-lg-1 bg-dark text-light sidebar-sticky rounded" style="top: 0.5%">
           <div class="sidebar p-2">
             <h3 class="text-center">Personaliza tu búsqueda!</h3>
             <hr class="border border-light border-1 opacity-100">
@@ -58,7 +58,7 @@ Homepage {% endblock %} {% block css %}
                   </select>
                   <br>
                   <label for="precioInput">Precio máximo: </label>
-                  <input type="number" name="precio" id="precioInput" class="form-control" placeholder="Precio máximo">
+                  <input type="number" name="precio" id="precioInput" class="form-control" min="0" placeholder="Precio máximo">
 
                   <button type="submit" class="btn btn-light mt-3">Buscar</button>
                 </form>
@@ -85,7 +85,7 @@ Homepage {% endblock %} {% block css %}
               <div class="modal fade" id="modalComentario-{{ profesional.id }}" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header text-center bg-dark text-light">
                       <h1 class="modal-title fs-5" id="exampleModalLabel">Valora a {{profesional.nombre}} {{ profesional.apellidos }}</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
@@ -99,12 +99,10 @@ Homepage {% endblock %} {% block css %}
 
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Comentar</button>
+                        <button type="submit" class="btn btn-dark">Comentar</button>
                       </div>
                       </form>
-                      
                     </div>
-                    
                   </div>
                 </div>
               </div>
@@ -112,15 +110,19 @@ Homepage {% endblock %} {% block css %}
               <div class="card mb-5 border-dark" style="width: 100%;">
                 <div class="row no-gutters">
                     <div class="col-4">
-                        <img src="https://thispersondoesnotexist.com/" class="card-img m-2 img-fluid" alt="Imagen perfil profesional">             
-                        <span class="m-2"><strong>Precio: </strong>{{ profesional.precio_consulta }}<small>€/consulta</small></span><br>
-                        <button class="btn btn-dark m-2">Contacto</button>
+                        <img src="{{ profesional.imagenPerfil.url }}" class="card-img m-2 img-fluid" alt="Imagen perfil profesional">             
+                        <span class="m-2 btn btn-dark" style="width: 100%"><strong>Precio: </strong>{{ profesional.precio_consulta }}<small>€/consulta</small></span><br>
+                        <!-- TODO: Hacer modal con datos de contacto  -->
+                        <a href="mailto:{{ profesional.email }}" class="btn btn-dark m-2" style="width: 100%">Contacto</a>
+                        <button class="btn btn-dark mt-2 ms-2 d-lg-none" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}" style="width: 100%">Ver comentarios <span class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>
+                        <button class="btn btn-dark mt-2 ms-2 mb-2 d-lg-none" data-bs-toggle="modal" data-bs-target="#modalComentario-{{ profesional.id }}" style="width: 100%">Valorar</button>
                     </div>
                     <div class="col-8">
                         <div class="card-body">
                             <h3 class="card-title border-bottom pb-2">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</h3>
-                            <h6 class="card-subtitle mb-2 text-body-secondary fw-bold">{{ profesional.campo | capfirst}} </h6>
+                            <h6 class="card-subtitle mb-2 text-body-secondary fw-bold">{{ profesional.campo | capfirst}} | {{ profesional.direccion }}</h6>
                             <p class="card-text">{{ profesional.descripcion }}</p>
+                            <hr>
                             <div class="especialidades-container bg-dark mt-3 p-2" style="width: 100%;">
                               <span class="text-light">Especialidades: </span>
                               {% for especialidad in profesional.especialidad.all %}
@@ -129,9 +131,9 @@ Homepage {% endblock %} {% block css %}
                               {% endif %} 
                               {% endfor %}
                             </div>
-                            <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark mt-2">Pedir Cita</a>
-                            <button class="btn btn-dark mt-2" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}">Ver comentarios</button>
-                            <button class="btn btn-dark mt-2" data-bs-toggle="modal" data-bs-target="#modalComentario-{{ profesional.id }}">Valorar</button>
+                            <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark mt-2 d-lg-block col-12 col-lg-9 mx-lg-auto">Pedir Cita</a>
+                            <button class="btn btn-dark mt-2 d-none d-lg-block col-12 col-md-9 mx-md-auto" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}">Ver comentarios <span class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>
+                            <button class="btn btn-dark mt-2 d-none d-lg-block col-12 col-md-9 mx-md-auto" data-bs-toggle="modal" data-bs-target="#modalComentario-{{ profesional.id }}">Valorar</button>
                         </div>
                     </div>
                 </div>

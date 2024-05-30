@@ -6,10 +6,16 @@ Política de cancelaciones
 
 {% endblock %}
 
+{% load static %}
+
 {% block content %}
 
-<section class="container-fluid bg-dark p-2 border-top">
-    <h2 class="text-light display-2 fw-semibold">Política de Cancelaciones</h2>
+<section class="border-top border-secondary">
+    <h1 class="bg-dark text-light text-center p-3">Política de Cancelaciones</h1>
+</section>
+
+<section style="width: 50%;" class="float-md-start mx-auto container">
+    <img class="img-fluid" src="{% static 'img/cancelar-cita.svg' %}" alt="Ilustración cancelar cita">
 </section>
 
 <!-- Sección donde se explica la política de cancelaciones que tiene la página. -->

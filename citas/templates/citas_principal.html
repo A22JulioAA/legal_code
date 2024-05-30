@@ -10,11 +10,19 @@ Mis citas
 
 {% block content %}
 
-<section class="container-fluid bg-dark p-2 border-top">
-    <h2 class="text-light display-2 fw-semibold">Mis citas</h2>
+<section class="border-top border-secondary">
+    <h1 class="bg-dark text-light text-center p-3">Mis citas</h1>
 </section>
 
 {% language 'es' %} <!-- Establecer el idioma en español -->
+
+{% if messages %}
+{% for message in messages %}
+<section class="container-fluid text-center alert alert-{{ message.tags }}">
+  {{ message }}
+</section>
+{% endfor %}
+{% endif %}
 
 <!-- Advertencia sobre cancelaciones -->
 

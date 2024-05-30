@@ -11,7 +11,7 @@ class CrearComentarioForm(forms.ModelForm):
         labels = {
             'texto_comentario': 'Escribe tu comentario: ',
             'recomendacion': '¿Recomendarías a este profesional?',
-            'valoracion': 'Valora tu experiencia:'
+            'valoracion': 'Valora tu experiencia(1-5):'
         }
         widgets = {
             'texto_comentario': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
