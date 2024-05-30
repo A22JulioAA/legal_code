@@ -41,6 +41,7 @@ def agendar_cita(request, id_profesional = None):
     """
 
     if id_profesional:
+        # Recuperamos el profesional para agendar la cita.
         profesional = Profesional.objects.filter(id=id_profesional)
 
     if request.method == 'POST':

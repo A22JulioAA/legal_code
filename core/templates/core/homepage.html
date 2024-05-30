@@ -67,7 +67,7 @@ Homepage {% endblock %} {% block css %}
           </div>
       </div>
 
-      <!-- Mensaje si no se encuentrar profesionales con esa especialidad -->
+      <!-- Mensaje si no se encuentran profesionales con esa especialidad -->
 
       <div class="col-12 col-md-8 col-lg-9 order-2 order-md-2 order-lg-2 p-0">
           <div class="oferta">
@@ -137,6 +137,7 @@ Homepage {% endblock %} {% block css %}
                         </div>
                     </div>
                 </div>
+                <!-- Aquí se muestran los comentarios de cada profesional. Se ha diseñado a modo de desplegable pulsando el botón de Ver comentarios. -->
                 <div class="bg-dark collapse text-light" id="comentarios-{{profesional.id}}">
                   {% if not profesional.comentarios.all %}
                   <div class="border m-2 p-2 text-center">

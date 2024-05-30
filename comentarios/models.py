@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Comentario(models.Model):
     """
-
+    Modelo de comentarios de los clientes acerca de los profesionales
     Args:
         models (Model): Modelo principal del cual heredan
 

@@ -16,6 +16,8 @@ Mis citas
 
 {% language 'es' %} <!-- Establecer el idioma en español -->
 
+<!-- Cargamos los mensajes flash que enviamos en otras peticiones si los hay -->
+
 {% if messages %}
 {% for message in messages %}
 <section class="container-fluid text-center alert alert-{{ message.tags }}">
