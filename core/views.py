@@ -180,6 +180,7 @@ def solicitudes(request):
 
     return render(request, 'core/solicitudes.html')
 
+@login_required
 def obtener_citas(request):
     '''
     Obtiene las citas del cliente actual.

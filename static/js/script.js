@@ -59,9 +59,5 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
     });
 
-$(document).ready(function () {
-    $(".rating").rating();
-});
-
 
 

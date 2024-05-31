@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
     entry: './assets/scripts/index.js',
@@ -6,6 +6,7 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, '.', 'static/js')
     },
+    devtool: 'inline-source-map', // Generar source maps en línea para facilitar la depuración
     module: {
         rules: [
             {
@@ -14,4 +15,4 @@ module.exports = {
             }
         ]
     }
-}
+};
