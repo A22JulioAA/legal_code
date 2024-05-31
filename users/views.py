@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-#TODO: Implementar la opción de modificar el perfil.
+from core.forms import ModificarUsuarioForm
+
 @login_required
 def profile(request):
+    if request.method == 'POST':
+        form = ModificarUsuarioForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirigir al perfil después de guardar los cambios
+    else:
+        form = ModificarUsuarioForm(instance=request.user)
+    
     data = {
-        
+        'form': form
     }
     
     return render(request, 'profile.html', data)

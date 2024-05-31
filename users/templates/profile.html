@@ -12,34 +12,60 @@ Perfil
 
 {% block content %}
 
-<!-- TODO: Implementar actualización de datos -->
-<!-- Aquí se carga la información del usuario logueado en el momento de cargar la vista. -->
+{% load crispy_forms_tags %}
+
+<!-- Aquí se muestra la información del usuario logueado en el momento de cargar la vista. -->
 
 <section class="container mt-3 p-0 border bg-dark text-light">
     <div class="row">
         <div class="p-3">
             <figure class="p-3 text-center">
-                {% if user.imagen_perfil %}
                 <img src="{{user.imagen_perfil.url}}" alt="Imagen de perfil" class="img-fluid">
-                {% else %}
-                <img src="{% static 'img/usuario.jpg' %}" alt="Imagen de perfil sin establecer">
-                {% endif %}
-                <figcaption><a href="">Editar imagen</a></figcaption>
             </figure>
+            <hr>
             <div class="p-3">
-                <strong>Nombre: </strong>{{user.name}}<br>
-                <strong>Apellidos:</strong> {{ user.apellidos|default_if_none:'-' }}<br> <strong>Fecha de nacimiento:
-                </strong>{{user.fecha_nacimiento}}<br>
-                <strong>Email: </strong>{{user.email}}<br>
-                <strong>Teléfono: </strong>{{user.telefono|default:'-'}}<br>
+                <h2 class="text-center">Perfil de {{user.name}}</h2>
+                <p class="alert alert-success" role="alert">
+                    ¡Recuerda! Puedes modificar tu información pero no tu correo electrónico.
+                    Si tienes problemas con tu cuenta, contacta con el servicio de atención al cliente.
+                </p>
+                <section class=" row p-3">
+                    <div class="col-12 col-md-6 mb-3">
+                        <strong class="row">Nombre: </strong>{{user.name}}
+                        <strong class="row">Apellidos:</strong> {{ user.apellidos|default_if_none:'-' }} <strong class="row">Fecha de
+                            nacimiento:
+                        </strong>{{user.fecha_nacimiento | default_if_none:'-'}}
+                        <strong class="row">Email: </strong>{{user.email}}
+                        <strong class="row">Teléfono: </strong>{{user.telefono|default:'-'}}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="d-inline-flex gap-1">
+                            <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#editarCollapse">
+                              Editar perfil
+                            </button>
+                          </p>
+                          <div class="collapse" id="editarCollapse">
+                            <div class="card card-body text-dark">
+                              <form method="post" enctype="multipart/form-data" id="formularioEditarPerfil">
+                                {% csrf_token %}
+                                {{ form | crispy }}
+                                <button class="btn btn-dark" type="submit">Editar</button>
+                              </form>
+                            </div>
+                          </div>
+                    </div>
+                </section>
 
-                <button type="submit" class="btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#modalConfirmacion">Eliminar Perfil</button>
-                <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
-
+                <div class="row">
+                    <button type="submit" class="btn btn-danger col-5" data-bs-toggle="modal"
+                        data-bs-target="#modalConfirmacion">Eliminar Perfil</button>
+                    <a href="/logout" class="btn btn-danger offset-2 col-5">Cerrar Sesión</a>
+                </div>
             </div>
         </div>
     </div>
+
+    
 
     <!-- Modal de confirmación-->
     <div class="modal fade" id="modalConfirmacion" tabindex="-1">

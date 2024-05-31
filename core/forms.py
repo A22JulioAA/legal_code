@@ -19,10 +19,7 @@ class RegistroForm(UserCreationForm):
             'email': 'Correo ',
             'password1': 'Contraseña ',
             'fecha_nacimiento': 'Fecha de nacimiento ',
-            'dni': 'DNI ',
             'telefono': 'Telefono ',
-            'precio_consulta': 'Precio Consulta ',
-            'direccion': 'Dirección '
         }
         widgets = {
             'password1': forms.PasswordInput(),
@@ -36,10 +33,27 @@ class RegistroForm(UserCreationForm):
         self.fields['email'].widget.attrs['autocomplete'] = 'off' # Se desactiva el autocompletado que usa el navegador por defecto
 
 class ModificarUsuarioForm(forms.ModelForm):
-    '''
-        Formulario para modificar los datos de un usuario. SIN IMPLENENTAR
-    '''
+    """
+    Formulario para la modificación de un usuario en la aplicación. Se basa en el modelo Cliente.
+    Args:
+        forms (ModelForm): Formulario que va a tener como base un Modelo creado
+        
+    """
+    
     class Meta:
-        model = Cliente
-        fields = ['name', 'apellidos', 'telefono', 'imagen_perfil']
+        model = Cliente # Se toma como modelo Cliente
+        fields = ['name', 'apellidos', 'telefono', 'fecha_nacimiento', 'imagen_perfil']
+        labels = {
+            'name': 'Nombre ',
+            'apellidos': 'Apellidos',
+            'telefono': 'Telefono ',
+            'fecha_nacimiento': 'Fecha de nacimiento ',
+            'imagen_perfil': 'Imagen de perfil',
+        }
+        
+        widgets = {
+            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date'}),
+            'imagen_perfil': forms.FileInput(attrs={'accept': 'image/*'}),
+        }
+    
 
