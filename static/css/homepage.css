@@ -1,3 +1,5 @@
+/* Ese ID lo tendrá el panel principal de la homepage */
+
 #inicio {
   background-image: url('../img/fondo_pagina.jpg');
   background-size: cover;
@@ -5,8 +7,6 @@
   background-repeat: no-repeat;
   height: 50vh;
 }
-
-/* Aquí establecemos los estilos de las etiquetas de búsqueda de las diferentes especialidades */
 
 h1 {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
@@ -38,6 +38,11 @@ h1 {
 .star-rating i.hovered {
     color: #ffcc00;
 }
+
+/* 
+Aquí aplicamos estilos al sidebar. El objetivo principal es que se quede estático
+en la página y cuando se haga scroll que se siga manteniendo estático y no deje de verse.
+*/
 
 @media (min-width: 768px) {
   .sidebar-sticky {

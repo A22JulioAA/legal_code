@@ -4,7 +4,7 @@ from users.models import Cliente
 
 class RegistroForm(UserCreationForm):
     """
-
+    Formulario para el registro de un usuario en la aplicación. Se basa en el modelo Cliente.
     Args:
         forms (ModelForm): Formulario que va a tener como base un Modelo creado
         

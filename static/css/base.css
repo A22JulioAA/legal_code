@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
 
+/* 
+Aquí se crea un estilo que se aplicará solo a elementos con esa clase para
+que tengan esa fuente obtenida de Google Fonts.
+*/
+
 .fuente-personalizada {
   font-family: 'Cinzel';
 }

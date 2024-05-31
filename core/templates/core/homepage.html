@@ -98,7 +98,7 @@ Homepage {% endblock %} {% block css %}
                       {{ comment_form | crispy}}
 
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
                         <button type="submit" class="btn btn-dark">Comentar</button>
                       </div>
                       </form>
@@ -106,14 +106,36 @@ Homepage {% endblock %} {% block css %}
                   </div>
                 </div>
               </div>
+
+              <!-- Modal para los datos de contacto -->
               
+              <div class="modal fade" id="modalContacto" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="tituloModalContacto">Contacto</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p><strong>Nombre:</strong> {{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</p>
+                      <p><strong>Correo:</strong> {{ profesional.email }}</p>
+                      <p><strong>Teléfono:</strong> {{ profesional.telefono }}</p>
+                      <p><strong>Dirección:</strong> {{ profesional.direccion }}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
               <div class="card mb-5 border-dark" style="width: 100%;">
                 <div class="row no-gutters">
                     <div class="col-4">
                         <img src="{{ profesional.imagenPerfil.url }}" class="card-img m-2 img-fluid" alt="Imagen perfil profesional">             
                         <span class="m-2 btn btn-dark" style="width: 100%"><strong>Precio: </strong>{{ profesional.precio_consulta }}<small>€/consulta</small></span><br>
-                        <!-- TODO: Hacer modal con datos de contacto  -->
-                        <a href="mailto:{{ profesional.email }}" class="btn btn-dark m-2" style="width: 100%">Contacto</a>
+                        <a data-bs-toggle="modal" data-bs-target="#modalContacto" class="btn btn-dark m-2" style="width: 100%">Contacto</a>
                         <button class="btn btn-dark mt-2 ms-2 d-lg-none" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}" style="width: 100%">Ver comentarios <span class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>
                         <button class="btn btn-dark mt-2 ms-2 mb-2 d-lg-none" data-bs-toggle="modal" data-bs-target="#modalComentario-{{ profesional.id }}" style="width: 100%">Valorar</button>
                     </div>
@@ -131,6 +153,7 @@ Homepage {% endblock %} {% block css %}
                               {% endif %} 
                               {% endfor %}
                             </div>
+                            <hr>
                             <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark mt-2 d-lg-block col-12 col-lg-9 mx-lg-auto">Pedir Cita</a>
                             <button class="btn btn-dark mt-2 d-none d-lg-block col-12 col-md-9 mx-md-auto" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}">Ver comentarios <span class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>
                             <button class="btn btn-dark mt-2 d-none d-lg-block col-12 col-md-9 mx-md-auto" data-bs-toggle="modal" data-bs-target="#modalComentario-{{ profesional.id }}">Valorar</button>
@@ -147,7 +170,7 @@ Homepage {% endblock %} {% block css %}
                     {% for comentario in profesional.comentarios.all %}
                       <div class="border m-2 p-2">
                         <p>{{ comentario.texto_comentario }}</p>
-                        <p>De: <i>{{ comentario.cliente }}</i> | Hace: <i>{{ comentario.fecha_comentario | timesince }}</i></p>
+                        <p>De: <i>{{ comentario.cliente.name }} {{ comentario.cliente.apellidos }}</i> | Hace: <i>{{ comentario.fecha_comentario | timesince }}</i></p>
                         <p></p>
                       </div>
                     {% endfor %}
