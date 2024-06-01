@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'corsheaders',
     'debug_toolbar',
-    'star_ratings'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
