@@ -9,7 +9,7 @@ Homepage {% endblock %} {% block css %}
     myToast.show();
   });
 </script>
-{% endblock %} 
+{% endblock %}
 
 <!-- TODO: Calcular valoración media para mostrar en la card de cada profesional  -->
 
@@ -17,174 +17,188 @@ Homepage {% endblock %} {% block css %}
 
 {% block content %}
 
-  <!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
-  <div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center p-0">
-    <!-- La función scrollToSection está definida en el script y sirve para desplazar
+<!-- Inicio de la página, lo que se ve tan pronto se accede al homepage -->
+<div id="inicio" class="container-fluid d-flex justify-content-center align-items-center text-center p-0">
+  <!-- La función scrollToSection está definida en el script y sirve para desplazar
       la vista hasta la sección de especialidades, que es donde empiezan los filtros y ofertas -->
-    <a href="" style="width: 50%" onclick="scrollToSection(event, 'especialidades')"
-      class="border border-light border-2 text-light p-5 enlace_und">EMPEZAR A EXPLORAR</a>
-  </div>
-  
-  <br />
-  
-  <!-- En esta sección mostraremos los mensajes flash que vayan ocurriendo en diferentes puntos de la web -->
-  
-  {% if messages %}
-  {% for message in messages %}
-  <section class="container-fluid text-center alert alert-{{ message.tags }}">
-    {{ message }}
-  </section>
-  {% endfor %}
-  {% endif %}
+  <a href="" style="width: 50%" onclick="scrollToSection(event, 'especialidades')"
+    class="border border-light border-2 text-light p-5 enlace_und">EMPEZAR A EXPLORAR</a>
+</div>
+
+<br />
+
+<!-- En esta sección mostraremos los mensajes flash que vayan ocurriendo en diferentes puntos de la web -->
+
+{% if messages %}
+{% for message in messages %}
+<section class="container-fluid text-center alert alert-{{ message.tags }}">
+  {{ message }}
+</section>
+{% endfor %}
+{% endif %}
 
 <!-- Filtro de las ofertas. Es posible filtrar por especialidad o precio. -->
 <div class="container mt-3" id="especialidades">
   <div class="row">
-      <div class="col-12 col-md-4 col-lg-3 order-1 order-md-1 order-lg-1 bg-dark text-light sidebar-sticky rounded" style="top: 0.5%">
-          <div class="sidebar p-2">
-            <h3 class="text-center">Personaliza tu búsqueda!</h3>
-            <hr class="border border-light border-1 opacity-100">
-            <div class="row">
-              <div class="col">
-                <form method="post">
-                  {% csrf_token %}
-                  <input type="hidden" name="form_type" value="filtro_especialidad">
-                  <label for="especialidadInput">Especialidad: </label>
-                  <select class="form-select" name="especialidad" id="especialidadInput">
-                    <option value="" selected>Selecciona una especialidad</option>
-                    {% for especialidad in especialidades %}
-                    {% if especialidad.subespecialidades.exists%}
-                    <option value="{{especialidad.id}}">{{especialidad | capfirst}}</option>
+    <div class="col-12 col-md-4 col-lg-3 order-1 order-md-1 order-lg-1 bg-dark text-light sidebar-sticky rounded"
+      style="top: 0.5%">
+      <div class="sidebar p-2">
+        <h3 class="text-center">Personaliza tu búsqueda!</h3>
+        <hr class="border border-light border-1 opacity-100">
+        <div class="row">
+          <div class="col">
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="form_type" value="filtro_especialidad">
+              <label for="especialidadInput">Especialidad: </label>
+              <select class="form-select" name="especialidad" id="especialidadInput">
+                <option value="" selected>Selecciona una especialidad</option>
+                {% for especialidad in especialidades %}
+                {% if especialidad.subespecialidades.exists%}
+                <option value="{{especialidad.id}}">{{especialidad | capfirst}}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+              <br>
+              <label for="precioInput">Precio máximo: </label>
+              <input type="number" name="precio" id="precioInput" class="form-control" min="0"
+                placeholder="Precio máximo">
+
+              <button type="submit" class="btn btn-light mt-3">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje si no se encuentran profesionales con esa especialidad -->
+
+    <div class="col-12 col-md-8 col-lg-9 order-2 order-md-2 order-lg-2 p-0">
+      <div class="oferta">
+        {% if no_profesionales_especialidad %}
+        <section class="container mt-3">
+          <h2>{{no_profesionales_especialidad}}</h2>
+        </section>
+        {% else %}
+
+        <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
+        <section class='seccion-profesionales container p-0 ps-md-3 mt-3 mt-md-0' id="seccion-profesionales">
+          {% for profesional in lista_profesionales %}
+
+          <!-- Ventana modal para los comentarios. -->
+          <div class="modal fade" id="modalComentario-{{ profesional.id }}" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header text-center bg-dark text-light">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Valora a {{profesional.nombre}} {{ profesional.apellidos }}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="comentario">
+                    <input type="hidden" name="profesional_id" value="{{ profesional.id }}">
+
+                    {{ comment_form | crispy}}
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+                      <button type="submit" class="btn btn-dark">Comentar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal para los datos de contacto -->
+
+          <div class="modal fade" id="modalContacto" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="tituloModalContacto">Contacto</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p><strong>Nombre:</strong> {{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}
+                  </p>
+                  <p><strong>Correo:</strong> {{ profesional.email }}</p>
+                  <p><strong>Teléfono:</strong> {{ profesional.telefono }}</p>
+                  <p><strong>Dirección:</strong> {{ profesional.direccion }}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card mb-5 border-dark" style="width: 100%;">
+            <div class="row no-gutters">
+              <div class="col-4">
+                <img src="{{ profesional.imagenPerfil.url }}" class="card-img m-2 img-fluid"
+                  alt="Imagen perfil profesional">
+                <span class="m-2 btn btn-dark" style="width: 100%"><strong>Precio: </strong>
+                  {{ profesional.precio_consulta }}<small>€/consulta</small></span><br>
+                <a data-bs-toggle="modal" data-bs-target="#modalContacto" class="btn btn-dark m-2"
+                  style="width: 100%">Contacto</a>
+                <button class="btn btn-dark mt-2 ms-2 d-lg-none" data-bs-toggle="collapse"
+                  data-bs-target="#comentarios-{{profesional.id}}" style="width: 100%">Ver comentarios <span
+                    class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>
+                <button class="btn btn-dark mt-2 ms-2 mb-2 d-lg-none" data-bs-toggle="modal"
+                  data-bs-target="#modalComentario-{{ profesional.id }}" style="width: 100%">Valorar</button>
+              </div>
+              <div class="col-8">
+                <div class="card-body">
+                  <h3 class="card-title border-bottom pb-2">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</h3>
+                  <h6 class="card-subtitle mb-2 text-body-secondary fw-bold">{{ profesional.campo | capfirst}} | {{ profesional.direccion }}</h6>
+                  <p class="card-text">{{ profesional.descripcion }}</p>
+                  <hr>
+                  <div class="especialidades-container bg-dark mt-3 p-2" style="width: 100%;">
+                    <span class="text-light">Especialidades: </span>
+                    {% for especialidad in profesional.especialidad.all %}
+                    {% if especialidad.subespecialidades.exists %}
+                    <span class="badge badge-secondary border">{{ especialidad | capfirst}}</span>
                     {% endif %}
                     {% endfor %}
-                  </select>
-                  <br>
-                  <label for="precioInput">Precio máximo: </label>
-                  <input type="number" name="precio" id="precioInput" class="form-control" min="0" placeholder="Precio máximo">
-
-                  <button type="submit" class="btn btn-light mt-3">Buscar</button>
-                </form>
+                  </div>
+                  <hr>
+                  <a href="{% url 'agendar-cita' %}{{profesional.id}}"
+                    class="btn btn-dark mt-2 d-lg-block col-12 col-lg-9 mx-lg-auto">Pedir Cita</a>
+                  <button class="btn btn-dark mt-2 d-none d-lg-block col-12 col-md-9 mx-md-auto"
+                    data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}">Ver comentarios <span
+                      class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>
+                  <button class="btn btn-dark mt-2 d-none d-lg-block col-12 col-md-9 mx-md-auto" data-bs-toggle="modal"
+                    data-bs-target="#modalComentario-{{ profesional.id }}">Valorar</button>
+                </div>
               </div>
             </div>
-          </div>
-      </div>
-
-      <!-- Mensaje si no se encuentran profesionales con esa especialidad -->
-
-      <div class="col-12 col-md-8 col-lg-9 order-2 order-md-2 order-lg-2 p-0">
-          <div class="oferta">
-            {% if no_profesionales_especialidad %}
-            <section class="container mt-3">
-              <h2>{{no_profesionales_especialidad}}</h2>
-            </section>
-            {% else %}
-            
-            <!-- Lista de los profesionales(en un principio aleatorios, sin filtros) -->
-            <section class='seccion-profesionales container p-0 ps-md-3 mt-3 mt-md-0' id="seccion-profesionales">
-              {% for profesional in lista_profesionales %}
-
-              <!-- Ventana modal para los comentarios. -->
-              <div class="modal fade" id="modalComentario-{{ profesional.id }}" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header text-center bg-dark text-light">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Valora a {{profesional.nombre}} {{ profesional.apellidos }}</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form  method="post">
-                      {% csrf_token %}
-                      <input type="hidden" name="form_type" value="comentario">
-                      <input type="hidden" name="profesional_id" value="{{ profesional.id }}">
-                      
-                      {{ comment_form | crispy}}
-
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                        <button type="submit" class="btn btn-dark">Comentar</button>
-                      </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
+            <!-- Aquí se muestran los comentarios de cada profesional. Se ha diseñado a modo de desplegable pulsando el botón de Ver comentarios. -->
+            <div class="bg-dark collapse text-light" id="comentarios-{{profesional.id}}">
+              {% if not profesional.comentarios.all %}
+              <div class="border m-2 p-2 text-center">
+                <p><i>No se han encontrado comentarios de este profesional. Sé tú el primero!</i></p>
               </div>
-
-              <!-- Modal para los datos de contacto -->
-              
-              <div class="modal fade" id="modalContacto" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="tituloModalContacto">Contacto</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <p><strong>Nombre:</strong> {{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</p>
-                      <p><strong>Correo:</strong> {{ profesional.email }}</p>
-                      <p><strong>Teléfono:</strong> {{ profesional.telefono }}</p>
-                      <p><strong>Dirección:</strong> {{ profesional.direccion }}</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
-                    </div>
-                  </div>
-                </div>
+              {% else %}
+              {% for comentario in profesional.comentarios.all %}
+              <div class="border m-2 p-2">
+                <p>{{ comentario.texto_comentario }}</p>
+                <p>De: <i>{{ comentario.cliente.name }} {{ comentario.cliente.apellidos | default_if_none:'' }}</i> |
+                  Hace: <i>{{ comentario.fecha_comentario | timesince }}</i></p>
+                <p></p>
               </div>
-              
-
-              <div class="card mb-5 border-dark" style="width: 100%;">
-                <div class="row no-gutters">
-                    <div class="col-4">
-                        <img src="{{ profesional.imagenPerfil.url }}" class="card-img m-2 img-fluid" alt="Imagen perfil profesional">             
-                        <span class="m-2 btn btn-dark" style="width: 100%"><strong>Precio: </strong>{{ profesional.precio_consulta }}<small>€/consulta</small></span><br>
-                        <a data-bs-toggle="modal" data-bs-target="#modalContacto" class="btn btn-dark m-2" style="width: 100%">Contacto</a>
-                        <button class="btn btn-dark mt-2 ms-2 d-lg-none" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}" style="width: 100%">Ver comentarios <span class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>
-                        <button class="btn btn-dark mt-2 ms-2 mb-2 d-lg-none" data-bs-toggle="modal" data-bs-target="#modalComentario-{{ profesional.id }}" style="width: 100%">Valorar</button>
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h3 class="card-title border-bottom pb-2">{{ profesional.nombre | capfirst }} {{ profesional.apellidos | capfirst }}</h3>
-                            <h6 class="card-subtitle mb-2 text-body-secondary fw-bold">{{ profesional.campo | capfirst}} | {{ profesional.direccion }}</h6>
-                            <p class="card-text">{{ profesional.descripcion }}</p>
-                            <hr>
-                            <div class="especialidades-container bg-dark mt-3 p-2" style="width: 100%;">
-                              <span class="text-light">Especialidades: </span>
-                              {% for especialidad in profesional.especialidad.all %}
-                              {% if especialidad.subespecialidades.exists %}
-                              <span class="badge badge-secondary border">{{ especialidad | capfirst}}</span>
-                              {% endif %} 
-                              {% endfor %}
-                            </div>
-                            <hr>
-                            <a href="{% url 'agendar-cita' %}{{profesional.id}}" class="btn btn-dark mt-2 d-lg-block col-12 col-lg-9 mx-lg-auto">Pedir Cita</a>
-                            <button class="btn btn-dark mt-2 d-none d-lg-block col-12 col-md-9 mx-md-auto" data-bs-toggle="collapse" data-bs-target="#comentarios-{{profesional.id}}">Ver comentarios <span class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>
-                            <button class="btn btn-dark mt-2 d-none d-lg-block col-12 col-md-9 mx-md-auto" data-bs-toggle="modal" data-bs-target="#modalComentario-{{ profesional.id }}">Valorar</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Aquí se muestran los comentarios de cada profesional. Se ha diseñado a modo de desplegable pulsando el botón de Ver comentarios. -->
-                <div class="bg-dark collapse text-light" id="comentarios-{{profesional.id}}">
-                  {% if not profesional.comentarios.all %}
-                  <div class="border m-2 p-2 text-center">
-                    <p><i>No se han encontrado comentarios de este profesional. Sé tú el primero!</i></p>
-                  </div>
-                  {% else %}
-                    {% for comentario in profesional.comentarios.all %}
-                      <div class="border m-2 p-2">
-                        <p>{{ comentario.texto_comentario }}</p>
-                        <p>De: <i>{{ comentario.cliente.name }} {{ comentario.cliente.apellidos }}</i> | Hace: <i>{{ comentario.fecha_comentario | timesince }}</i></p>
-                        <p></p>
-                      </div>
-                    {% endfor %}
-                  {% endif %}
-                </div>
-            </div>
               {% endfor %}
-            </section>
-            
-            {% endif %}
+              {% endif %}
+            </div>
           </div>
+          {% endfor %}
+        </section>
+
+        {% endif %}
       </div>
+    </div>
   </div>
 </div>
 

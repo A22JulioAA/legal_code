@@ -1,7 +1,5 @@
 {% extends "core/base.html" %}
 {% load static %}
-#TODO: Pasar las citas a la plantilla y mostrarlas en el calendario.
-#TODO: Implementar otros eventos en el calendario
 {% block title %}
 Calendario
 {% endblock %}
@@ -18,8 +16,11 @@ Calendario
 </section>
 
 
-<section class="container mt-3" id="calendar" data-citas="{{ citas }}">
-
+<section class="container mt-3">
+    <div class="row">
+        <div class="col-12 col-md-6" id="calendar"></div>
+        <div class="col-12 col-md-6">Hola</div>
+    </div>
 </section>
 
 {% endblock %}
