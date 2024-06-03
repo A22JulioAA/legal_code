@@ -1,7 +1,16 @@
-img {
+figure {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    width: 20vh;
-    height: 20vh;
-    border: 2px solid green;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+figure img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }

@@ -23,6 +23,10 @@ registros, ver base-login
 
     {% block css %}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+
     {% endblock %}
 
     {% block script %}
@@ -46,11 +50,11 @@ registros, ver base-login
                 </button>
                 <div class="collapse navbar-collapse fs-5" id="navbarNavAltMarkup">
                     <div class="navbar-nav mx-auto">
-                        <a class="nav-link me-3" href="{% url 'calendario' %}"><i class="fa-regular fa-calendar"></i>
+                        <a class="nav-link me-3" href="{% url 'calendario' %}" style="font-family: Cinzel;"><i class="fa-regular fa-calendar"></i>
                             Calendario</a>
-                        <a class="nav-link me-3" href="{% url 'citas-principal' %}"><i
+                        <a class="nav-link me-3" href="{% url 'citas-principal' %}" style="font-family: Cinzel;"><i
                                 class="fa-regular fa-hand-point-up"></i> Mis citas</a>
-                        <a class="nav-link" href="{% url 'sobre-nosotros' %}"><i class="fa-solid fa-people-roof"></i>
+                        <a class="nav-link" href="{% url 'sobre-nosotros' %}" style="font-family: Cinzel;"><i class="fa-solid fa-people-roof"></i>
                             Nosotros</a>
 
                         <li class="nav-item dropdown">
@@ -58,18 +62,18 @@ registros, ver base-login
                                 aria-expanded="false">
                                 <i class="fa-regular fa-user"></i>
                                 {% if request.user.is_authenticated %}
-                                Hi, {{ user.name | capfirst }}!
+                                <span style="font-family: Cinzel;">Hi, {{ user.name | capfirst }}!</span>
 
                                 {% else %}
-                                Accede!
+                                <span style="font-family: Cinzel;">Accede!</span>
                                 {% endif %}
                             </a>
                             <ul class="dropdown-menu">
                                 {% if request.user.is_authenticated %}
-                                <li><a class="dropdown-item" href="/users/profile"><i class="fa-regular fa-user"></i> Mi
+                                <li><a class="dropdown-item" href="/users/profile" style="font-family: Cinzel;"><i class="fa-regular fa-user"></i> Mi
                                         perfil</a></li>
                                 <hr>
-                                <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-door-open"></i> Cerrar
+                                <li><a class="dropdown-item" href="/logout" style="font-family: Cinzel;"><i class="fa-solid fa-door-open"></i> Cerrar
                                         sesión</a></li>
                                 {% else %}
                                 <li><a class="dropdown-item" href="{% url 'login' %}"><i
