@@ -125,7 +125,11 @@ def register(request):
                 new_user = authenticate(email=email, password=password)
                 if new_user is not None:
                     login(request, new_user)
-                    return redirect(homepage)            
+                    return redirect(homepage)  
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f'No se ha podido registrar el usuario. {error}')          
     else:
         return redirect('logout')
     

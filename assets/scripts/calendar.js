@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('http://127.0.0.1:8000/obtener-citas/')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             data.forEach(evento => {
                 let partes = evento.fecha_cita.split('T');
                 let fecha = partes[0];
