@@ -21,7 +21,7 @@ Mis citas
 {% if messages %}
 {% for message in messages %}
 <section class="container-fluid text-center alert alert-{{ message.tags }}">
-  {{ message }}
+    {{ message }}
 </section>
 {% endfor %}
 {% endif %}
@@ -29,7 +29,7 @@ Mis citas
 <!-- Advertencia sobre cancelaciones -->
 
 <div id="advertencia" class="container mt-3 mb-5">
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Advertencia</h4>
         <p>Recuerde! Cualquier cancelación está sujeta a las condiciones establecidas por los profesionales. En caso de
             no especificarse nada, el período de cancelación
@@ -59,8 +59,8 @@ Mis citas
             <div class="accordion-body col-8">
                 <p><strong>Motivo de la cita: </strong>{{cita.descripcion}}</p>
                 <p><strong>Especialidades:</strong>
-                <ul>{% for especialidad in cita.profesional.especialidad.all %}
-                    <li>{{especialidad | capfirst}}</li>
+                <ul class="list-group">{% for especialidad in cita.profesional.especialidad.all %}
+                    <li class="list-group-item">{{especialidad | capfirst}}</li>
                     {% endfor %}
                 </ul>
                 </p>
@@ -68,9 +68,13 @@ Mis citas
             <div class="col-4 mt-3">
                 <strong>Precio: {{cita.precio}}€</strong><br>
                 <strong>Estado: {{cita.get_estado_display}}</strong>
-                <form method="post" action="{% url 'anular_cita' cita.id %}">
+                <form method="post" action="{% url 'anular_cita' cita.id %}" class="text-center">
                     {% csrf_token %}
-                    <button class="btn btn-danger mt-3">Anular Cita</button>
+                    <div class="alert alert-danger mt-3" role="alert">
+                        <span>Si tiene cualquier problema con la cita o desea anularla pulse en el siguiente
+                            botón:</span><br>
+                        <button class="btn btn-danger mt-3">Anular Cita</button>
+                    </div>
                 </form>
             </div>
         </div>

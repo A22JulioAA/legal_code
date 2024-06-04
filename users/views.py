@@ -11,7 +11,7 @@ def profile(request):
             form.save()
             return redirect('profile')  # Redirigir al perfil después de guardar los cambios
     else:
-        form = ModificarUsuarioForm(instance=request.user)
+        form = ModificarUsuarioForm(instance=request.user)    
     
     data = {
         'form': form
