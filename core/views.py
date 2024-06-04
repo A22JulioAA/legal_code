@@ -62,19 +62,23 @@ def homepage(request):
         comment_form = CrearComentarioForm(request.POST)
         
         if form_type == 'comentario': 
-            if comment_form.is_valid():
-                profesional_id = request.POST.get('profesional_id')
-                profesional = Profesional.objects.get(id=profesional_id)
-                
-                comentario = comment_form.save(commit=False)
-                
-                comentario.profesional = profesional
-                comentario.cliente = request.user
-                
-                comment_form.save()
+            if request.user.is_anonymous:
+                messages.error(request, 'Debes iniciar sesión para poder comentar.')
+                return redirect('login')
+            else:
+                if comment_form.is_valid():
+                    profesional_id = request.POST.get('profesional_id')
+                    profesional = Profesional.objects.get(id=profesional_id)
+                    
+                    comentario = comment_form.save(commit=False)
+                    
+                    comentario.profesional = profesional
+                    comentario.cliente = request.user
+                    
+                    comment_form.save()
 
-                messages.success(request, 'Tu comentario se ha enviado con éxito.')
-                return redirect('homepage')
+                    messages.success(request, 'Tu comentario se ha enviado con éxito.')
+                    return redirect('homepage')
     else:
         comment_form = CrearComentarioForm()
                 

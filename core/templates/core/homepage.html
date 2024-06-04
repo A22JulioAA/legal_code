@@ -89,9 +89,9 @@ Homepage {% endblock %} {% block css %}
           <div class="modal fade" id="modalComentario-{{ profesional.id }}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
-                <div class="modal-header text-center bg-dark text-light">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Valora a {{profesional.nombre}} {{ profesional.apellidos }}</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-header text-center bg-dark text-white">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-regular fa-star"></i> Valora a {{profesional.nombre}} {{ profesional.apellidos }} <i class="fa-regular fa-star"></i></h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" style="color: white; background-color: white;"></button>
                 </div>
                 <div class="modal-body">
                   <form method="post">
@@ -187,7 +187,7 @@ Homepage {% endblock %} {% block css %}
                 <p>{{ comentario.texto_comentario }}</p>
                 <p>De: <i>{{ comentario.cliente.name }} {{ comentario.cliente.apellidos | default_if_none:'' }}</i> |
                   Hace: <i>{{ comentario.fecha_comentario | timesince }}</i></p>
-                <p></p>
+                <p>Puntuación: <i>{{ comentario.valoracion }}/5</i></p>
               </div>
               {% endfor %}
               {% endif %}
