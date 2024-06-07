@@ -1,3 +1,4 @@
+from datetime import timedelta, timezone
 from django.db import models
 
 class Especialidad(models.Model):
@@ -41,6 +42,13 @@ class Profesional(models.Model):
     
     def __str__(self) -> str:
         return self.nombre + ' ' + self.apellidos 
+    
+    def obtener_dias_disponibles(self):
+        citas = self.citas.all()
+        dias_ocupados = set(cita.fecha_cita.date() for cita in citas)
+        hoy = timezone.now().date()
+        dias_disponibles = [hoy + timedelta(days=i) for i in range(1, 8) if hoy + timedelta(days=i) not in dias_ocupados]
+        return dias_disponibles
 
 
     

@@ -1,10 +1,11 @@
+from datetime import timedelta
 from django.shortcuts import render, redirect
 from .models import Cita
 from django.contrib.auth.decorators import login_required
 from .forms import CitaForm
 from django.contrib import messages
-from core.models import Profesional, Especialidad
-from users.models import Cliente
+from core.models import Profesional
+from django.utils import timezone
 
 @login_required
 def citas_principal(request):
@@ -62,6 +63,11 @@ def agendar_cita(request, id_profesional = None):
                 # Cuando ponemos commit=False no añadimos la cita a la base de datos, se crea una instancia que 
                 # luego modificaremos según los valores que querramos que tenga. 
                 cita = form.save(commit=False)
+                # Comprobamos la fecha de la cita
+                if cita.fecha_cita < timezone.now() + timedelta(days=2):
+                    form = CitaForm()
+                    return render(request, 'agendar_cita.html', {'error': 'La cita debe pedirse con al menos 2 días de antelación. Pruebe con otra fecha!', 'form': form})
+                # Guardamos el id del profesional que tiene la sesión iniciada.
                 cita.profesional_id = profesional.id
                 # Guardamos el id del cliente que tiene la sesión iniciada.
                 cita.cliente = request.user

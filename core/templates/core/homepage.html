@@ -11,8 +11,6 @@ Homepage {% endblock %} {% block css %}
 </script>
 {% endblock %}
 
-<!-- TODO: Calcular valoración media para mostrar en la card de cada profesional  -->
-
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -144,6 +142,8 @@ Homepage {% endblock %} {% block css %}
                   {{ profesional.precio_consulta }}<small>€/consulta</small></span><br>
                 <a data-bs-toggle="modal" data-bs-target="#modalContacto" class="btn btn-dark m-2"
                   style="width: 100%">Contacto</a>
+                  <a data-bs-toggle="modal" data-bs-target="#modalContacto" class="btn btn-dark m-2"
+                  style="width: 100%">Valoración media: <b>{{ profesional.media_valoracion | default_if_none:'Sin valoraciones' }}</b></a>
                 <button class="btn btn-dark mt-2 ms-2 d-lg-none" data-bs-toggle="collapse"
                   data-bs-target="#comentarios-{{profesional.id}}" style="width: 100%">Ver comentarios <span
                     class="badge bg-light text-dark">{{ profesional.comentarios.all | length}}</span></button>

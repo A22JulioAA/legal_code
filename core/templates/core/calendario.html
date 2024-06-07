@@ -11,15 +11,34 @@ Calendario
 
 {% block content %}
 
+<!-- Aquí cargamos el calendario del calendar.js -->
 <section class="border-top border-secondary">
     <h1 class="bg-dark text-light text-center p-3">Calendario</h1>
 </section>
 
-
 <section class="container mt-3">
     <div class="row">
-        <div class="col-12 col-md-6" id="calendar"></div>
-        <div class="col-12 col-md-6">Hola</div>
+        <div class="col-12 col-md-6 mb-3 mb-md-0" id="calendar"></div>
+        <div class="col-12 col-md-6" style="max-height: 75vh; overflow: scroll;">
+            <div class="alert alert-primary" role="alert">
+                Estos eventos son abiertos a todo el mundo. Creemos que la mejor manera de combatir
+                la desinformación es a través de la educación y la participación. ¡Te esperamos!
+              </div>
+              <!-- Aquí se muestra una lista de eventos a los que cualquier persona puede ir -->
+            <h2 class="text-center text-dark">Próximos Eventos</h2>
+            <ul class="list-group">
+                {% for evento in eventos_legales %}
+                    <li class="list-group-item">
+                        <span style="font-weight: bold;">{{ evento.titulo }} | </span>
+                        <span>{{ evento.fecha }} {{ evento.hora }}</span>
+                        <br>
+                        <span style="font-weight: bold;">{{ evento.ubicacion }} | Entrada: {{ evento.tipo_entrada }}</span>
+                        <br>
+                        <span>{{ evento.descripcion }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </section>
 

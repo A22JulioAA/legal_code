@@ -13,3 +13,11 @@
 .fc-col-header {
     color: black; 
 }
+
+.fc-header-toolbar {
+    font-size: 14px; 
+}
+
+.fc-header-toolbar button {
+    font-size: 12px; 
+}

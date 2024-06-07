@@ -48,7 +48,7 @@ registros, ver base-login
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse fs-5" id="navbarNavAltMarkup">
+                <div class="collapse navbar-collapse fs-5 mt-3 mt-lg-0" id="navbarNavAltMarkup">
                     <div class="navbar-nav mx-auto">
                         <a class="nav-link me-3" href="{% url 'calendario' %}" style="font-family: Cinzel;"><i class="fa-regular fa-calendar"></i>
                             Calendario</a>
@@ -62,7 +62,7 @@ registros, ver base-login
                                 aria-expanded="false">
                                 <i class="fa-regular fa-user"></i>
                                 {% if request.user.is_authenticated %}
-                                <span style="font-family: Cinzel;">Hi, {{ user.name | capfirst }}!</span>
+                                <span style="font-family: Cinzel;">Hola, {{ user.name | capfirst }}!</span>
 
                                 {% else %}
                                 <span style="font-family: Cinzel;">Accede!</span>

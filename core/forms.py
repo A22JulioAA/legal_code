@@ -52,7 +52,10 @@ class ModificarUsuarioForm(forms.ModelForm):
         }
         
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'type': 'text', 'class': 'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(
+                format='%d-%m-%Y',  
+                attrs={'type': 'text', 'class': 'datepicker', 'autocomplete': 'off'},
+            ),
             'imagen_perfil': forms.FileInput(attrs={'accept': 'image/*'}),
         }
         

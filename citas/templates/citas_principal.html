@@ -1,6 +1,6 @@
 {% extends "core/base.html" %}
 {% block title %}
-Mis citas
+Mis Citas
 {% endblock %}
 
 {% load tz %} <!-- Importar la zona horaria -->
@@ -70,7 +70,7 @@ Mis citas
                 <strong>Estado: {{cita.get_estado_display}}</strong>
                 <form method="post" action="{% url 'anular_cita' cita.id %}" class="text-center">
                     {% csrf_token %}
-                    <div class="alert alert-danger mt-3" role="alert">
+                    <div class="alert alert-danger mt-3 m" role="alert">
                         <span>Si tiene cualquier problema con la cita o desea anularla pulse en el siguiente
                             botón:</span><br>
                         <button class="btn btn-danger mt-3">Anular Cita</button>

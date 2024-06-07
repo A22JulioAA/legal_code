@@ -8,6 +8,8 @@ from citas.models import Cita
 from django.http import JsonResponse
 from django.contrib import messages
 from comentarios.forms import CrearComentarioForm
+from django.db.models import Avg
+from comentarios.models import Comentario
 
 """
     Cada función define una vista de la web que luego se le pasarán al archivo urls.py
@@ -34,7 +36,7 @@ def homepage(request):
     # Primero sacamos todas las especialidades para cargarlas en la sección de filtros.
     especialidades = Especialidad.objects.all()
     
-    lista_profesionales = Profesional.objects.all()
+    lista_profesionales = Profesional.objects.annotate(media_valoracion=Avg('comentarios__valoracion'))
         
     if request.method == 'POST':
         form_type = request.POST.get('form_type')
@@ -48,7 +50,7 @@ def homepage(request):
             precio_maximo = request.POST.get('precio')
 
             if especialidad:
-                lista_profesionales = especialidad.profesional_set.all()
+                lista_profesionales = especialidad.profesional_set.all().annotate(media_valoracion=Avg('comentarios__valoracion'))
             if precio_maximo:
                 lista_profesionales = lista_profesionales.filter(precio_consulta__lte=precio_maximo)
     
@@ -157,8 +159,92 @@ def calendario(request):
         django.http.HttpResponse: El render carga una plantilla indicada en el 2 argumento y lo carga 
         junto con el contexto de data.
     """
+    
+    # Cargamos una lista de eventos que mostrar en la página del calendario.
+    eventos_legales = [
+    {
+        'titulo': 'Conferencia sobre Derecho Internacional',
+        'descripcion': 'Conferencia anual sobre los últimos desarrollos en derecho internacional.',
+        'fecha': '2024-07-15',
+        'hora': '09:00',
+        'tipo_entrada': 'Libre',
+        'ubicacion': 'Centro de Convenciones de la Ciudad',
+    },
+    {
+        'titulo': 'Seminario de Derecho Laboral',
+        'descripcion': 'Seminario intensivo sobre los aspectos legales relacionados con el empleo y el trabajo.',
+        'fecha': '2024-08-20',
+        'hora': '14:00',
+        'tipo_entrada': '10€',
+        'ubicacion': 'Universidad de la Ciudad',
+    },
+    {
+        'titulo': 'Curso de Propiedad Intelectual',
+        'descripcion': 'Curso de tres días sobre leyes y prácticas relacionadas con la propiedad intelectual.',
+        'fecha': '2024-09-10',
+        'hora': '10:30',
+        'tipo_entrada': '45€',
+        'ubicacion': 'Colegio de Abogados del Condado',
+    },
+    {
+        'titulo': 'Taller de Mediación Familiar',
+        'descripcion': 'Taller práctico sobre mediación familiar y resolución de conflictos.',
+        'fecha': '2024-10-05',
+        'hora': '16:00',
+        'tipo_entrada': 'Libre',
+        'ubicacion': 'Centro Comunitario',
+    },
+    {
+        'titulo': 'Conferencia sobre Privacidad en Internet',
+        'descripcion': 'Charla informativa sobre la privacidad en línea y la legislación relacionada.',
+        'fecha': '2024-11-12',
+        'hora': '11:30',
+        'tipo_entrada': 'Libre',
+        'ubicacion': 'Oficinas de la Asociación de Tecnología',
+    },
+    {
+        'titulo': 'Seminario de Derecho Penal',
+        'descripcion': 'Seminario avanzado sobre temas actuales en derecho penal y procedimientos judiciales.',
+        'fecha': '2025-01-18',
+        'hora': '13:45',
+        'tipo_entrada': '10€',
+        'ubicacion': 'Tribunal de la Ciudad',
+    },
+    {
+        'titulo': 'Curso de Derecho Ambiental',
+        'descripcion': 'Curso introductorio sobre leyes y regulaciones ambientales y su aplicación práctica.',
+        'fecha': '2025-02-22',
+        'hora': '09:30',
+        'tipo_entrada': 'Libre',
+        'ubicacion': 'Centro de Recursos Ambientales',
+    },
+    {
+        'titulo': 'Taller de Negociación Legal',
+        'descripcion': 'Taller práctico sobre habilidades de negociación para profesionales legales.',
+        'fecha': '2025-03-30',
+        'hora': '15:15',
+        'tipo_entrada': '5€',
+        'ubicacion': 'Cámara de Comercio',
+    },
+    {
+        'titulo': 'Conferencia de Derechos Humanos',
+        'descripcion': 'Conferencia internacional sobre el estado actual de los derechos humanos en todo el mundo.',
+        'fecha': '2025-04-25',
+        'hora': '10:00',
+        'tipo_entrada': 'Libre',
+        'ubicacion': 'Universidad Nacional',
+    },
+    {
+        'titulo': 'Seminario de Derecho de la Salud',
+        'descripcion': 'Seminario sobre los desafíos legales y éticos en el campo de la salud y la medicina.',
+        'fecha': '2025-05-20',
+        'hora': '08:45',
+        'tipo_entrada': '12€',
+        'ubicacion': 'Hospital Principal de la Ciudad',
+    },
+]
 
-    return render(request, 'core/calendario.html')
+    return render(request, 'core/calendario.html', {'eventos_legales': eventos_legales})
 
 def sobre_nosotros(request):
     """
