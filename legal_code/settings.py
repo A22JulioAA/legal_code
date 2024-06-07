@@ -82,6 +82,8 @@ INTERNAL_IPS = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
+
 
 ROOT_URLCONF = 'legal_code.urls'
 
@@ -159,6 +161,7 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/app/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
